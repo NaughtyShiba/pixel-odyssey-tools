@@ -2,18 +2,18 @@ import sys
 
 sys.path.append("tools")
 
-import math
 import argparse
 import json
-
+import math
 from typing import Optional
+
+from utils.constants import stats_refine_bonus
 from utils.types import (
-  Stats,
-  StatRecord,
   NumbersPerLevel,
   NumbersPerPerfectLevel,
+  StatRecord,
+  Stats,
 )
-from utils.constants import stats_refine_bonus
 
 
 def better_for_refine(new_stats: Stats, potential_new_stats: Stats):
