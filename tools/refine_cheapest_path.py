@@ -1,63 +1,19 @@
+import sys
+sys.path.append("tools")
+
 import math
 import argparse
 import json
 
-from typing import Literal, Dict, TypedDict, Optional
+from typing import Optional
+from utils.types import Stats, StatRecord, NumbersPerLevel, NumbersPerPerfectLevel
+from utils.constants import stats_refine_bonus
 
-Stat = Literal[
-  "air_damage",
-  "attack",
-  "defense",
-  "earth_damage",
-  "earth_defense",
-  "fire_damage",
-  "fire_defense",
-  "health",
-  "luck",
-  "mana",
-  "mana_regen",
-  "speed",
-  "water_damage",
-  "water_defense",
-  "crit_chance",
-  "crit_damage",
-  "mining",
-  "berry",
-  "mush",
-]
-Stats = Dict[Stat, int];
-class StatRecord(TypedDict):
-  level: int;
-  perfect: bool;
-  items_required: float
-  stats: Stats
-class PStatRecord(StatRecord):
-  cheapest_item: Optional[StatRecord]
-NumbersPerLevel = Dict[int, StatRecord]
-NumbersPerPerfectLevel = Dict[int, PStatRecord]
-
-RefineBonus = Dict[Stat, float]
-stats_refine_bonus: RefineBonus = {
-  "air_damage": 25,
-  "attack": 25,
-  "defense": 25,
-  "earth_damage": 25,
-  "earth_defense": 25,
-  "fire_damage": 25,
-  "fire_defense": 25,
-  "health": 25,
-  "luck": 25,
-  "mana": 25,
-  "mana_regen": 25,
-  "speed": 25,
-  "water_damage": 25,
-  "water_defense": 25,
-  "crit_chance": 16.75,
-  "crit_damage": 16.75,
-  "mining": 12.5,
-  "berry": 12.5,
-  "mush": 12.5,
-}
+def better_for_refine(new_stats: Stats, potential_new_stats: Stats):
+  return any(
+      val > potential_new_stats.get(stat, 0)
+      for stat, val in new_stats.items()
+  )
 
 def calculate_imperfect_refine(stats: Stats):
   numbers_per_level: NumbersPerLevel = {
@@ -87,12 +43,6 @@ def calculate_imperfect_refine(stats: Stats):
     }
 
   return numbers_per_level
-
-def better_for_refine(new_stats: Stats, potential_new_stats: Stats):
-  return any(
-      val > potential_new_stats.get(stat, 0)
-      for stat, val in new_stats.items()
-  )
 
 def calculate_perfect_refine(stats: Stats):
   # Imperfect refine stats
