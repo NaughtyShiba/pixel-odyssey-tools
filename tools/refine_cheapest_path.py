@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append("tools")
 
 import math
@@ -6,14 +7,20 @@ import argparse
 import json
 
 from typing import Optional
-from utils.types import Stats, StatRecord, NumbersPerLevel, NumbersPerPerfectLevel
+from utils.types import (
+  Stats,
+  StatRecord,
+  NumbersPerLevel,
+  NumbersPerPerfectLevel,
+)
 from utils.constants import stats_refine_bonus
+
 
 def better_for_refine(new_stats: Stats, potential_new_stats: Stats):
   return any(
-      val > potential_new_stats.get(stat, 0)
-      for stat, val in new_stats.items()
+    val > potential_new_stats.get(stat, 0) for stat, val in new_stats.items()
   )
+
 
 def calculate_imperfect_refine(stats: Stats):
   numbers_per_level: NumbersPerLevel = {
@@ -25,14 +32,13 @@ def calculate_imperfect_refine(stats: Stats):
     }
   }
 
-  for target_level in range(2,11):
+  for target_level in range(2, 11):
     previous_level_stats = numbers_per_level[target_level - 1]["stats"]
     current_level_stats = {}
     for stat in previous_level_stats:
       val = previous_level_stats[stat]
       next_val = val + max(
-        math.floor(stats[stat] / 100 * stats_refine_bonus[stat]),
-        2
+        math.floor(stats[stat] / 100 * stats_refine_bonus[stat]), 2
       )
       current_level_stats[stat] = next_val
     numbers_per_level[target_level] = {
@@ -43,6 +49,7 @@ def calculate_imperfect_refine(stats: Stats):
     }
 
   return numbers_per_level
+
 
 def calculate_perfect_refine(stats: Stats):
   # Imperfect refine stats
@@ -62,11 +69,11 @@ def calculate_perfect_refine(stats: Stats):
       "items_required": numbers_per_imperfect_level[2]["items_required"],
       "cheapest_item": numbers_per_imperfect_level[1],
       "perfect": True,
-    }
+    },
   }
 
   # Go from 3 to 10 - that's our target level
-  for target_level in range(3,11):
+  for target_level in range(3, 11):
     # Cheapest item with best bonus
     # E.g.
     #   Level 8 Perfect Refine Silver Pickaxe + Level 8 imPerfect Refine Silver Pickaxe = 37 + 4 = 41
@@ -91,12 +98,14 @@ def calculate_perfect_refine(stats: Stats):
         val = previous_level_stats[stat]
         next_val = val + max(
           # Multiple N level imperfect refine items stat by a bonus and floor it
-          math.floor(sacrifice_item["stats"][stat] / 100 * stats_refine_bonus[stat]),
+          math.floor(
+            sacrifice_item["stats"][stat] / 100 * stats_refine_bonus[stat]
+          ),
           # Fallback to 2 if value line above is 1
-          2
+          2,
         )
         stats_to_compare[stat] = next_val
-      if (better_for_refine(stats_to_compare, potential_new_stats)):
+      if better_for_refine(stats_to_compare, potential_new_stats):
         potential_new_stats = stats_to_compare
         cheapest_item_to_refine_with = sacrifice_item
 
@@ -111,14 +120,16 @@ def calculate_perfect_refine(stats: Stats):
         val = previous_level_stats[stat]
         next_val = val + max(
           # Multiple N level imperfect refine items stat by a bonus and floor it
-          math.floor(sacrifice_item["stats"][stat] / 100 * stats_refine_bonus[stat]),
+          math.floor(
+            sacrifice_item["stats"][stat] / 100 * stats_refine_bonus[stat]
+          ),
           # Fallback to 2 if value line above is 1
-          2
+          2,
         )
         stats_to_compare[stat] = next_val
-      if (better_for_refine(stats_to_compare, potential_new_stats)):
-          potential_new_stats = stats_to_compare
-          cheapest_item_to_refine_with = sacrifice_item
+      if better_for_refine(stats_to_compare, potential_new_stats):
+        potential_new_stats = stats_to_compare
+        cheapest_item_to_refine_with = sacrifice_item
 
     if cheapest_item_to_refine_with is not None:
       numbers_per_pefect_level[target_level] = {
@@ -126,16 +137,21 @@ def calculate_perfect_refine(stats: Stats):
         # Stats of next level
         "stats": potential_new_stats,
         # Total Items required
-        "items_required": numbers_per_pefect_level[target_level - 1]["items_required"] + cheapest_item_to_refine_with["items_required"],
+        "items_required": numbers_per_pefect_level[target_level - 1][
+          "items_required"
+        ]
+        + cheapest_item_to_refine_with["items_required"],
         "cheapest_item": cheapest_item_to_refine_with,
-        "perfect": True
+        "perfect": True,
       }
   return numbers_per_pefect_level
 
+
 def load_json(file_path: str):
-  with open(file_path, 'r') as file:
+  with open(file_path, "r") as file:
     data = json.load(file)
   return data
+
 
 def calculate_and_print(item_name: str):
   itemsJSON = load_json("./data/items.json")
@@ -154,27 +170,36 @@ def calculate_and_print(item_name: str):
     exit()
 
   rows = calculate_perfect_refine(item["stats"])
-  items = rows.items();
+  items = rows.items()
   for [level, entry] in items:
-    if (entry["cheapest_item"] is None):
+    if entry["cheapest_item"] is None:
       print(f"Level {entry["level"]} item does not need to be refined, silly!")
-    else :
-      perfect = "perfect" if entry["cheapest_item"]["perfect"] else "imperfect";
-      print(f"Level {entry["level"]} requires Level {entry["cheapest_item"]["level"]} {perfect} sacrifice, because: ")
+    else:
+      perfect = "perfect" if entry["cheapest_item"]["perfect"] else "imperfect"
+      print(
+        f"Level {entry["level"]} requires Level {entry["cheapest_item"]["level"]} {perfect} sacrifice, because: "
+      )
       for stat in entry["stats"]:
-        print(f"  {rows[level -1]["stats"][stat]} {stat} + ({entry["cheapest_item"]["stats"][stat]} {stat} * {stats_refine_bonus[stat]}%) = {entry["stats"][stat]} {stat}")
+        print(
+          f"  {rows[level -1]["stats"][stat]} {stat} + ({entry["cheapest_item"]["stats"][stat]} {stat} * {stats_refine_bonus[stat]}%) = {entry["stats"][stat]} {stat}"
+        )
 
   print(f"Totals items required: {int(rows[10]["items_required"])}")
 
 
 def main():
-  parser = argparse.ArgumentParser(description=f"""
+  parser = argparse.ArgumentParser(
+    description="""
     Refine Cheapest Path Calculator.
     Usage: python tools/refine_cheapest_path.py --name=silver_pickaxe
-  """);
-  parser.add_argument("--name", type=str, help="Name of item to check refine path of")
+  """
+  )
+  parser.add_argument(
+    "--name", type=str, help="Name of item to check refine path of"
+  )
   args = parser.parse_args()
   calculate_and_print(args.name)
 
+
 if __name__ == "__main__":
-    main()
+  main()

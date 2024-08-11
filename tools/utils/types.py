@@ -22,14 +22,20 @@ Stat = Literal[
   "mush",
 ]
 
-Stats = Dict[Stat, int];
+Stats = Dict[Stat, int]
+
+
 class StatRecord(TypedDict):
-  level: int;
-  perfect: bool;
+  level: int
+  perfect: bool
   items_required: float
   stats: Stats
+
+
 class PStatRecord(StatRecord):
   cheapest_item: Optional[StatRecord]
+
+
 NumbersPerLevel = Dict[int, StatRecord]
 NumbersPerPerfectLevel = Dict[int, PStatRecord]
 
