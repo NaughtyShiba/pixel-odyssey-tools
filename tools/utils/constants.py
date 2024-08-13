@@ -2,6 +2,7 @@ from utils.types import RefineBonus
 
 stats_refine_bonus: RefineBonus = {
   "air_damage": 25,
+  "air_defense": 25,
   "attack": 25,
   "defense": 25,
   "earth_damage": 25,

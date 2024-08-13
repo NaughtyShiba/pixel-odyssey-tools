@@ -181,7 +181,7 @@ def calculate_and_print(item_name: str):
       )
       for stat in entry["stats"]:
         print(
-          f"  {rows[level -1]["stats"][stat]} {stat} + ({entry["cheapest_item"]["stats"][stat]} {stat} * {stats_refine_bonus[stat]}%) = {entry["stats"][stat]} {stat}"
+          f"  {rows[level -1]["stats"][stat]} {stat} + ({entry["cheapest_item"]["stats"][stat]} {stat} * {stats_refine_bonus[stat]}%) = ({rows[level -1]["stats"][stat]} + {entry["cheapest_item"]["stats"][stat] / 100 * stats_refine_bonus[stat]}) = {entry["stats"][stat]} {stat}"
         )
 
   print(f"Totals items required: {int(rows[10]["items_required"])}")

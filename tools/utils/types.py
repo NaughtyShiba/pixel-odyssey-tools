@@ -2,6 +2,7 @@ from typing import Literal, Dict, TypedDict, Optional
 
 Stat = Literal[
   "air_damage",
+  "air_defense",
   "attack",
   "defense",
   "earth_damage",
@@ -28,7 +29,7 @@ Stats = Dict[Stat, int]
 class StatRecord(TypedDict):
   level: int
   perfect: bool
-  items_required: float
+  items_required: int
   stats: Stats
 
 
@@ -40,3 +41,12 @@ NumbersPerLevel = Dict[int, StatRecord]
 NumbersPerPerfectLevel = Dict[int, PStatRecord]
 
 RefineBonus = Dict[Stat, float]
+
+
+class Item(TypedDict):
+  type: str
+  label: str
+  stats: Optional[Stats]
+  craft: Optional[Dict[str, int]]
+
+Items = Dict[str, Item]
