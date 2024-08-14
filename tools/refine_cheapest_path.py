@@ -55,7 +55,7 @@ def calculate_perfect_refine(stats: Stats):
   # Imperfect refine stats
   numbers_per_imperfect_level = calculate_imperfect_refine(stats)
   # Level 1 and 2 stats - they are same as Level 1 and Level 2 imperfect refine, so skip calculation
-  numbers_per_pefect_level: NumbersPerPerfectLevel = {
+  numbers_per_perfect_level: NumbersPerPerfectLevel = {
     1: {
       "level": 1,
       "stats": numbers_per_imperfect_level[1]["stats"],
@@ -81,9 +81,9 @@ def calculate_perfect_refine(stats: Stats):
     # Because Level 8 imPerfect requires only 8 pickaxe Level 7 Perfect requires 16 pickaxes, we want Level 8 imPerfect
     cheapest_item_to_refine_with: Optional[StatRecord] = None
     # Stats of item, which will be refined to next level. If target_level is 3, target item will have level 2)
-    previous_level_stats = numbers_per_pefect_level[target_level - 1]["stats"]
+    previous_level_stats = numbers_per_perfect_level[target_level - 1]["stats"]
     # Stats kept for comparison
-    potential_new_stats = numbers_per_pefect_level[target_level - 2]["stats"]
+    potential_new_stats = numbers_per_perfect_level[target_level - 2]["stats"]
 
     # First we go through each imperfect level to figure out which one provides best increase for lowest level
     # e.g. if level 10 and 8 provides same bonus - we want level 8 item
@@ -112,7 +112,7 @@ def calculate_perfect_refine(stats: Stats):
     # Now we will calculate using perfect refine
     # However, max level we can sacrifice is same as current items level
     for sacrifice_level in range(1, target_level):
-      sacrifice_item = numbers_per_pefect_level[sacrifice_level]
+      sacrifice_item = numbers_per_perfect_level[sacrifice_level]
       # Stats used for comparison to check if item is better
       stats_to_compare: Stats = {}
       # Go through each stat to calculate new value
@@ -132,19 +132,19 @@ def calculate_perfect_refine(stats: Stats):
         cheapest_item_to_refine_with = sacrifice_item
 
     if cheapest_item_to_refine_with is not None:
-      numbers_per_pefect_level[target_level] = {
+      numbers_per_perfect_level[target_level] = {
         "level": target_level,
         # Stats of next level
         "stats": potential_new_stats,
         # Total Items required
-        "items_required": numbers_per_pefect_level[target_level - 1][
+        "items_required": numbers_per_perfect_level[target_level - 1][
           "items_required"
         ]
         + cheapest_item_to_refine_with["items_required"],
         "cheapest_item": cheapest_item_to_refine_with,
         "perfect": True,
       }
-  return numbers_per_pefect_level
+  return numbers_per_perfect_level
 
 
 def load_json(file_path: str):

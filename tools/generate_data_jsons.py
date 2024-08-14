@@ -37,7 +37,7 @@ def item_perfect_refine(item: Any):
   for [level, entry] in rows.items():
    if "cheapest_item" in entry and entry["cheapest_item"] is not None:
       data[level] = {
-        "refine_with": { "pefect": entry["cheapest_item"]["perfect"], "level": entry["cheapest_item"]["level"] },
+        "refine_with": { "perfect": entry["cheapest_item"]["perfect"], "level": entry["cheapest_item"]["level"] },
         "total_items": entry["items_required"],
         "stats": entry["stats"]
       }

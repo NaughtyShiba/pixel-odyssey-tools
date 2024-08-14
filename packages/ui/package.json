@@ -5,8 +5,8 @@
 	"files": ["dist"],
 	"exports": {
 		"./styles.css": "./dist/index.css",
-		"./card": "./src/card.tsx",
-		"./button": "./src/button.tsx"
+		"./lib/*": "./src/lib/*.ts",
+		"./components/*": ["./src/components/*.tsx", "./src/components/*.ts"]
 	},
 	"license": "MIT",
 	"scripts": {
@@ -27,9 +27,13 @@
 		"typescript": "^5.3.3"
 	},
 	"dependencies": {
+		"@radix-ui/react-dialog": "^1.1.1",
+		"@radix-ui/react-popover": "^1.1.1",
 		"@radix-ui/react-slot": "^1.1.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "2.1.1",
+		"cmdk": "^1.0.0",
+		"lucide-react": "^0.427.0",
 		"tailwind-merge": "^2.4.0"
 	}
 }
