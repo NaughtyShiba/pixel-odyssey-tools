@@ -2,6 +2,10 @@
 	"name": "@repo/helper",
 	"private": true,
 	"sideEffects": ["src/app/globals.css"],
+	"exports": {
+		"./*": ["./src/*.tsx", "./src/*.ts"],
+		"./data/*": ["./data/*"]
+	},
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",

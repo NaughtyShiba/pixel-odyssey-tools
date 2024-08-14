@@ -1,12 +1,12 @@
-interface ApiItemGETParams {
+interface ApiEnemyGETParams {
 	params: { slug: string };
 }
 
-export async function GET(_request: Request, { params }: ApiItemGETParams) {
+export async function GET(_request: Request, { params }: ApiEnemyGETParams) {
 	const slug = params.slug;
 
 	try {
-		const data = await import(`@repo/helper/data/items/${slug}.json`);
+		const data = await import(`@repo/helper/data/enemies/${slug}.json`);
 
 		return new Response(JSON.stringify(data.default), {
 			status: 200,

@@ -49,43 +49,87 @@ def item_perfect_refine(item: Any):
   return data
 
 
+def generate_data_for_items(
+  items_json: Any,
+  enemies_json: Any,
+  locations_json: Any
+):
+  items = items_json.items()
+  for [item_name, item] in items:
+    data = {}
+    if "stats" in item:
+      data["perfect_refine"] = item_perfect_refine(item)
+      data["imperfect_refine"] = item_imperfect_refine(item)
+
+    if "craft" in item:
+      data["craft"] = item["craft"]
+      data["total_craft"] = calculate_total_craft_requirements(items_json, item_name)
+
+    enemy_drop = {}
+    for [enemy_name, enemy] in enemies_json.items():
+      result = next((item for item in enemy["drops"] if item["item"] == item_name), None)
+      if result:
+        enemy_drop[enemy_name] = result["chance"]
+
+    if len(enemy_drop) > 0:
+      data["enemy_drop"] = enemy_drop
+
+
+    stepping_drop = []
+    for [location_name, location] in locations_json.items():
+      result = next((item for item in location["items"] if item == item_name), None)
+      if result:
+        stepping_drop.append(location_name)
+
+    if len(stepping_drop) > 0:
+      data["stepping_drop"] = stepping_drop
+
+
+    write_json(data, f"./apps/helper/data/items/{item_name}.json")
+  write_json({key: value["label"] for key, value in items_json.items()}, "./apps/helper/data/items.json")
+
+def generate_data_for_locations(
+  locations_json: Any
+):
+  locations = locations_json.items()
+  for [location_name, location] in locations:
+    write_json(location, f"./apps/helper/data/locations/{location_name}.json")
+  write_json({key: value["label"] for key, value in locations_json.items()}, "./apps/helper/data/locations.json")
+
+def generate_data_for_enemies(
+  enemies_json: Any,
+  locations_json: Any
+):
+  enemies = enemies_json.items()
+  for [enemy_name, enemy] in enemies:
+    locations = []
+    for [location_name, location] in locations_json.items():
+      result = next((item for item in location["enemies"] if item == enemy_name), None)
+      if result:
+        locations.append(location_name)
+
+    if len(locations) > 0:
+      enemy["locations"] = locations
+    write_json(enemy, f"./apps/helper/data/enemies/{enemy_name}.json")
+  write_json({key: value["name"] for key, value in enemies_json.items()}, "./apps/helper/data/enemies.json")
+
+
 def main():
- items_json = load_json("./data/items.json")
- enemies_json = load_json("./data/enemies.json")
- locations_json = load_json("./data/locations.json")
- items = items_json.items()
- for [item_name, item] in items:
-  data = {}
-  if "stats" in item:
-    data["perfect_refine"] = item_perfect_refine(item)
-    data["imperfect_refine"] = item_imperfect_refine(item)
-
-  if "craft" in item:
-    data["craft"] = item["craft"]
-    data["total_craft"] = calculate_total_craft_requirements(items_json, item_name)
-
-  enemy_drop = {}
-  for [enemy_name, enemy] in enemies_json.items():
-    result = next((item for item in enemy["drops"] if item["item"] == item_name), None)
-    if result:
-      enemy_drop[enemy_name] = result["chance"]
-
-  if len(enemy_drop) > 0:
-    data["enemy_drop"] = enemy_drop
-
-
-  stepping_drop = []
-  for [location_name, location] in locations_json.items():
-    result = next((item for item in location["items"] if item == item_name), None)
-    if result:
-      stepping_drop.append(location_name)
-
-  if len(stepping_drop) > 0:
-    data["stepping_drop"] = stepping_drop
-
-
-  write_json(data, f"./apps/helper/data/items/{item_name}.json")
-  write_json(list(items_json.keys()), "./apps/helper/data/items.json")
+  items_json = load_json("./data/items.json")
+  enemies_json = load_json("./data/enemies.json")
+  locations_json = load_json("./data/locations.json")
+  generate_data_for_items(
+    items_json=items_json,
+    enemies_json=enemies_json,
+    locations_json=locations_json
+  )
+  generate_data_for_locations(
+    locations_json=locations_json
+  )
+  generate_data_for_enemies(
+    enemies_json=enemies_json,
+    locations_json=locations_json
+  )
 
 
 
