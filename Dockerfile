@@ -22,7 +22,5 @@ RUN python tools/generate_data_jsons.py
 RUN pnpm install --frozen-lockfile
 RUN pnpm turbo build
 
-ENV PORT=3000
-ENV HOSTNAME=0.0.0.0
-EXPOSE 3000
+EXPOSE 3002
 ENTRYPOINT [ "pnpm", "turbo", "start" ]
