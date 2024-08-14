@@ -3,14 +3,9 @@
 import { useState } from "react";
 import { ItemSelector } from "./item-selector";
 import { useQuery } from "@tanstack/react-query";
-import {
-	Table,
-	TableRow,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-} from "@repo/ui/components/table";
+import { isCraftable, isRefineable } from "../shape";
+import { RefineInfo } from "./refine-info";
+import { CraftInfo } from "./craft-info";
 
 interface ItemInfoProps {
 	items: Array<{ value: string; label: string }>;
@@ -23,7 +18,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 		enabled: Boolean(selectedItem),
 		async queryFn() {
 			const res = await fetch(`/api/item/${selectedItem}`);
-			return (await res.json()) as Item;
+			return (await res.json()) as object;
 		},
 	});
 
@@ -36,42 +31,8 @@ export function ItemInfo({ items }: ItemInfoProps) {
 					setSelectedItem(value);
 				}}
 			/>
-			{data?.perfect_refine && (
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead>Target level</TableHead>
-							<TableHead>Source Item Level</TableHead>
-							<TableHead>Sacrifice Item Level</TableHead>
-							<TableHead>Sacrifice Item Perfect</TableHead>
-							<TableHead>Total Level 1 Items Required</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{Object.entries(data.perfect_refine).map(([key, entry]) =>
-							typeof entry.refine_with === "undefined" ? (
-								<TableRow key={key}>
-									<TableCell>{key}</TableCell>
-									<TableCell>-</TableCell>
-									<TableCell>-</TableCell>
-									<TableCell>-</TableCell>
-									<TableCell>-</TableCell>
-								</TableRow>
-							) : (
-								<TableRow key={key}>
-									<TableCell>{key}</TableCell>
-									<TableCell>{Number(key) - 1}</TableCell>
-									<TableCell>{entry.refine_with.level}</TableCell>
-									<TableCell>
-										{entry.refine_with.perfect ? "yes" : "no"}
-									</TableCell>
-									<TableCell>{entry.total_items}</TableCell>
-								</TableRow>
-							),
-						)}
-					</TableBody>
-				</Table>
-			)}
+			{isRefineable(data) && <RefineInfo {...data} />}
+			{isCraftable(data) && <CraftInfo {...data} />}
 		</div>
 	);
 }
