@@ -1,6 +1,5 @@
 {
   "name": "pixel-odyssey-tools",
-  "type": "module",
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -8,6 +7,10 @@
     "typescript": "5.5.4"
   },
   "packageManager": "bun@1.1.23",
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "esbuild"
+  ],
   "workspaces": [
     "packages/*",
     "apps/*"

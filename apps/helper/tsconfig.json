@@ -1,23 +1,24 @@
 {
-  "extends": [
-    "../../packages/typescript-config/tsconfig.json"
-  ],
+  "extends": "@repo/typescript-config/next.json",
   "compilerOptions": {
-    "incremental": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",
-    ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
