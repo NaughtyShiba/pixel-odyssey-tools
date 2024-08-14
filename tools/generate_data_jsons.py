@@ -1,6 +1,6 @@
 import sys
 import os
-from typing import Any
+from typing import Any, Dict, List
 
 
 sys.path.append("tools")
@@ -9,6 +9,11 @@ import json
 
 from refine_cheapest_path import calculate_imperfect_refine, calculate_perfect_refine
 from craft import calculate_total_craft_requirements
+
+def write_json(data: Dict[Any, Any] | List[Any], path: str):
+  os.makedirs(os.path.dirname(path), exist_ok=True)
+  with open(path, "w") as file:
+    file.write(json.dumps(data, indent=2))
 
 def load_json(file_path: str):
   with open(file_path, "r") as file:
@@ -79,12 +84,8 @@ def main():
     data["stepping_drop"] = stepping_drop
 
 
-
-
-
-  os.makedirs(os.path.dirname(f"./apps/helper/data/{item_name}.json"), exist_ok=True)
-  with open(f"./apps/helper/data/{item_name}.json", "w") as file:
-    file.write(json.dumps(data, indent=2))
+  write_json(data, f"./apps/helper/data/items/{item_name}.json")
+  write_json(list(items_json.keys()), "./apps/helper/data/items.json")
 
 
 

@@ -1,3 +1,4 @@
-export default function Page() {
-	return <h1 className="flex">Hello, Next.js!</h1>;
+export default async function Page() {
+  const data = await import(`../../data/items.json`);
+  return <h1 className="flex">{JSON.stringify(Array.from(data))}</h1>;
 }

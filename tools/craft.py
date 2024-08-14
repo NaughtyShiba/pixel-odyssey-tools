@@ -6,7 +6,6 @@ from utils.types import Items
 
 
 def calculate_total_craft_requirements(items: Items, item_name: str, amount = 1) -> Dict[str, int]:
-  print(f"{item_name}")
   item = items.get(item_name)
   if item is None:
     raise Exception(f"{item_name} does not exist?")

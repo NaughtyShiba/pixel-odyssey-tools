@@ -6,7 +6,7 @@ export async function GET(_request: Request, { params }: ApiItemGETParams) {
   const slug = params.slug;
 
   try {
-    const data = await import(`../../../../../data/${slug}.json`);
+    const data = await import(`../../../../../data/items/${slug}.json`);
 
     return new Response(JSON.stringify(data), {
       status: 200,
