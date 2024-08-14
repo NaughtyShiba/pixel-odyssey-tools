@@ -4,8 +4,8 @@ export default async function Page() {
 	const items = Array.from(data).map((i) => ({ value: i, label: i }));
 
 	return (
-		<h1 className="flex">
+		<article className="w-full">
 			<ItemInfo items={items} />
-		</h1>
+		</article>
 	);
 }

@@ -1121,5 +1121,17 @@
 			"defense": 5,
 			"air_damage": 5
 		}
+	},
+	"roast_potato": {
+		"type": "food",
+		"label": "Roast Potato",
+		"craft": {
+			"potato": 1,
+			"coal": 3
+		}
+	},
+	"potato": {
+		"type": "material",
+		"label": "Potato"
 	}
 }

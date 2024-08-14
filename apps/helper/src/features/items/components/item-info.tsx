@@ -3,9 +3,16 @@
 import { useState } from "react";
 import { ItemSelector } from "./item-selector";
 import { useQuery } from "@tanstack/react-query";
-import { isCraftable, isRefineable } from "../shape";
+import {
+	isCraftable,
+	isDroppedByEnemies,
+	isDroppedByStepping,
+	isRefineable,
+} from "../shape";
 import { RefineInfo } from "./refine-info";
 import { CraftInfo } from "./craft-info";
+import { EnemyDropInfo } from "./enemy-drop-info";
+import { StepDropInfo } from "./step-drop-info";
 
 interface ItemInfoProps {
 	items: Array<{ value: string; label: string }>;
@@ -23,7 +30,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 	});
 
 	return (
-		<div>
+		<div className="flex flex-col w-full gap-16">
 			<ItemSelector
 				items={items}
 				value={selectedItem}
@@ -33,6 +40,8 @@ export function ItemInfo({ items }: ItemInfoProps) {
 			/>
 			{isRefineable(data) && <RefineInfo {...data} />}
 			{isCraftable(data) && <CraftInfo {...data} />}
+			{isDroppedByEnemies(data) && <EnemyDropInfo {...data} />}
+			{isDroppedByStepping(data) && <StepDropInfo {...data} />}
 		</div>
 	);
 }
