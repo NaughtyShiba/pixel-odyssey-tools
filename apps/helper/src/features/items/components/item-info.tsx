@@ -44,6 +44,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 							<TableHead>Source Item Level</TableHead>
 							<TableHead>Sacrifice Item Level</TableHead>
 							<TableHead>Sacrifice Item Perfect</TableHead>
+							<TableHead>Total Level 1 Items Required</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
@@ -51,6 +52,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 							typeof entry.refine_with === "undefined" ? (
 								<TableRow key={key}>
 									<TableCell>{key}</TableCell>
+									<TableCell>-</TableCell>
 									<TableCell>-</TableCell>
 									<TableCell>-</TableCell>
 									<TableCell>-</TableCell>
@@ -63,6 +65,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 									<TableCell>
 										{entry.refine_with.perfect ? "yes" : "no"}
 									</TableCell>
+									<TableCell>{entry.total_items}</TableCell>
 								</TableRow>
 							),
 						)}
