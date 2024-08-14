@@ -1,4 +1,5 @@
 import sys
+import os
 from typing import Any
 
 
@@ -81,6 +82,7 @@ def main():
 
 
 
+  os.makedirs(os.path.dirname(f"./apps/helper/data/{item_name}.json"), exist_ok=True)
   with open(f"./apps/helper/data/{item_name}.json", "w") as file:
     file.write(json.dumps(data, indent=2))
 
