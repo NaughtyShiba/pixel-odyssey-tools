@@ -23,7 +23,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 		enabled: Boolean(selectedItem),
 		async queryFn() {
 			const res = await fetch(`/api/item/${selectedItem}`);
-			return await res.json();
+			return (await res.json()) as Item;
 		},
 	});
 
@@ -48,7 +48,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 					</TableHeader>
 					<TableBody>
 						{Object.entries(data.perfect_refine).map(([key, entry]) =>
-							key === "1" ? (
+							typeof entry.refine_with === "undefined" ? (
 								<TableRow key={key}>
 									<TableCell>{key}</TableCell>
 									<TableCell>-</TableCell>
@@ -58,7 +58,7 @@ export function ItemInfo({ items }: ItemInfoProps) {
 							) : (
 								<TableRow key={key}>
 									<TableCell>{key}</TableCell>
-									<TableCell>{key - 1}</TableCell>
+									<TableCell>{Number(key) - 1}</TableCell>
 									<TableCell>{entry.refine_with.level}</TableCell>
 									<TableCell>
 										{entry.refine_with.perfect ? "yes" : "no"}
