@@ -1,11 +1,11 @@
 "use client";
 
-import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@repo/ui/components/sheet";
-import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@repo/ui/components/sheet";
 import { cn } from "@repo/ui/lib/utils";
+import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { Link } from "./link";
 
 export function Header() {
 	const pathname = usePathname();
@@ -47,6 +47,7 @@ export function Header() {
 				</SheetTrigger>
 				<SheetContent side="left">
 					<nav className="grid gap-6 text-lg font-medium">
+					  <SheetClose asChild>
 						<Link
 							href="/items"
 							className={cn(
@@ -55,6 +56,8 @@ export function Header() {
 							)}>
 							Items
 						</Link>
+						</SheetClose>
+						<SheetClose asChild>
 						<Link
 							href="/locations"
 							className={cn(
@@ -63,6 +66,8 @@ export function Header() {
 							)}>
 							Locations
 						</Link>
+						</SheetClose>
+						<SheetClose asChild>
 						<Link
 							href="/enemies"
 							className={cn(
@@ -71,6 +76,7 @@ export function Header() {
 							)}>
 							Enemies
 						</Link>
+						</SheetClose>
 					</nav>
 				</SheetContent>
 			</Sheet>

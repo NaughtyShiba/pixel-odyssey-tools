@@ -1,12 +1,12 @@
-import type { Craftable, Refineable } from "../shape";
 import {
 	Table,
-	TableRow,
 	TableBody,
 	TableCell,
 	TableHead,
 	TableHeader,
+	TableRow,
 } from "@repo/ui/components/table";
+import type { Craftable } from "../shape";
 
 interface CraftInfoProps extends Craftable {}
 export function CraftInfo({ craft, total_craft }: CraftInfoProps) {

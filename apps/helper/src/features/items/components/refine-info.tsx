@@ -1,12 +1,12 @@
-import type { Refineable } from "../shape";
 import {
 	Table,
-	TableRow,
 	TableBody,
 	TableCell,
 	TableHead,
 	TableHeader,
+	TableRow,
 } from "@repo/ui/components/table";
+import type { Refineable } from "../shape";
 
 interface RefineInfoProps extends Refineable {}
 export function RefineInfo({ perfect_refine }: RefineInfoProps) {

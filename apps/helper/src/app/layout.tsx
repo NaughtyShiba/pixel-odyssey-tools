@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
+// import "@repo/ui/styles.css";
 import "./globals.css";
-import "@repo/ui/styles.css";
-import { Providers } from "../features/providers/providers";
 import { Header } from "../components/header";
+import { Providers } from "../features/providers/providers";
 
 interface RootLayoutProps {
 	children: ReactNode;

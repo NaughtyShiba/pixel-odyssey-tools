@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@repo/ui/lib/utils";
 import { Button } from "@repo/ui/components/button";
 import {
 	Command,
@@ -18,6 +17,7 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@repo/ui/components/popover";
+import { cn } from "@repo/ui/lib/utils";
 
 interface EnemySelectorProps {
 	items: Array<{ value: string; label: string }>;
