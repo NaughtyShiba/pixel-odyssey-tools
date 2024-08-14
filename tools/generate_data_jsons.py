@@ -81,7 +81,7 @@ def main():
 
 
 
-  with open(f"./data/__generated__/items/{item_name}.json", "w") as file:
+  with open(f"./apps/helper/data/{item_name}.json", "w") as file:
     file.write(json.dumps(data, indent=2))
 
 

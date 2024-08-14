@@ -1,3 +1,11 @@
+# Generated Data
+data/__generated__
+apps/helper/data
+
+# Python things
 __pycache__
 .ruff_cache
-data/__generated__
+
+# Node stuff
+node_modules
+.turbo
