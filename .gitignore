@@ -9,3 +9,4 @@ __pycache__
 # Node stuff
 node_modules
 .turbo
+.next

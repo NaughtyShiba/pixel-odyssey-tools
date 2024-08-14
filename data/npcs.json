@@ -1,15 +1,15 @@
 {
-  "elder_wanderer": {
-    "name": "Elder Wanderer",
-    "shop": [
-      {
-        "item": "big_pouch",
-        "amount": 1,
-        "price": {
-          "currency": "flask",
-          "amount": 2
-        }
-      }
-    ]
-  }
+	"elder_wanderer": {
+		"name": "Elder Wanderer",
+		"shop": [
+			{
+				"item": "big_pouch",
+				"amount": 1,
+				"price": {
+					"currency": "flask",
+					"amount": 2
+				}
+			}
+		]
+	}
 }

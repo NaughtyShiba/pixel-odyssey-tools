@@ -1,18 +1,17 @@
 {
-  "name": "pixel-odyssey-tools",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "5.5.4"
-  },
-  "packageManager": "bun@1.1.23",
-  "trustedDependencies": [
-    "@biomejs/biome",
-    "esbuild"
-  ],
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ]
+	"name": "pixel-odyssey-tools",
+	"scripts": {
+		"lint": "biome check",
+		"format": "biome format"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@biomejs/biome": "1.8.3"
+	},
+	"peerDependencies": {
+		"typescript": "5.5.4"
+	},
+	"packageManager": "bun@1.1.23",
+	"trustedDependencies": ["@biomejs/biome", "esbuild"],
+	"workspaces": ["packages/*", "apps/*"]
 }
