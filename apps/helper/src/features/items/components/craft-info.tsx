@@ -10,6 +10,7 @@ import type { Craftable } from "../types";
 import { getItemsQueryKey } from "../utils";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { PageSubTitle } from "@/src/components/page";
 
 interface CraftInfoProps extends Craftable {}
 export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
@@ -17,9 +18,9 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 
 	return (
 		<>
-			<section className="flex flex-col gap-1">
-				<h3 className="text-xl">Craft requirements:</h3>
-				<Table>
+			<section className="flex flex-col gap-8">
+				<PageSubTitle>Craft requirements:</PageSubTitle>
+				<Table className="w-auto">
 					<TableHeader>
 						<TableRow>
 							<TableHead>Item</TableHead>
@@ -43,9 +44,9 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 					</TableBody>
 				</Table>
 			</section>
-			<section className="flex flex-col gap-1">
-				<h3 className="text-xl">Total Items required:</h3>
-				<Table>
+			<section className="flex flex-col gap-8">
+				<PageSubTitle>Total Items required:</PageSubTitle>
+				<Table className="w-auto">
 					<TableHeader>
 						<TableRow>
 							<TableHead>Item</TableHead>

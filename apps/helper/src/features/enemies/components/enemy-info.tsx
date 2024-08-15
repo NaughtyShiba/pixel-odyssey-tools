@@ -15,6 +15,14 @@ import Link from "next/link";
 import { getEnemy } from "../models";
 import { getLocations } from "../../locations/models";
 import { getItems } from "../../items/models";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@repo/ui/components/table";
 
 export function EnemyInfo() {
 	const { slug } = useParams<{ slug: string }>();
@@ -22,7 +30,6 @@ export function EnemyInfo() {
 		queryKey: getEnemyQueryKey(slug),
 		queryFn: () => getEnemy(slug),
 	});
-
 	const { data: items } = useQuery({
 		queryKey: getItemsQueryKey(),
 		queryFn: getItems,
@@ -36,30 +43,49 @@ export function EnemyInfo() {
 		<PageArticle>
 			<PageTitle>{enemy?.name}</PageTitle>
 			<PageContent>
-				<div>
+				<div className="flex flex-col gap-8">
 					<PageSubTitle>Drops</PageSubTitle>
-					<ul>
-						{enemy?.drops?.map(({ item, chance }) => (
-							<li key={item}>
-								<Link href={`/items/${item}`}>
-									{(items as Record<string, { label: string }>)[item].label} -{" "}
-									{chance}%
-								</Link>
-							</li>
-						))}
-					</ul>
+					<Table className="w-auto">
+						<TableHeader>
+							<TableRow>
+								<TableHead>Item</TableHead>
+								<TableHead>Rarity</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{enemy?.drops?.map(({ item, chance }) => (
+								<TableRow key={item}>
+									<TableCell>
+										<Link href={`/items/${item}`}>
+											{(items as Record<string, { label: string }>)[item].label}
+										</Link>
+									</TableCell>
+									<TableCell>{chance}%</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
 				</div>
-				<div>
+				<div className="flex flex-col gap-8">
 					<PageSubTitle>Locations</PageSubTitle>
-					<ul>
-						{enemy?.locations?.map((location) => (
-							<li key={location}>
-								<Link href={`/locations/${location}`}>
-									{locations?.[location as keyof typeof locations]?.label}
-								</Link>
-							</li>
-						))}
-					</ul>
+					<Table className="w-auto">
+						<TableHeader>
+							<TableRow>
+								<TableHead>Area</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{enemy?.locations?.map((location) => (
+								<TableRow key={location}>
+									<TableCell>
+										<Link href={`/locations/${location}`}>
+											{locations?.[location as keyof typeof locations]?.label}
+										</Link>
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
 				</div>
 			</PageContent>
 		</PageArticle>

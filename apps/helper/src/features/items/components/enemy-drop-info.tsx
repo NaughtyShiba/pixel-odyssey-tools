@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getEnemiesQueryKey } from "../../enemies/utils";
 import Link from "next/link";
 import { getEnemies } from "../../enemies/models";
+import { PageSubTitle } from "@/src/components/page";
 
 interface EnemyDropInfoProps extends DroppedByEnemies {}
 export function EnemyDropInfo({ enemy_drop }: EnemyDropInfoProps) {
@@ -20,9 +21,9 @@ export function EnemyDropInfo({ enemy_drop }: EnemyDropInfoProps) {
 	});
 
 	return (
-		<section className="flex flex-col gap-1">
-			<h3 className="text-xl">Drop rate from enemies:</h3>
-			<Table>
+		<section className="flex flex-col gap-8">
+			<PageSubTitle>Drop rate from enemies:</PageSubTitle>
+			<Table className="w-auto">
 				<TableHeader>
 					<TableRow>
 						<TableHead>Enemy</TableHead>

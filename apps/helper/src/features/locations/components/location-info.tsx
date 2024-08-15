@@ -15,6 +15,14 @@ import Link from "next/link";
 import { getItems } from "../../items/models";
 import { getEnemies } from "../../enemies/models";
 import { getLocation } from "../models";
+import {
+	Table,
+	TableHeader,
+	TableRow,
+	TableHead,
+	TableBody,
+	TableCell,
+} from "@repo/ui/components/table";
 
 const COMMON_DROPS = [
 	"acorn",
@@ -59,53 +67,91 @@ export function LocationInfo() {
 		<PageArticle>
 			<PageTitle>{location?.label}</PageTitle>
 			<PageContent>
-				<div>
+				<div className="flex flex-col gap-8">
 					<PageSubTitle>Enemies</PageSubTitle>
-					<ul>
-						{location?.enemies?.map((enemy) => (
-							<li key={enemy}>
-								<Link href={`/enemies/${enemy}`}>
-									{enemies?.[enemy as keyof typeof enemies]?.label}
-								</Link>
-							</li>
-						))}
-					</ul>
+					<Table className="w-auto">
+						<TableHeader>
+							<TableRow>
+								<TableHead>Area</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{location?.enemies?.map((enemy) => (
+								<TableRow key={enemy}>
+									<TableCell>
+										<Link href={`/enemies/${enemy}`}>
+											{enemies?.[enemy as keyof typeof enemies]?.label}
+										</Link>
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
 				</div>
-				<div>
+				<div className="flex flex-col gap-8">
 					<PageSubTitle>Area Drops</PageSubTitle>
-					<ul>
-						{location?.items?.map((item) =>
-							item in (items ?? {}) ? (
-								<li key={item}>
-									<Link href={`/items/${item}`}>
-										{(items as Record<string, { label: string }>)[item].label}
-									</Link>
-								</li>
-							) : null,
-						)}
-					</ul>
+					<Table className="w-auto">
+						<TableHeader>
+							<TableRow>
+								<TableHead>Area</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{location?.items?.map((item) =>
+								items?.[item]?.label ? (
+									<TableRow key={item}>
+										<TableCell>
+											<Link href={`/items/${item}`}>
+												{items?.[item]?.label}
+											</Link>
+										</TableCell>
+									</TableRow>
+								) : null,
+							)}
+						</TableBody>
+					</Table>
 				</div>
-				<div>
+				<div className="flex flex-col gap-8">
 					<PageSubTitle>Common Drops</PageSubTitle>
-					<ul>
-						{COMMON_DROPS.map((item) =>
-							item in (items ?? {}) ? (
-								<li key={item}>
-									<Link href={`/items/${item}`}>
-										{(items as Record<string, { label: string }>)[item].label}
-									</Link>
-								</li>
-							) : null,
-						)}
-					</ul>
+					<Table className="w-auto">
+						<TableHeader>
+							<TableRow>
+								<TableHead>Area</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{COMMON_DROPS.map((item) =>
+								items?.[item]?.label ? (
+									<TableRow key={item}>
+										<TableCell>
+											<Link href={`/items/${item}`}>
+												{items?.[item]?.label}
+											</Link>
+										</TableCell>
+									</TableRow>
+								) : null,
+							)}
+						</TableBody>
+					</Table>
 				</div>
-				<div>
+				<div className="flex flex-col gap-8">
 					<PageSubTitle>NPCs</PageSubTitle>
-					<ul>
-						{location?.npcs?.map((npc) => (
-							<li key={npc}>{npc}</li>
-						))}
-					</ul>
+					<Table className="w-auto">
+						<TableHeader>
+							<TableRow>
+								<TableHead>Area</TableHead>
+							</TableRow>
+						</TableHeader>
+						<TableBody>
+							{location?.npcs?.map((npc) => (
+								<TableRow key={npc}>
+									<TableCell>
+										<Link href={`/npc/${npc}`}>{npc}</Link>
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
 				</div>
 			</PageContent>
 		</PageArticle>

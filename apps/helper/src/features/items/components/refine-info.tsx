@@ -7,12 +7,13 @@ import {
 	TableRow,
 } from "@repo/ui/components/table";
 import type { Refineable } from "../types";
+import { PageSubTitle } from "@/src/components/page";
 
 interface RefineInfoProps extends Refineable {}
 export function RefineInfo({ perfect_refine }: RefineInfoProps) {
 	return (
-		<section className="flex flex-col gap-1">
-			<h3 className="text-xl">Perfect refine:</h3>
+		<section className="flex flex-col gap-8">
+			<PageSubTitle>Perfect refine:</PageSubTitle>
 			<Table>
 				<TableHeader>
 					<TableRow>
