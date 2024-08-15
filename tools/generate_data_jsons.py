@@ -86,7 +86,7 @@ def generate_data_for_items(
 
 
     write_json(data, f"./apps/helper/data/items/{item_name}.json")
-  write_json({key: value["label"] for key, value in items_json.items()}, "./apps/helper/data/items.json")
+  write_json({key: {"label": value["label"], "type": value["type"]} for key, value in items_json.items()}, "./apps/helper/data/items.json")
 
 def generate_data_for_locations(
   locations_json: Any
