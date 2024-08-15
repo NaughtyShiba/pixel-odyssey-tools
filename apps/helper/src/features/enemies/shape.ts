@@ -1,6 +1,5 @@
-export interface Location {
-	label: string;
-	enemies: string[];
-	items: string[];
-	npcs: string[];
+export interface Enemy {
+	name: string;
+	drops: Array<{ item: string; chance: number }>;
+	locations: string[];
 }

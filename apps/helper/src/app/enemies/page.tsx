@@ -1,4 +1,6 @@
+import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
 import { EnemyInfo } from "@repo/helper/features/enemies/components/enemy-info";
+import Link from "next/link";
 
 export default async function Page() {
 	const data = (await import("@repo/helper/data/enemies.json")).default;
@@ -8,11 +10,17 @@ export default async function Page() {
 	}));
 
 	return (
-		<article className="w-full">
-			<div className="mx-auto grid w-full max-w-6xl gap-2">
-				<h1 className="text-3xl font-semibold">Enemies Info</h1>
-			</div>
-			<EnemyInfo enemies={enemies} />
-		</article>
+		<PageArticle>
+			<PageTitle>Enemies</PageTitle>
+			<PageContent>
+				<ul>
+					{enemies.map((enemy) => (
+						<li key={enemy.value}>
+							<Link href={`/enemies/${enemy.value}`}>{enemy.label}</Link>
+						</li>
+					))}
+				</ul>
+			</PageContent>
+		</PageArticle>
 	);
 }

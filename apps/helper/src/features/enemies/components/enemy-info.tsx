@@ -1,38 +1,46 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { EnemySelector } from "./enemy-selector";
-// import { RefineInfo } from "./refine-info";
-// import { CraftInfo } from "./craft-info";
-// import { EnemyDropInfo } from "./enemy-drop-info";
-// import { StepDropInfo } from "./step-drop-info";
+import { useParams } from "next/navigation";
+import type { Enemy } from "../shape";
+import {
+	PageArticle,
+	PageTitle,
+	PageSubTitle,
+	PageContent,
+} from "@/src/components/page";
+import { getEnemyQueryKey } from "../utils";
 
-interface EnemyInfoProps {
-	enemies: Array<{ value: string; label: string }>;
-}
-
-export function EnemyInfo({ enemies }: EnemyInfoProps) {
-	const [selectedItem, setSelectedItem] = useState("");
-	const { data } = useQuery({
-		queryKey: ["enemy", selectedItem],
-		enabled: Boolean(selectedItem),
+export function EnemyInfo() {
+	const { slug } = useParams<{ slug: string }>();
+	console.log(slug);
+	const { data: enemy } = useQuery({
+		queryKey: getEnemyQueryKey(slug),
 		async queryFn() {
-			const res = await fetch(`/api/enemy/${selectedItem}`);
-			return (await res.json()) as object;
+			const res = await fetch(`/api/enemies/${slug}`);
+			return (await res.json()) as Enemy;
 		},
 	});
 
 	return (
-		<div className="flex flex-col w-full gap-16">
-			<EnemySelector
-				items={enemies}
-				value={selectedItem}
-				onSelect={(value) => {
-					setSelectedItem(value);
-				}}
-			/>
-			<pre>{JSON.stringify(data, null, "  ")}</pre>
-		</div>
+		<PageArticle>
+			<PageTitle>{enemy?.name}</PageTitle>
+			<PageContent>
+				<PageSubTitle>Drops</PageSubTitle>
+				<ul>
+					{enemy?.drops.map(({ item, chance }) => (
+						<li key={item}>
+							{item} - {chance}%
+						</li>
+					))}
+				</ul>
+				<PageSubTitle>Locations</PageSubTitle>
+				<ul>
+					{enemy?.locations.map((location) => (
+						<li key={location}>{location}</li>
+					))}
+				</ul>
+			</PageContent>
+		</PageArticle>
 	);
 }
