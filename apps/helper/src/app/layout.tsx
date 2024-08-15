@@ -11,6 +11,9 @@ import {
 import { getLocationsQueryKey } from "../features/locations/utils";
 import { getItemsQueryKey } from "../features/items/utils";
 import { getEnemiesQueryKey } from "../features/enemies/utils";
+import { getLocations } from "../features/locations/models";
+import { getItems } from "../features/items/models";
+import { getEnemies } from "../features/enemies/models";
 
 interface RootLayoutProps {
 	children: ReactNode;
@@ -20,42 +23,15 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 	const queryClient = new QueryClient();
 	await queryClient.prefetchQuery({
 		queryKey: getLocationsQueryKey(),
-		async queryFn() {
-			try {
-				const res = await import("@repo/helper/data/locations.json");
-				return Object.entries(res.default).map(([value, label]) => ({
-					value,
-					label,
-				}));
-			} catch (ex) {
-				console.error(ex);
-				throw ex;
-			}
-		},
+		queryFn: getLocations,
 	});
 	await queryClient.prefetchQuery({
 		queryKey: getItemsQueryKey(),
-		async queryFn() {
-			try {
-				const res = await import("@repo/helper/data/items.json");
-				return res.default;
-			} catch (ex) {
-				console.error(ex);
-				throw ex;
-			}
-		},
+		queryFn: getItems,
 	});
 	await queryClient.prefetchQuery({
 		queryKey: getEnemiesQueryKey(),
-		async queryFn() {
-			try {
-				const res = await import("@repo/helper/data/enemies.json");
-				return res.default;
-			} catch (ex) {
-				console.error(ex);
-				throw ex;
-			}
-		},
+		queryFn: getEnemies,
 	});
 	return (
 		<ReactQueryClientProvider>

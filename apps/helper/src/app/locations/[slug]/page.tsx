@@ -1,10 +1,8 @@
 // import { getPostBySlug, getSlugsByCategory } from "@/src/features/mdx/utils";
 
 import { LocationInfo } from "@/src/features/locations/components/location-info";
-import {
-	getLocationQueryKey,
-	getLocationsQueryKey,
-} from "@/src/features/locations/utils";
+import { getLocation } from "@/src/features/locations/models";
+import { getLocationQueryKey } from "@/src/features/locations/utils";
 import {
 	dehydrate,
 	HydrationBoundary,
@@ -14,16 +12,8 @@ import {
 export default async function Page({ params }: { params: { slug: string } }) {
 	const queryClient = new QueryClient();
 	await queryClient.prefetchQuery({
-		queryKey: getLocationsQueryKey(),
-		async queryFn() {
-			try {
-				const res = await import("@repo/helper/data/locations.json");
-				return res.default;
-			} catch (ex) {
-				console.error(ex);
-				throw ex;
-			}
-		},
+		queryKey: getLocationQueryKey(params.slug),
+		queryFn: () => getLocation(params.slug),
 	});
 
 	return (

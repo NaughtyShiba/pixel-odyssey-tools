@@ -3,6 +3,12 @@ import { LocationsList } from "@repo/helper/features/locations/components/locati
 import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
 
 export default async function Page() {
+	const data = (await import("@repo/helper/data/locations.json")).default;
+	const locations = Object.entries(data).map(([value, label]) => ({
+		value,
+		label: label.label,
+	}));
+
 	const post = await getPostBySlug({
 		slug: "locations",
 		category: "pages",
@@ -10,12 +16,6 @@ export default async function Page() {
 			LocationsList: () => <LocationsList locations={locations} />,
 		},
 	});
-
-	const data = (await import("@repo/helper/data/locations.json")).default;
-	const locations = Object.entries(data).map(([value, label]) => ({
-		value,
-		label,
-	}));
 
 	return (
 		<PageArticle>

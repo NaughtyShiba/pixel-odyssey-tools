@@ -10,10 +10,14 @@ import type { DroppedByEnemies } from "../types";
 import { useQuery } from "@tanstack/react-query";
 import { getEnemiesQueryKey } from "../../enemies/utils";
 import Link from "next/link";
+import { getEnemies } from "../../enemies/models";
 
 interface EnemyDropInfoProps extends DroppedByEnemies {}
 export function EnemyDropInfo({ enemy_drop }: EnemyDropInfoProps) {
-	const { data: enemies } = useQuery({ queryKey: getEnemiesQueryKey() });
+	const { data: enemies } = useQuery({
+		queryKey: getEnemiesQueryKey(),
+		queryFn: () => getEnemies(),
+	});
 
 	return (
 		<Table>
@@ -28,7 +32,7 @@ export function EnemyDropInfo({ enemy_drop }: EnemyDropInfoProps) {
 					<TableRow key={enemyName}>
 						<TableCell>
 							<Link href={`/enemies/${enemyName}`}>
-								{(enemies as Record<string, string>)[enemyName]}
+								{enemies?.[enemyName as keyof typeof enemies]?.label}
 							</Link>
 						</TableCell>
 						<TableCell>{chance}%</TableCell>

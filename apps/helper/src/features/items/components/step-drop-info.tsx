@@ -10,10 +10,14 @@ import type { DroppedByStepping } from "../types";
 import { useQuery } from "@tanstack/react-query";
 import { getLocationsQueryKey } from "../../locations/utils";
 import Link from "next/link";
+import { getLocations } from "../../locations/models";
 
 interface StepDropInfoProps extends DroppedByStepping {}
 export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {
-	const { data: locations } = useQuery({ queryKey: getLocationsQueryKey() });
+	const { data: locations } = useQuery({
+		queryKey: getLocationsQueryKey(),
+		queryFn: getLocations,
+	});
 
 	return (
 		<Table>
@@ -27,11 +31,7 @@ export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {
 					<TableRow key={location}>
 						<TableCell>
 							<Link href={`/locations/${location}`}>
-								{
-									(locations as Array<Record<string, string>>).find(
-										(loc) => loc.value === location,
-									)?.label
-								}
+								{locations?.[location]?.label}
 							</Link>
 						</TableCell>
 					</TableRow>

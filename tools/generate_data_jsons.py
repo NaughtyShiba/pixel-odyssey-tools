@@ -97,7 +97,7 @@ def generate_data_for_locations(
   locations = locations_json.items()
   for [location_name, location] in locations:
     write_json(location, f"./apps/helper/data/locations/{location_name}.json")
-  write_json({key: value["label"] for key, value in locations_json.items()}, "./apps/helper/data/locations.json")
+  write_json({key: { "label": value["label"] } for key, value in locations_json.items()}, "./apps/helper/data/locations.json")
 
 def generate_data_for_enemies(
   enemies_json: Any,
@@ -114,7 +114,7 @@ def generate_data_for_enemies(
     if len(locations) > 0:
       enemy["locations"] = locations
     write_json(enemy, f"./apps/helper/data/enemies/{enemy_name}.json")
-  write_json({key: value["name"] for key, value in enemies_json.items()}, "./apps/helper/data/enemies.json")
+  write_json({key: { "label": value["name"] } for key, value in enemies_json.items()}, "./apps/helper/data/enemies.json")
 
 def generate_search_map(
   items_json: Any,

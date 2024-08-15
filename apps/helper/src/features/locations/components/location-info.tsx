@@ -10,23 +10,30 @@ import {
 	PageContent,
 } from "@/src/components/page";
 import { getLocationQueryKey } from "../utils";
-import { getEnemiesQueryKey } from "../../enemies/utils";
+import { getEnemiesQueryKey, getEnemyQueryKey } from "../../enemies/utils";
 import { getItemsQueryKey } from "../../items/utils";
 import Link from "next/link";
+import { getItems } from "../../items/models";
+import { getEnemies } from "../../enemies/models";
+import { getLocation } from "../models";
 
 export function LocationInfo() {
 	const { slug } = useParams<{ slug: string }>();
 	console.log(slug);
 	const { data: location } = useQuery({
 		queryKey: getLocationQueryKey(slug),
-		async queryFn() {
-			const res = await fetch(`/api/locations/${slug}`);
-			return (await res.json()) as LocationShape;
-		},
+		queryFn: () => getLocation(slug),
 	});
+	console.log({ location });
 
-	const { data: items } = useQuery({ queryKey: getItemsQueryKey() });
-	const { data: enemies } = useQuery({ queryKey: getEnemiesQueryKey() });
+	const { data: items } = useQuery({
+		queryKey: getItemsQueryKey(),
+		queryFn: getItems,
+	});
+	const { data: enemies } = useQuery({
+		queryKey: getEnemiesQueryKey(),
+		queryFn: getEnemies,
+	});
 
 	return (
 		<PageArticle>
@@ -34,18 +41,18 @@ export function LocationInfo() {
 			<PageContent>
 				<PageSubTitle>Enemies</PageSubTitle>
 				<ul>
-					{location?.enemies.map((enemy) => (
+					{location?.enemies?.map((enemy) => (
 						<li key={enemy}>
 							<Link href={`/enemies/${enemy}`}>
-								{(enemies as Record<string, string>)[enemy]}
+								{enemies?.[enemy as keyof typeof enemies]?.label}
 							</Link>
 						</li>
 					))}
 				</ul>
 				<PageSubTitle>Items</PageSubTitle>
 				<ul>
-					{location?.items.map((item) =>
-						item in (items as Record<string, string>) ? (
+					{location?.items?.map((item) =>
+						item in (items ?? {}) ? (
 							<li key={item}>
 								<Link href={`/items/${item}`}>
 									{(items as Record<string, { label: string }>)[item].label}
@@ -56,7 +63,7 @@ export function LocationInfo() {
 				</ul>
 				<PageSubTitle>NPCs</PageSubTitle>
 				<ul>
-					{location?.npcs.map((npc) => (
+					{location?.npcs?.map((npc) => (
 						<li key={npc}>{npc}</li>
 					))}
 				</ul>
