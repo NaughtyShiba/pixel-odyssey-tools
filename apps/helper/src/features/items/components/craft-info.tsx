@@ -13,7 +13,7 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 	return (
 		<>
 			<section className="flex flex-col gap-1">
-				<h3 className="text-sm text-muted-foreground">Craft requirements:</h3>
+				<h3 className="text-xl">Craft requirements:</h3>
 				<Table>
 					<TableHeader>
 						<TableRow>
@@ -34,7 +34,7 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 				</Table>
 			</section>
 			<section className="flex flex-col gap-1">
-				<h3 className="text-sm text-muted-foreground">Total Items required:</h3>
+				<h3 className="text-xl">Total Items required:</h3>
 				<Table>
 					<TableHeader>
 						<TableRow>

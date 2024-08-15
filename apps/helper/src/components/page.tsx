@@ -25,7 +25,7 @@ interface PageContentProps {
 	children: ReactNode;
 }
 function PageContent({ children }: PageContentProps) {
-	return <div className="flex flex-col gap-4">{children}</div>;
+	return <div className="flex flex-col gap-16">{children}</div>;
 }
 
 export { PageArticle, PageTitle, PageSubTitle, PageContent };
