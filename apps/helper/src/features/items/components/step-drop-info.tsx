@@ -6,7 +6,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import type { DroppedByStepping } from "../shape";
+import type { DroppedByStepping } from "../types";
 
 interface StepDropInfoProps extends DroppedByStepping {}
 export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {

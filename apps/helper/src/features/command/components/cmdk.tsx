@@ -11,7 +11,7 @@ import {
 	CommandList,
 	CommandSeparator,
 } from "@repo/ui/components/command";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { SearchItems } from "../types";
 import Link from "next/link";
@@ -54,15 +54,18 @@ export const CommandMenu = () => {
 						<CommandEmpty>No results found.</CommandEmpty>
 						{data?.map((group, i) => {
 							return (
-								<CommandGroup key={group.id} heading={group.label}>
-									{group.items.map((item) => {
-										return (
-											<CommandItem key={item.id}>
-												<Link href={item.slug}>{item.label}</Link>
-											</CommandItem>
-										);
-									})}
-								</CommandGroup>
+								<Fragment key={group.id}>
+									<CommandGroup heading={group.label}>
+										{group.items.map((item) => {
+											return (
+												<CommandItem key={item.id}>
+													<Link href={item.slug}>{item.label}</Link>
+												</CommandItem>
+											);
+										})}
+									</CommandGroup>
+									<CommandSeparator />
+								</Fragment>
 							);
 						})}
 					</CommandList>

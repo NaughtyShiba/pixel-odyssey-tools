@@ -6,7 +6,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import type { Craftable } from "../shape";
+import type { Craftable } from "../types";
 
 interface CraftInfoProps extends Craftable {}
 export function CraftInfo({ craft, total_craft }: CraftInfoProps) {

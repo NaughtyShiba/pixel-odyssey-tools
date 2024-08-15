@@ -6,7 +6,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import type { DroppedByEnemies } from "../shape";
+import type { DroppedByEnemies } from "../types";
 
 interface EnemyDropInfoProps extends DroppedByEnemies {}
 export function EnemyDropInfo({ enemy_drop }: EnemyDropInfoProps) {
