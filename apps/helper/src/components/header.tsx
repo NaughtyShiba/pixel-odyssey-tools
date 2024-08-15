@@ -13,28 +13,20 @@ export function Header() {
 	return (
 		<header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-30">
 			<nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-				<Link
-					href="/items"
-					className={cn(
-						"transition-colors hover:text-foreground",
-						pathname === "/items" ? "text-foreground" : "text-muted",
-					)}>
+			<Link
+				href="/guides">
+				Guides
+			</Link>
+			<Link
+					href="/items">
 					Items
 				</Link>
 				<Link
-					href="/locations"
-					className={cn(
-						"transition-colors hover:text-foreground",
-						pathname === "/locations" ? "text-foreground" : "text-muted",
-					)}>
+					href="/locations">
 					Locations
 				</Link>
 				<Link
-					href="/enemies"
-					className={cn(
-						"transition-colors hover:text-foreground",
-						pathname === "/enemies" ? "text-foreground" : "text-muted",
-					)}>
+					href="/enemies">
 					Enemies
 				</Link>
 			</nav>
@@ -48,32 +40,24 @@ export function Header() {
 				<SheetContent side="left">
 					<nav className="grid gap-6 text-lg font-medium">
 					  <SheetClose asChild>
+							<Link
+								href="/guides">
+								Guides
+							</Link>
 						<Link
-							href="/items"
-							className={cn(
-								"hover:text-foreground",
-								pathname === "/items" ? "" : "text-muted",
-							)}>
+							href="/items">
 							Items
 						</Link>
 						</SheetClose>
 						<SheetClose asChild>
 						<Link
-							href="/locations"
-							className={cn(
-								"hover:text-foreground",
-								pathname === "/locations" ? "" : "text-muted",
-							)}>
+							href="/locations">
 							Locations
 						</Link>
 						</SheetClose>
 						<SheetClose asChild>
 						<Link
-							href="/enemies"
-							className={cn(
-								"hover:text-foreground",
-								pathname === "/enemies" ? "" : "text-muted",
-							)}>
+							href="/enemies">
 							Enemies
 						</Link>
 						</SheetClose>
