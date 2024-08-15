@@ -4,6 +4,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@repo/ui/components/card";
+import Image from "next/image";
 import Link from "next/link";
 
 interface PlaceholderCardProps {
@@ -16,7 +17,15 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 		<Link href={href}>
 			<Card>
 				<CardContent className="p-0">
-					<div className="h-32 bg-foreground opacity-5" />
+					<div className="h-64 overflow-hidden relative">
+						<Image
+							alt={title}
+							src={`/assets/locations/${image}.png`}
+							width="234"
+							height="234"
+							className="absolute top-0"
+						/>
+					</div>
 				</CardContent>
 				<CardHeader className="pt-4">
 					<CardTitle>{title}</CardTitle>
@@ -38,6 +47,7 @@ export function LocationsList({ locations }: LocationsListProps) {
 					key={location.value}
 					title={location.label}
 					href={`/locations/${location.value}`}
+					image={location.value}
 				/>
 			))}
 		</div>
