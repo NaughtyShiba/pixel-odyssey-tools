@@ -7,7 +7,7 @@ import {
 	isDroppedByEnemies,
 	isDroppedByStepping,
 	isRefineable,
-} from "../shape";
+} from "../types";
 import { PageArticle, PageTitle, PageContent } from "@/src/components/page";
 import { getItemQueryKey } from "../utils";
 import { CraftInfo } from "./craft-info";
@@ -27,7 +27,7 @@ export function ItemInfo() {
 
 	return (
 		<PageArticle>
-			<PageTitle>{item?.name}</PageTitle>
+			<PageTitle>{item?.label}</PageTitle>
 			<PageContent>
 				{isRefineable(item) && <RefineInfo {...item} />}
 				{isCraftable(item) && <CraftInfo {...item} />}

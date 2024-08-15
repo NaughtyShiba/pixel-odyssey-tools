@@ -1,6 +1,7 @@
 import sys
 import os
 from typing import Any, Dict, List
+import builtins
 
 
 sys.path.append("tools")
@@ -56,7 +57,9 @@ def generate_data_for_items(
 ):
   items = items_json.items()
   for [item_name, item] in items:
-    data = {}
+    data = {
+      "label": item["label"]
+    }
     if "stats" in item:
       data["perfect_refine"] = item_perfect_refine(item)
       data["imperfect_refine"] = item_imperfect_refine(item)
@@ -113,6 +116,36 @@ def generate_data_for_enemies(
     write_json(enemy, f"./apps/helper/data/enemies/{enemy_name}.json")
   write_json({key: value["name"] for key, value in enemies_json.items()}, "./apps/helper/data/enemies.json")
 
+def generate_search_map(
+  items_json: Any,
+  enemies_json: Any,
+  locations_json: Any
+):
+  map = [{
+      "id": "items",
+      "label": "Items",
+      "items": [
+      {"id": key, "slug": f"/items/{key}", "label": value["label"], }
+        for key, value in items_json.items()
+      ],
+  },{
+      "id": "enemies",
+      "label": "Enemies",
+      "items": [
+      {"id": key,  "slug": f"/enemies/{key}", "label": value["name"], }
+        for key, value in enemies_json.items()
+      ],
+  },{
+      "id": "locations",
+      "label": "Locations",
+      "items": [
+      {"id": key,  "slug": f"/locations/{key}", "label": value["label"], }
+        for key, value in locations_json.items()
+      ],
+  }]
+  write_json(map, "./apps/helper/data/search_map.json")
+
+
 
 def main():
   items_json = load_json("./data/items.json")
@@ -127,6 +160,11 @@ def main():
     locations_json=locations_json
   )
   generate_data_for_enemies(
+    enemies_json=enemies_json,
+    locations_json=locations_json
+  )
+  generate_search_map(
+    items_json=items_json,
     enemies_json=enemies_json,
     locations_json=locations_json
   )
