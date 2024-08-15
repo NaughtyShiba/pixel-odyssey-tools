@@ -8,10 +8,6 @@ import {
 	QueryClient,
 } from "@tanstack/react-query";
 
-// export async function generateStaticParams() {
-// 	return await getSlugsByCategory("guides");
-// }
-
 export default async function Page({ params }: { params: { slug: string } }) {
 	const queryClient = new QueryClient();
 
