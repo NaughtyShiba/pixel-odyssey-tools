@@ -6,6 +6,7 @@ import {
 	isCraftable,
 	isDroppedByEnemies,
 	isDroppedByStepping,
+	isRecipeIngredient,
 	isRefineable,
 } from "../guards";
 import { PageArticle, PageTitle, PageContent } from "@/src/components/page";
@@ -15,6 +16,7 @@ import { EnemyDropInfo } from "./enemy-drop-info";
 import { RefineInfo } from "./refine-info";
 import { StepDropInfo } from "./step-drop-info";
 import { getItem } from "../models";
+import { RecipeInfo } from "./recipe-info";
 
 export function ItemInfo() {
 	const { slug } = useParams<{ slug: string }>();
@@ -31,6 +33,7 @@ export function ItemInfo() {
 				{isCraftable(item) && <CraftInfo {...item} />}{" "}
 				{isDroppedByEnemies(item) && <EnemyDropInfo {...item} />}
 				{isDroppedByStepping(item) && <StepDropInfo {...item} />}
+				{isRecipeIngredient(item) && <RecipeInfo {...item} />}
 			</PageContent>
 		</PageArticle>
 	);

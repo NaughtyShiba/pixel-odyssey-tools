@@ -2,6 +2,7 @@ import type {
 	Craftable,
 	DroppedByEnemies,
 	DroppedByStepping,
+	RecipeIngredient,
 	Refineable,
 } from "./types";
 
@@ -15,3 +16,5 @@ export const isRefineable = (item?: object): item is Refineable =>
 	"imperfect_refine" in item;
 export const isCraftable = (item?: object): item is Craftable =>
 	typeof item === "object" && "craft" in item && "total_craft" in item;
+export const isRecipeIngredient = (item?: object): item is RecipeIngredient =>
+	typeof item === "object" && "recipe" in item;

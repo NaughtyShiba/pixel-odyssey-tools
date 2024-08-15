@@ -68,6 +68,15 @@ def generate_data_for_items(
       data["craft"] = item["craft"]
       data["total_craft"] = calculate_total_craft_requirements(items_json, item_name)
 
+    for [recipe_item_name, item] in items_json.items():
+      if "craft" not in item:
+        continue
+
+      if item_name in item["craft"]:
+        if "recipe" not in data or data['recipe'] is None:
+          data["recipe"] = {}
+        data["recipe"][recipe_item_name] = item["craft"][item_name]
+
     enemy_drop = {}
     for [enemy_name, enemy] in enemies_json.items():
       result = next((item for item in enemy["drops"] if item["item"] == item_name), None)

@@ -3,6 +3,10 @@ export interface Craftable {
 	total_craft: Record<string, number>;
 }
 
+export interface RecipeIngredient {
+	recipe: Record<string, number>;
+}
+
 export interface Refineable {
 	perfect_refine: Record<
 		string,
