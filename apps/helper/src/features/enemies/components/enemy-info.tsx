@@ -10,10 +10,12 @@ import {
 	PageContent,
 } from "@/src/components/page";
 import { getEnemyQueryKey } from "../utils";
+import { getItemsQueryKey } from "../../items/utils";
+import { getLocationsQueryKey } from "../../locations/utils";
+import Link from "next/link";
 
 export function EnemyInfo() {
 	const { slug } = useParams<{ slug: string }>();
-	console.log(slug);
 	const { data: enemy } = useQuery({
 		queryKey: getEnemyQueryKey(slug),
 		async queryFn() {
@@ -21,6 +23,9 @@ export function EnemyInfo() {
 			return (await res.json()) as Enemy;
 		},
 	});
+
+	const { data: items } = useQuery({ queryKey: getItemsQueryKey() });
+	const { data: locations } = useQuery({ queryKey: getLocationsQueryKey() });
 
 	return (
 		<PageArticle>
@@ -30,14 +35,25 @@ export function EnemyInfo() {
 				<ul>
 					{enemy?.drops.map(({ item, chance }) => (
 						<li key={item}>
-							{item} - {chance}%
+							<Link href={`/items/${item}`}>
+								{(items as Record<string, { label: string }>)[item].label} -{" "}
+								{chance}%
+							</Link>
 						</li>
 					))}
 				</ul>
 				<PageSubTitle>Locations</PageSubTitle>
 				<ul>
 					{enemy?.locations.map((location) => (
-						<li key={location}>{location}</li>
+						<li key={location}>
+							<Link href={`/locations/${location}`}>
+								{
+									(locations as Array<Record<string, string>>).find(
+										(loc) => loc.value === location,
+									)?.label
+								}
+							</Link>
+						</li>
 					))}
 				</ul>
 			</PageContent>

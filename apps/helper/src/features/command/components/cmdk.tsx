@@ -27,7 +27,6 @@ export const CommandMenu = () => {
 	});
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState("");
-	console.log({ data });
 
 	// Toggle the menu when ⌘K is pressed
 	useEffect(() => {

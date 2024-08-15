@@ -1,13 +1,21 @@
 import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
+import { getEnemiesQueryKey } from "@/src/features/enemies/utils";
 import { EnemyInfo } from "@repo/helper/features/enemies/components/enemy-info";
+import { QueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 
 export default async function Page() {
-	const data = (await import("@repo/helper/data/enemies.json")).default;
-	const enemies = Object.entries(data).map(([value, label]) => ({
-		value,
-		label,
-	}));
+	const queryClient = new QueryClient();
+	const enemies = await queryClient.prefetchQuery({
+		queryKey: getEnemiesQueryKey(),
+		async queryFn() {
+			const res = (await import("@repo/helper/data/enemies.json")).default;
+			return Object.entries(res).map(([value, label]) => ({
+				value,
+				label,
+			})) as Array<{ value: string; label: string }>;
+		},
+	});
 
 	return (
 		<PageArticle>
