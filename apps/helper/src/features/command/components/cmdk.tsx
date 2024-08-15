@@ -14,9 +14,10 @@ import {
 import { Fragment, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { SearchItems } from "../types";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export const CommandMenu = () => {
+	const router = useRouter();
 	const { data } = useQuery({
 		queryKey: ["search_map"],
 		async queryFn() {
@@ -58,8 +59,13 @@ export const CommandMenu = () => {
 									<CommandGroup heading={group.label}>
 										{group.items.map((item) => {
 											return (
-												<CommandItem key={item.id}>
-													<Link href={item.slug}>{item.label}</Link>
+												<CommandItem
+													key={item.id}
+													onSelect={() => {
+														setOpen(false);
+														router.push(item.slug);
+													}}>
+													<span>{item.label}</span>
 												</CommandItem>
 											);
 										})}
