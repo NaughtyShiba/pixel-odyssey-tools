@@ -20,23 +20,26 @@ export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {
 	});
 
 	return (
-		<Table>
-			<TableHeader>
-				<TableRow>
-					<TableHead>Location</TableHead>
-				</TableRow>
-			</TableHeader>
-			<TableBody>
-				{stepping_drop.map((location) => (
-					<TableRow key={location}>
-						<TableCell>
-							<Link href={`/locations/${location}`}>
-								{locations?.[location]?.label}
-							</Link>
-						</TableCell>
+		<section className="flex flex-col gap-1">
+			<h3 className="text-xl">Found in:</h3>
+			<Table>
+				<TableHeader>
+					<TableRow>
+						<TableHead>Location</TableHead>
 					</TableRow>
-				))}
-			</TableBody>
-		</Table>
+				</TableHeader>
+				<TableBody>
+					{stepping_drop.map((location) => (
+						<TableRow key={location}>
+							<TableCell>
+								<Link href={`/locations/${location}`}>
+									{locations?.[location]?.label}
+								</Link>
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</section>
 	);
 }

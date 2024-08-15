@@ -20,25 +20,28 @@ export function EnemyDropInfo({ enemy_drop }: EnemyDropInfoProps) {
 	});
 
 	return (
-		<Table>
-			<TableHeader>
-				<TableRow>
-					<TableHead>Enemy</TableHead>
-					<TableHead>Chance</TableHead>
-				</TableRow>
-			</TableHeader>
-			<TableBody>
-				{Object.entries(enemy_drop).map(([enemyName, chance]) => (
-					<TableRow key={enemyName}>
-						<TableCell>
-							<Link href={`/enemies/${enemyName}`}>
-								{enemies?.[enemyName as keyof typeof enemies]?.label}
-							</Link>
-						</TableCell>
-						<TableCell>{chance}%</TableCell>
+		<section className="flex flex-col gap-1">
+			<h3 className="text-xl">Drop rate from enemies:</h3>
+			<Table>
+				<TableHeader>
+					<TableRow>
+						<TableHead>Enemy</TableHead>
+						<TableHead>Chance</TableHead>
 					</TableRow>
-				))}
-			</TableBody>
-		</Table>
+				</TableHeader>
+				<TableBody>
+					{Object.entries(enemy_drop).map(([enemyName, chance]) => (
+						<TableRow key={enemyName}>
+							<TableCell>
+								<Link href={`/enemies/${enemyName}`}>
+									{enemies?.[enemyName as keyof typeof enemies]?.label}
+								</Link>
+							</TableCell>
+							<TableCell>{chance}%</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</section>
 	);
 }
