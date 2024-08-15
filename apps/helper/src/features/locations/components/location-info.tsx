@@ -18,17 +18,17 @@ import { getLocation } from "../models";
 
 export function LocationInfo() {
 	const { slug } = useParams<{ slug: string }>();
-	console.log(slug);
+
 	const { data: location } = useQuery({
 		queryKey: getLocationQueryKey(slug),
 		queryFn: () => getLocation(slug),
 	});
-	console.log({ location });
 
 	const { data: items } = useQuery({
 		queryKey: getItemsQueryKey(),
 		queryFn: getItems,
 	});
+
 	const { data: enemies } = useQuery({
 		queryKey: getEnemiesQueryKey(),
 		queryFn: getEnemies,
