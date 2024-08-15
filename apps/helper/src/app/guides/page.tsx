@@ -12,6 +12,11 @@ export default function Page() {
 							Refine
 						</Link>
 					</li>
+					<li>
+						<Link href="/guides/obols" className="text-primary">
+							Obols
+						</Link>
+					</li>
 				</ul>
 			</PageContent>
 		</PageArticle>
