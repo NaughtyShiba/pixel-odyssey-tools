@@ -6,22 +6,29 @@ import {
 } from "@/src/components/page";
 import Link from "next/link";
 
-const groupBy = <T, K extends T[keyof T]>(list: T[], getKey: (item: T) => K) =>
+const groupBy = <
+	T extends Record<string, string>,
+	K extends keyof T,
+	G extends T[K],
+>(
+	list: T[],
+	key: K,
+) =>
 	list.reduce(
 		(previous, currentItem) => {
-			const group = getKey(currentItem);
-			if (!previous[group]) previous[group] = [];
+			const group = currentItem[key] as G;
+			previous[group] ??= [];
 			previous[group].push(currentItem);
 			return previous;
 		},
-		{} as Record<K, T[]>,
+		{} as Record<G, T[]>,
 	);
 
 export default async function Page() {
 	const items = (await import("@repo/helper/data/items.json")).default;
 	const groupedItems = groupBy(
 		Object.entries(items).map(([key, item]) => ({ ...item, id: key })),
-		(item) => item.type,
+		"type",
 	);
 
 	return (
