@@ -1,38 +1,48 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { LocationSelector } from "./location-selector";
-// import { RefineInfo } from "./refine-info";
-// import { CraftInfo } from "./craft-info";
-// import { EnemyDropInfo } from "./enemy-drop-info";
-// import { StepDropInfo } from "./step-drop-info";
+import { useParams } from "next/navigation";
+import type { LocationShape } from "../shape";
+import {
+	PageArticle,
+	PageTitle,
+	PageSubTitle,
+	PageContent,
+} from "@/src/components/page";
 
-interface LocationInfoProps {
-	locations: Array<{ value: string; label: string }>;
-}
-
-export function LocationInfo({ locations }: LocationInfoProps) {
-	const [selectedItem, setSelectedItem] = useState("");
-	const { data } = useQuery({
-		queryKey: ["location", selectedItem],
-		enabled: Boolean(selectedItem),
+export function LocationInfo() {
+	const { slug } = useParams<{ slug: string }>();
+	const { data: location } = useQuery({
+		queryKey: ["locations", slug],
 		async queryFn() {
-			const res = await fetch(`/api/location/${selectedItem}`);
-			return (await res.json()) as object;
+			const res = await fetch(`/api/location/${slug}`);
+			return (await res.json()) as LocationShape;
 		},
 	});
 
 	return (
-		<div className="flex flex-col w-full gap-16">
-			<LocationSelector
-				items={locations}
-				value={selectedItem}
-				onSelect={(value) => {
-					setSelectedItem(value);
-				}}
-			/>
-			<pre>{JSON.stringify(data, null, "  ")}</pre>
-		</div>
+		<PageArticle>
+			<PageTitle>{location?.label}</PageTitle>
+			<PageContent>
+				<PageSubTitle>Enemies</PageSubTitle>
+				<ul>
+					{location?.enemies.map((enemy) => (
+						<li key={enemy}>{enemy}</li>
+					))}
+				</ul>
+				<PageSubTitle>Items</PageSubTitle>
+				<ul>
+					{location?.items.map((item) => (
+						<li key={item}>{item}</li>
+					))}
+				</ul>
+				<PageSubTitle>NPCs</PageSubTitle>
+				<ul>
+					{location?.npcs.map((npc) => (
+						<li key={npc}>{npc}</li>
+					))}
+				</ul>
+			</PageContent>
+		</PageArticle>
 	);
 }

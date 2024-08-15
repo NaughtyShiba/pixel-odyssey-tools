@@ -1,4 +1,4 @@
-export interface Location {
+export interface LocationShape {
 	label: string;
 	enemies: string[];
 	items: string[];

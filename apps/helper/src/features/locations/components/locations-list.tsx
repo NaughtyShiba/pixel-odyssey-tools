@@ -5,7 +5,6 @@ import {
 	CardTitle,
 } from "@repo/ui/components/card";
 import Link from "next/link";
-import { PageArticle, PageContent, PageTitle } from "../components/page";
 
 interface PlaceholderCardProps {
 	title: string;
@@ -27,18 +26,20 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 	);
 }
 
-export default function () {
+interface LocationsListProps {
+	locations: Array<{ value: string; label: string }>;
+}
+
+export function LocationsList({ locations }: LocationsListProps) {
 	return (
-		<PageArticle>
-			<PageTitle>Pixel Odyssey Helper & Guide</PageTitle>
-			<PageContent>
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-					<PlaceholderCard title="Items" href="/items" />
-					<PlaceholderCard title="Locations" href="/locations" />
-					<PlaceholderCard title="Enemies" href="/enemies" />
-					<PlaceholderCard title="Guides" href="/guides" />
-				</div>
-			</PageContent>
-		</PageArticle>
+		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+			{locations.map((location) => (
+				<PlaceholderCard
+					key={location.value}
+					title={location.label}
+					href={`/locations/${location.value}`}
+				/>
+			))}
+		</div>
 	);
 }

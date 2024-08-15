@@ -1,5 +1,16 @@
-import { LocationInfo } from "@repo/helper/features/locations/components/location-info";
+import { getPostBySlug } from "@/src/features/mdx/utils";
+import { LocationsList } from "@repo/helper/features/locations/components/locations-list";
+import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
+
 export default async function Page() {
+	const post = await getPostBySlug({
+		slug: "locations",
+		category: "pages",
+		components: {
+			LocationsList: () => <LocationsList locations={locations} />,
+		},
+	});
+
 	const data = (await import("@repo/helper/data/locations.json")).default;
 	const locations = Object.entries(data).map(([value, label]) => ({
 		value,
@@ -7,11 +18,9 @@ export default async function Page() {
 	}));
 
 	return (
-		<article className="w-full">
-			<div className="mx-auto grid w-full max-w-6xl gap-2">
-				<h1 className="text-3xl font-semibold">Locations Info</h1>
-			</div>
-			<LocationInfo locations={locations} />
-		</article>
+		<PageArticle>
+			<PageTitle>{post.meta.title}</PageTitle>
+			<PageContent>{post.content.content}</PageContent>
+		</PageArticle>
 	);
 }

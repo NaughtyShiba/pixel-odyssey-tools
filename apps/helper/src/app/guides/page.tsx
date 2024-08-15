@@ -1,14 +1,19 @@
+import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
 import Link from "next/link";
 
-export default async function Page() {
+export default function Page() {
 	return (
-		<article className="w-full">
-			<div className="mx-auto grid w-full max-w-6xl gap-2">
-				<h1 className="text-3xl font-semibold">Guides</h1>
-			</div>
-			<ul>
-			 <li><Link href="/guides/refine" className="text-primary">Refine</Link></li>
-			</ul>
-		</article>
+		<PageArticle>
+			<PageTitle>Guides</PageTitle>
+			<PageContent>
+				<ul>
+					<li>
+						<Link href="/guides/refine" className="text-primary">
+							Refine
+						</Link>
+					</li>
+				</ul>
+			</PageContent>
+		</PageArticle>
 	);
 }

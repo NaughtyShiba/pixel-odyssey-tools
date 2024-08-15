@@ -1,4 +1,5 @@
 import { ItemInfo } from "@repo/helper/features/items/components/item-info";
+import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
 
 export default async function Page() {
 	const data = (await import("@repo/helper/data/items.json")).default;
@@ -8,11 +9,11 @@ export default async function Page() {
 	}));
 
 	return (
-		<article className="w-full">
-			<div className="mx-auto grid w-full max-w-6xl gap-2">
-				<h1 className="text-3xl font-semibold">Items Info</h1>
-			</div>
-			<ItemInfo items={items} />
-		</article>
+		<PageArticle>
+			<PageTitle>Items Info</PageTitle>
+			<PageContent>
+				<ItemInfo items={items} />
+			</PageContent>
+		</PageArticle>
 	);
 }
