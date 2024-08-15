@@ -2,7 +2,6 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import type { LocationShape } from "../shape";
 import {
 	PageArticle,
 	PageTitle,
@@ -10,7 +9,7 @@ import {
 	PageContent,
 } from "@/src/components/page";
 import { getLocationQueryKey } from "../utils";
-import { getEnemiesQueryKey, getEnemyQueryKey } from "../../enemies/utils";
+import { getEnemiesQueryKey } from "../../enemies/utils";
 import { getItemsQueryKey } from "../../items/utils";
 import Link from "next/link";
 import { getItems } from "../../items/models";
