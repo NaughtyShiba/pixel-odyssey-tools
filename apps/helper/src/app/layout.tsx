@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import "./globals.css";
 import { Header } from "../components/header";
-import { Providers } from "../features/providers/providers";
+import { ReactQueryClientProvider } from "../features/providers/providers";
 
 interface RootLayoutProps {
 	children: ReactNode;
@@ -9,7 +9,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
-		<Providers>
+		<ReactQueryClientProvider>
 			<html lang="en" className="dark">
 				<body>
 					<div className="flex min-h-screen w-full flex-col">
@@ -20,6 +20,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
 					</div>
 				</body>
 			</html>
-		</Providers>
+		</ReactQueryClientProvider>
 	);
 }

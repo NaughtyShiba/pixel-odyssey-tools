@@ -9,11 +9,13 @@ import {
 	PageSubTitle,
 	PageContent,
 } from "@/src/components/page";
+import { getLocationQueryKey } from "../utils";
 
 export function LocationInfo() {
 	const { slug } = useParams<{ slug: string }>();
+	console.log(slug);
 	const { data: location } = useQuery({
-		queryKey: ["locations", slug],
+		queryKey: getLocationQueryKey(slug),
 		async queryFn() {
 			const res = await fetch(`/api/location/${slug}`);
 			return (await res.json()) as LocationShape;
