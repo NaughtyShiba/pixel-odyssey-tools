@@ -1,5 +1,5 @@
 export const groupBy = <
-	T extends Record<string, string | number | null>,
+	T extends Record<string, string | number>,
 	K extends keyof T,
 	G extends T[K],
 >(

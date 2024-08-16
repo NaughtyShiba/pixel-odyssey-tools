@@ -9,10 +9,13 @@ import {
 	QueryClient,
 } from "@tanstack/react-query";
 import { getLocationsQueryKey } from "../features/locations/utils";
-import { getItemsQueryKey } from "../features/items/utils";
+import {
+	getCategoriesQueryKey,
+	getItemsQueryKey,
+} from "../features/items/utils";
 import { getEnemiesQueryKey } from "../features/enemies/utils";
 import { getLocations } from "../features/locations/models";
-import { getItems } from "../features/items/models";
+import { getCategories, getItems } from "../features/items/models";
 import { getEnemies } from "../features/enemies/models";
 
 interface RootLayoutProps {
@@ -21,18 +24,24 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
 	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery({
-		queryKey: getLocationsQueryKey(),
-		queryFn: getLocations,
-	});
-	await queryClient.prefetchQuery({
-		queryKey: getItemsQueryKey(),
-		queryFn: getItems,
-	});
-	await queryClient.prefetchQuery({
-		queryKey: getEnemiesQueryKey(),
-		queryFn: getEnemies,
-	});
+	await Promise.all([
+		queryClient.prefetchQuery({
+			queryKey: getLocationsQueryKey(),
+			queryFn: getLocations,
+		}),
+		queryClient.prefetchQuery({
+			queryKey: getItemsQueryKey(),
+			queryFn: getItems,
+		}),
+		queryClient.prefetchQuery({
+			queryKey: getEnemiesQueryKey(),
+			queryFn: getEnemies,
+		}),
+		queryClient.prefetchQuery({
+			queryKey: getCategoriesQueryKey(),
+			queryFn: getCategories,
+		}),
+	]);
 	return (
 		<ReactQueryClientProvider>
 			<HydrationBoundary state={dehydrate(queryClient)}>

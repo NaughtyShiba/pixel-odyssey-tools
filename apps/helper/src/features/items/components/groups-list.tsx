@@ -8,8 +8,8 @@ import {
 } from "@repo/ui/components/card";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { getItems } from "../models";
-import { getItemsQueryKey } from "../utils";
+import { getCategories, getItems } from "../models";
+import { getCategoriesQueryKey, getItemsQueryKey } from "../utils";
 import { groupBy } from "@/src/libs/fn/group-by";
 
 interface PlaceholderCardProps {
@@ -25,7 +25,7 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 					<CardTitle>{title}</CardTitle>
 				</CardHeader>
 				<CardContent className="p-0">
-					<div className="h-32 overflow-hidden relative"></div>
+					<div className="h-32 overflow-hidden relative" />
 				</CardContent>
 			</Card>
 		</Link>
@@ -33,25 +33,19 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 }
 
 export function GroupsList() {
-	const { data: items } = useQuery({
-		queryKey: getItemsQueryKey(),
-		queryFn: getItems,
+	const { data: groups } = useQuery({
+		queryKey: getCategoriesQueryKey(),
+		queryFn: getCategories,
 	});
 
-	const groupedItems = items
-		? groupBy(
-				Object.entries(items).map(([key, item]) => ({ ...item, id: key })),
-				(item) => item.slot ?? item.type,
-			)
-		: {};
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-			{Object.keys(groupedItems).map((group) => (
+			{Object.entries(groups ?? {}).map(([groupId, group]) => (
 				<PlaceholderCard
-					key={group}
-					title={group}
-					href={`/items/${group}`}
-					image={group}
+					key={groupId}
+					title={group.label}
+					href={`/items/${groupId}`}
+					image={groupId}
 				/>
 			))}
 		</div>

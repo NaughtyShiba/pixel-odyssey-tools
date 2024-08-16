@@ -32,6 +32,18 @@ export async function getItems(): Promise<Record<string, ItemMinimal>> {
 	}
 }
 
+export async function getCategories(): Promise<
+	Record<string, { label: string }>
+> {
+	try {
+		const res = await import("@repo/helper/data/categories.json");
+		return res.default as Record<string, { label: string }>;
+	} catch (ex) {
+		console.error(ex);
+		throw ex;
+	}
+}
+
 export async function getItem(slug: string) {
 	try {
 		const res = await import(`@repo/helper/data/items/${slug}.json`);
