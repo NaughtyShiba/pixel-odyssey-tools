@@ -18,12 +18,22 @@ import { getCategories, getItems } from "../features/items/models";
 import { getEnemies } from "../features/enemies/models";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "../features/theme/context";
+import { cookies } from "next/headers";
 
 interface RootLayoutProps {
 	children: ReactNode;
 }
 
+function getTheme() {
+	const theme = cookies().get("theme");
+	if (["light", "dark", "system"].includes(theme?.value ?? ""))
+		return theme?.value as "light" | "dark" | "system";
+	return "system";
+}
+
 export default async function RootLayout({ children }: RootLayoutProps) {
+	const theme = getTheme();
+	console.log(theme);
 	const queryClient = new QueryClient();
 	await Promise.all([
 		queryClient.prefetchQuery({
@@ -47,9 +57,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 		<ClerkProvider>
 			<ReactQueryClientProvider>
 				<HydrationBoundary state={dehydrate(queryClient)}>
-					<html lang="en">
+					<html lang="en" data-theme={theme}>
 						<head />
-						<ThemeProvider>
+						<ThemeProvider defaultTheme={theme}>
 							<body>
 								<div className="flex min-h-screen w-full flex-col">
 									<Header />
