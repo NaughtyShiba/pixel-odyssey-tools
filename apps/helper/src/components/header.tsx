@@ -28,11 +28,6 @@ export function Header() {
 				</SheetTrigger>
 				<SheetContent side="left">
 					<nav className="grid gap-6 text-lg font-medium">
-						<div className="mt-12">
-							<SheetClose asChild>
-								<CommandMenu />
-							</SheetClose>
-						</div>
 						<SheetClose asChild>
 							<Link href="/">Helper</Link>
 						</SheetClose>

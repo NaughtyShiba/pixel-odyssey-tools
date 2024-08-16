@@ -37,6 +37,8 @@ import {
 import { Switch } from "@repo/ui/components/switch";
 import { Label } from "@repo/ui/components/label";
 import { useTheme } from "next-themes";
+import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export function UserDropdownMenu() {
 	const { setTheme, theme } = useTheme();
@@ -75,6 +77,19 @@ export function UserDropdownMenu() {
 						</DropdownMenuSubContent>
 					</DropdownMenuPortal>
 				</DropdownMenuSub>
+				<DropdownMenuSeparator />
+				<SignedOut>
+					<DropdownMenuItem>
+						<Link href="/login">Sign in</Link>
+					</DropdownMenuItem>
+				</SignedOut>
+				<SignedIn>
+					<DropdownMenuItem>
+						<SignOutButton redirectUrl="/">
+							<span>Logout</span>
+						</SignOutButton>
+					</DropdownMenuItem>
+				</SignedIn>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
