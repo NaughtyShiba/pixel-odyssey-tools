@@ -730,6 +730,10 @@ video {
   max-height: 300px;
 }
 
+.min-h-\[80px\] {
+  min-height: 80px;
+}
+
 .w-10 {
   width: 2.5rem;
 }

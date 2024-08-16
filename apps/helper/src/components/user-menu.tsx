@@ -19,14 +19,14 @@ import {
 } from "lucide-react";
 import { Moon, Settings, Sun } from "lucide-react";
 
-import { SignOutButton, useUser } from "@clerk/nextjs";
+// import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/components/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	// DropdownMenuGroup,
 	DropdownMenuItem,
-	DropdownMenuLabel,
+	// DropdownMenuLabel,
 	DropdownMenuPortal,
 	DropdownMenuSeparator,
 	// DropdownMenuShortcut,
@@ -35,13 +35,13 @@ import {
 	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "@repo/ui/components/dropdown-menu";
-import Link from "next/link";
+// import Link from "next/link";
 import { useTheme } from "../features/theme/context";
 
 export function UserDropdownMenu() {
 	const { setTheme } = useTheme();
-	const user = useUser();
-	const username = user.user?.username;
+	// const user = useUser();
+	// const username = user.user?.username;
 
 	return (
 		<DropdownMenu>
@@ -54,7 +54,7 @@ export function UserDropdownMenu() {
 				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56">
-				{username ? (
+				{/*{username ? (
 					<>
 						<DropdownMenuLabel>Hello, {username}!</DropdownMenuLabel>
 						<DropdownMenuSeparator />
@@ -62,7 +62,7 @@ export function UserDropdownMenu() {
 				) : null}
 				{user.isSignedIn ? (
 					<DropdownMenuItem className="cursor-pointer">Editor</DropdownMenuItem>
-				) : null}
+					) : null}*/}
 				<DropdownMenuSeparator />
 				<DropdownMenuSub>
 					<DropdownMenuSubTrigger>
@@ -92,7 +92,7 @@ export function UserDropdownMenu() {
 					</DropdownMenuPortal>
 				</DropdownMenuSub>
 				<DropdownMenuSeparator />
-				{user.isSignedIn ? (
+				{/*{user.isSignedIn ? (
 					<DropdownMenuItem className="cursor-pointer">
 						<SignOutButton redirectUrl="/">
 							<span className="block w-full">Logout</span>
@@ -104,7 +104,7 @@ export function UserDropdownMenu() {
 							Sign in
 						</Link>
 					</DropdownMenuItem>
-				)}
+				)}*/}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

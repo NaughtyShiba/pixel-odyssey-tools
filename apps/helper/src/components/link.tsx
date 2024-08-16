@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@repo/ui/lib/utils";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,7 +14,9 @@ export function Link(props: LinkProps) {
 			{...props}
 			className={cn(
 				"transition-colors hover:text-primary",
-				pathname === props.href ? "text-primary" : "text-foreground",
+				pathname.startsWith(props.href.toString())
+					? "text-primary"
+					: "text-foreground",
 			)}
 		/>
 	);
