@@ -1,20 +1,11 @@
 {
 	"name": "@repo/helper",
 	"private": true,
-	"sideEffects": [
-		"src/app/globals.css"
-	],
+	"sideEffects": ["src/app/globals.css"],
 	"exports": {
-		"./*": [
-			"./src/*.tsx",
-			"./src/*.ts"
-		],
-		"./data/*": [
-			"./data/*"
-		],
-		"./content/*": [
-			"./content/*"
-		]
+		"./*": ["./src/*.tsx", "./src/*.ts"],
+		"./data/*": ["./data/*"],
+		"./content/*": ["./content/*"]
 	},
 	"scripts": {
 		"dev": "next dev",
@@ -52,7 +43,6 @@
 		"lucide-react": "^0.427.0",
 		"next": "14.2.5",
 		"next-mdx-remote": "^5.0.0",
-		"next-themes": "^0.3.0",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
 		"remark-gfm": "^4.0.0",

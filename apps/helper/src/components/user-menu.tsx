@@ -36,12 +36,12 @@ import {
 } from "@repo/ui/components/dropdown-menu";
 import { Switch } from "@repo/ui/components/switch";
 import { Label } from "@repo/ui/components/label";
-import { useTheme } from "next-themes";
 import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { useTheme } from "../features/theme/context";
 
 export function UserDropdownMenu() {
-	const { setTheme, theme } = useTheme();
+	const { setTheme } = useTheme();
 
 	return (
 		<DropdownMenu>
@@ -62,15 +62,15 @@ export function UserDropdownMenu() {
 					</DropdownMenuSubTrigger>
 					<DropdownMenuPortal>
 						<DropdownMenuSubContent>
-							<DropdownMenuItem onClick={() => setTheme("light")}>
+							<DropdownMenuItem onClick={() => setTheme?.("light")}>
 								<Sun className="mr-2 h-4 w-4" />
 								<span>Light mode</span>
 							</DropdownMenuItem>
-							<DropdownMenuItem onClick={() => setTheme("dark")}>
+							<DropdownMenuItem onClick={() => setTheme?.("dark")}>
 								<Moon className="mr-2 h-4 w-4" />
 								<span>Dark mode</span>
 							</DropdownMenuItem>
-							<DropdownMenuItem onClick={() => setTheme("system")}>
+							<DropdownMenuItem onClick={() => setTheme?.("system")}>
 								<Settings className="mr-2 h-4 w-4" />
 								<span>System</span>
 							</DropdownMenuItem>

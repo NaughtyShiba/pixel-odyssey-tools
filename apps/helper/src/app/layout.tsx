@@ -16,8 +16,8 @@ import { getEnemiesQueryKey } from "../features/enemies/utils";
 import { getLocations } from "../features/locations/models";
 import { getCategories, getItems } from "../features/items/models";
 import { getEnemies } from "../features/enemies/models";
-import { ThemeProvider } from "../features/theme/context";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "../features/theme/context";
 
 interface RootLayoutProps {
 	children: ReactNode;
@@ -47,12 +47,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 		<ClerkProvider>
 			<ReactQueryClientProvider>
 				<HydrationBoundary state={dehydrate(queryClient)}>
-					<html lang="en" className="dark" suppressHydrationWarning>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="system"
-							enableSystem
-							disableTransitionOnChange>
+					<html lang="en">
+						<head />
+						<ThemeProvider>
 							<body>
 								<div className="flex min-h-screen w-full flex-col">
 									<Header />
