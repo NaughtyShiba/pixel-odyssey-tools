@@ -14,11 +14,13 @@ import {
 	CommandList,
 	CommandSeparator,
 } from "@repo/ui/components/command";
+import { Search } from "lucide-react";
 import { Fragment, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { SearchItems } from "../types";
 import { useRouter } from "next/navigation";
 import { inputVariants } from "@repo/ui/components/input";
+import { cn } from "@repo/ui/lib/utils";
 
 export const CommandMenu = () => {
 	const router = useRouter();
@@ -51,7 +53,13 @@ export const CommandMenu = () => {
 	return (
 		<Dialog open={open} onOpenChange={(open) => setOpen(open)}>
 			<DialogTrigger className="w-64">
-				<div className={inputVariants()} />
+				<div className={cn(inputVariants(), "flex flex-row justify-between")}>
+					<span className="flex flex-row gap-2 items-center">
+						<Search className="h-4 w-4" />
+						<span>Search</span>
+					</span>{" "}
+					<span>⌘K</span>
+				</div>
 			</DialogTrigger>
 			<DialogContent>
 				<Command className="rounded-lg border shadow-md">
