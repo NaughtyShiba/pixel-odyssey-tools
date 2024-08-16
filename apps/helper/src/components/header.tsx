@@ -11,15 +11,13 @@ import { Menu } from "lucide-react";
 import { Link } from "./link";
 // import { NextBreadcrumb } from "./breadcrumbs";
 import { CommandMenu } from "../features/command/components/cmdk";
+import { UserDropdownMenu } from "./user-menu";
 
 export function Header() {
 	return (
 		<header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-30">
 			<nav className="hidden gap-6 text-lg font-medium md:flex md:w-full md:flex-row md:justify-between md:gap-5 md:text-sm lg:gap-6">
 				<div />
-				<div>
-					<CommandMenu />
-				</div>
 			</nav>
 			<Sheet>
 				<SheetTrigger asChild>
@@ -41,6 +39,8 @@ export function Header() {
 					</nav>
 				</SheetContent>
 			</Sheet>
+			<CommandMenu />
+			<UserDropdownMenu />
 		</header>
 	);
 }
