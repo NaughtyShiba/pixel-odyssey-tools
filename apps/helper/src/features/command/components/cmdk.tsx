@@ -1,7 +1,10 @@
 "use client";
 
-import { CommandShortcut } from "@repo/ui/components/command";
-import { Dialog, DialogContent } from "@repo/ui/components/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogTrigger,
+} from "@repo/ui/components/dialog";
 import {
 	Command,
 	CommandEmpty,
@@ -15,6 +18,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { SearchItems } from "../types";
 import { useRouter } from "next/navigation";
+import { inputVariants } from "@repo/ui/components/input";
 
 export const CommandMenu = () => {
 	const router = useRouter();
@@ -26,7 +30,6 @@ export const CommandMenu = () => {
 		},
 	});
 	const [open, setOpen] = useState(false);
-	const [value, setValue] = useState("");
 
 	// Toggle the menu when ⌘K is pressed
 	useEffect(() => {
@@ -47,6 +50,9 @@ export const CommandMenu = () => {
 
 	return (
 		<Dialog open={open} onOpenChange={(open) => setOpen(open)}>
+			<DialogTrigger className="w-64">
+				<div className={inputVariants()} />
+			</DialogTrigger>
 			<DialogContent>
 				<Command className="rounded-lg border shadow-md">
 					<CommandInput placeholder="Search for something" />
