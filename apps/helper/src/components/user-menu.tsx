@@ -17,8 +17,9 @@ import {
 	// Users,
 	User,
 } from "lucide-react";
-import { Moon, Sun, Settings } from "lucide-react";
+import { Moon, Settings, Sun } from "lucide-react";
 
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/components/button";
 import {
 	DropdownMenu,
@@ -34,14 +35,13 @@ import {
 	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "@repo/ui/components/dropdown-menu";
-import { Switch } from "@repo/ui/components/switch";
-import { Label } from "@repo/ui/components/label";
-import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { useTheme } from "../features/theme/context";
 
 export function UserDropdownMenu() {
 	const { setTheme } = useTheme();
+	const user = useUser();
+	const username = user.user?.username;
 
 	return (
 		<DropdownMenu>
@@ -54,7 +54,15 @@ export function UserDropdownMenu() {
 				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56">
-				<DropdownMenuLabel>Settings</DropdownMenuLabel>
+				{username ? (
+					<>
+						<DropdownMenuLabel>Hello, {username}!</DropdownMenuLabel>
+						<DropdownMenuSeparator />
+					</>
+				) : null}
+				{user.isSignedIn ? (
+					<DropdownMenuItem className="cursor-pointer">Editor</DropdownMenuItem>
+				) : null}
 				<DropdownMenuSeparator />
 				<DropdownMenuSub>
 					<DropdownMenuSubTrigger>
@@ -62,15 +70,21 @@ export function UserDropdownMenu() {
 					</DropdownMenuSubTrigger>
 					<DropdownMenuPortal>
 						<DropdownMenuSubContent>
-							<DropdownMenuItem onClick={() => setTheme?.("light")}>
+							<DropdownMenuItem
+								onClick={() => setTheme?.("light")}
+								className="cursor-pointer">
 								<Sun className="mr-2 h-4 w-4" />
 								<span>Light mode</span>
 							</DropdownMenuItem>
-							<DropdownMenuItem onClick={() => setTheme?.("dark")}>
+							<DropdownMenuItem
+								onClick={() => setTheme?.("dark")}
+								className="cursor-pointer">
 								<Moon className="mr-2 h-4 w-4" />
 								<span>Dark mode</span>
 							</DropdownMenuItem>
-							<DropdownMenuItem onClick={() => setTheme?.("system")}>
+							<DropdownMenuItem
+								onClick={() => setTheme?.("system")}
+								className="cursor-pointer">
 								<Settings className="mr-2 h-4 w-4" />
 								<span>System</span>
 							</DropdownMenuItem>
@@ -78,18 +92,19 @@ export function UserDropdownMenu() {
 					</DropdownMenuPortal>
 				</DropdownMenuSub>
 				<DropdownMenuSeparator />
-				<SignedOut>
-					<DropdownMenuItem>
-						<Link href="/login">Sign in</Link>
-					</DropdownMenuItem>
-				</SignedOut>
-				<SignedIn>
-					<DropdownMenuItem>
+				{user.isSignedIn ? (
+					<DropdownMenuItem className="cursor-pointer">
 						<SignOutButton redirectUrl="/">
-							<span>Logout</span>
+							<span className="block w-full">Logout</span>
 						</SignOutButton>
 					</DropdownMenuItem>
-				</SignedIn>
+				) : (
+					<DropdownMenuItem className="cursor-pointer">
+						<Link href="/login" className="block w-full">
+							Sign in
+						</Link>
+					</DropdownMenuItem>
+				)}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

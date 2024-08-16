@@ -1,3 +1,4 @@
+import { PageSubTitle } from "@/src/components/page";
 import {
 	Table,
 	TableBody,
@@ -7,7 +8,6 @@ import {
 	TableRow,
 } from "@repo/ui/components/table";
 import type { Refineable } from "../types";
-import { PageSubTitle } from "@/src/components/page";
 
 interface RefineInfoProps extends Refineable {}
 export function RefineInfo({ perfect_refine }: RefineInfoProps) {

@@ -2,9 +2,9 @@ import { EnemyInfo } from "@/src/features/enemies/components/enemy-info";
 import { getEnemy } from "@/src/features/enemies/models";
 import { getEnemyQueryKey } from "@/src/features/enemies/utils";
 import {
-	dehydrate,
 	HydrationBoundary,
 	QueryClient,
+	dehydrate,
 } from "@tanstack/react-query";
 
 export default async function Page({ params }: { params: { slug: string } }) {

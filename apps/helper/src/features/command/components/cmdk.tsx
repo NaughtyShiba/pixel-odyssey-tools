@@ -1,11 +1,11 @@
 "use client";
 
+import { Content as DialogContent } from "@radix-ui/react-dialog";
 import {
 	Dialog,
 	DialogOverlay,
 	DialogTrigger,
 } from "@repo/ui/components/dialog";
-import { Content as DialogContent } from "@radix-ui/react-dialog";
 
 import {
 	Command,
@@ -16,13 +16,13 @@ import {
 	CommandList,
 	CommandSeparator,
 } from "@repo/ui/components/command";
-import { Search } from "lucide-react";
-import { Fragment, useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import type { SearchItems } from "../types";
-import { useRouter } from "next/navigation";
 import { inputVariants } from "@repo/ui/components/input";
 import { cn } from "@repo/ui/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Fragment, useEffect, useState } from "react";
+import type { SearchItems } from "../types";
 
 export const CommandMenu = () => {
 	const router = useRouter();

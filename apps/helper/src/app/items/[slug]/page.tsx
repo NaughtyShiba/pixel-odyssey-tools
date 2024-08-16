@@ -2,9 +2,9 @@ import { ItemInfo } from "@/src/features/items/components/item-info";
 import { getItem } from "@/src/features/items/models";
 import { getItemQueryKey } from "@/src/features/items/utils";
 import {
-	dehydrate,
 	HydrationBoundary,
 	QueryClient,
+	dehydrate,
 } from "@tanstack/react-query";
 
 export default async function Page({ params }: { params: { slug: string } }) {

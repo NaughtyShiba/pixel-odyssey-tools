@@ -1,3 +1,4 @@
+import { PageSubTitle } from "@/src/components/page";
 import {
 	Table,
 	TableBody,
@@ -6,12 +7,11 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import type { DroppedByStepping } from "../types";
 import { useQuery } from "@tanstack/react-query";
-import { getLocationsQueryKey } from "../../locations/utils";
 import Link from "next/link";
 import { getLocations } from "../../locations/models";
-import { PageSubTitle } from "@/src/components/page";
+import { getLocationsQueryKey } from "../../locations/utils";
+import type { DroppedByStepping } from "../types";
 
 interface StepDropInfoProps extends DroppedByStepping {}
 export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {

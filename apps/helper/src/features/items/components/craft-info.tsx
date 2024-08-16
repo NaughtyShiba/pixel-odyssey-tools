@@ -1,3 +1,4 @@
+import { PageSubTitle } from "@/src/components/page";
 import {
 	Table,
 	TableBody,
@@ -6,11 +7,10 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import type { Craftable } from "../types";
-import { getItemsQueryKey } from "../utils";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { PageSubTitle } from "@/src/components/page";
+import type { Craftable } from "../types";
+import { getItemsQueryKey } from "../utils";
 
 interface CraftInfoProps extends Craftable {}
 export function CraftInfo({ craft, total_craft }: CraftInfoProps) {

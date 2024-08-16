@@ -1,9 +1,9 @@
-import { compileMDX } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
+import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 
-import path from "node:path";
 import fs from "node:fs/promises";
+import path from "node:path";
 
 import {
 	Table,

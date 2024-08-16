@@ -1,24 +1,24 @@
 import type { ReactNode } from "react";
 import "./globals.css";
-import { Header } from "../components/header";
-import { ReactQueryClientProvider } from "../features/providers/providers";
+import { ClerkProvider } from "@clerk/nextjs";
 import {
-	dehydrate,
 	HydrationBoundary,
 	QueryClient,
+	dehydrate,
 } from "@tanstack/react-query";
-import { getLocationsQueryKey } from "../features/locations/utils";
+import { cookies } from "next/headers";
+import { Header } from "../components/header";
+import { getEnemies } from "../features/enemies/models";
+import { getEnemiesQueryKey } from "../features/enemies/utils";
+import { getCategories, getItems } from "../features/items/models";
 import {
 	getCategoriesQueryKey,
 	getItemsQueryKey,
 } from "../features/items/utils";
-import { getEnemiesQueryKey } from "../features/enemies/utils";
 import { getLocations } from "../features/locations/models";
-import { getCategories, getItems } from "../features/items/models";
-import { getEnemies } from "../features/enemies/models";
-import { ClerkProvider } from "@clerk/nextjs";
+import { getLocationsQueryKey } from "../features/locations/utils";
+import { ReactQueryClientProvider } from "../features/providers/providers";
 import { ThemeProvider } from "../features/theme/context";
-import { cookies } from "next/headers";
 
 interface RootLayoutProps {
 	children: ReactNode;

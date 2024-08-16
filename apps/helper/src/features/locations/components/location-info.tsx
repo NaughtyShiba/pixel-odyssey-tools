@@ -1,28 +1,28 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
 import {
 	PageArticle,
-	PageTitle,
-	PageSubTitle,
 	PageContent,
+	PageSubTitle,
+	PageTitle,
 } from "@/src/components/page";
-import { getLocationQueryKey } from "../utils";
-import { getEnemiesQueryKey } from "../../enemies/utils";
-import { getItemsQueryKey } from "../../items/utils";
-import Link from "next/link";
-import { getItems } from "../../items/models";
-import { getEnemies } from "../../enemies/models";
-import { getLocation } from "../models";
 import {
 	Table,
-	TableHeader,
-	TableRow,
-	TableHead,
 	TableBody,
 	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
 } from "@repo/ui/components/table";
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { getEnemies } from "../../enemies/models";
+import { getEnemiesQueryKey } from "../../enemies/utils";
+import { getItems } from "../../items/models";
+import { getItemsQueryKey } from "../../items/utils";
+import { getLocation } from "../models";
+import { getLocationQueryKey } from "../utils";
 
 const COMMON_DROPS = [
 	"acorn",

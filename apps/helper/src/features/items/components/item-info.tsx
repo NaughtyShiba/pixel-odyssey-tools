@@ -1,5 +1,6 @@
 "use client";
 
+import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import {
@@ -9,14 +10,13 @@ import {
 	isRecipeIngredient,
 	isRefineable,
 } from "../guards";
-import { PageArticle, PageTitle, PageContent } from "@/src/components/page";
+import { getItem } from "../models";
 import { getItemQueryKey } from "../utils";
 import { CraftInfo } from "./craft-info";
 import { EnemyDropInfo } from "./enemy-drop-info";
+import { RecipeInfo } from "./recipe-info";
 import { RefineInfo } from "./refine-info";
 import { StepDropInfo } from "./step-drop-info";
-import { getItem } from "../models";
-import { RecipeInfo } from "./recipe-info";
 
 export function ItemInfo() {
 	const { slug } = useParams<{ slug: string }>();

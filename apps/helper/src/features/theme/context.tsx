@@ -1,11 +1,7 @@
 "use client";
 
 import { setThemeCookie } from "@/src/app/actions";
-import {
-	createContext,
-	useCallback,
-	useContext,
-} from "react";
+import { createContext, useCallback, useContext } from "react";
 import type { ReactNode } from "react";
 
 type Mode = "dark" | "light" | "system";

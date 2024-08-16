@@ -1,6 +1,6 @@
+import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
 import { getPostBySlug } from "@/src/features/mdx/utils";
 import { LocationsList } from "@repo/helper/features/locations/components/locations-list";
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
 
 export default async function Page() {
 	const data = (await import("@repo/helper/data/locations.json")).default;

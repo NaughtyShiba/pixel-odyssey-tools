@@ -1,20 +1,11 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
 import {
 	PageArticle,
-	PageTitle,
-	PageSubTitle,
 	PageContent,
+	PageSubTitle,
+	PageTitle,
 } from "@/src/components/page";
-import { getEnemyQueryKey } from "../utils";
-import { getItemsQueryKey } from "../../items/utils";
-import { getLocationsQueryKey } from "../../locations/utils";
-import Link from "next/link";
-import { getEnemy } from "../models";
-import { getLocations } from "../../locations/models";
-import { getItems } from "../../items/models";
 import {
 	Table,
 	TableBody,
@@ -23,6 +14,15 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { getItems } from "../../items/models";
+import { getItemsQueryKey } from "../../items/utils";
+import { getLocations } from "../../locations/models";
+import { getLocationsQueryKey } from "../../locations/utils";
+import { getEnemy } from "../models";
+import { getEnemyQueryKey } from "../utils";
 
 export function EnemyInfo() {
 	const { slug } = useParams<{ slug: string }>();

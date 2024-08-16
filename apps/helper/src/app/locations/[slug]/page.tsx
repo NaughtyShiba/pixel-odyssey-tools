@@ -4,9 +4,9 @@ import { LocationInfo } from "@/src/features/locations/components/location-info"
 import { getLocation } from "@/src/features/locations/models";
 import { getLocationQueryKey } from "@/src/features/locations/utils";
 import {
-	dehydrate,
 	HydrationBoundary,
 	QueryClient,
+	dehydrate,
 } from "@tanstack/react-query";
 
 export default async function Page({ params }: { params: { slug: string } }) {
