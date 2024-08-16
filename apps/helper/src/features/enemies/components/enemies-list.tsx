@@ -12,11 +12,13 @@ export function EnemiesList() {
 	});
 
 	return (
-		<ul>
+		<ul className="list-disc">
 			{enemies
 				? Object.entries(enemies).map(([enemyName, enemy]) => (
 						<li key={enemyName}>
-							<Link href={`/enemies/${enemyName}`}>{enemy.label}</Link>
+							<Link className="underline" href={`/enemies/${enemyName}`}>
+								{enemy.label}
+							</Link>
 						</li>
 					))
 				: null}

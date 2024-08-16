@@ -56,7 +56,7 @@ export function EnemyInfo() {
 							{enemy?.drops?.map(({ item, chance }) => (
 								<TableRow key={item}>
 									<TableCell>
-										<Link href={`/items/${item}`}>
+										<Link className="underline" href={`/items/${item}`}>
 											{(items as Record<string, { label: string }>)[item].label}
 										</Link>
 									</TableCell>
@@ -78,7 +78,7 @@ export function EnemyInfo() {
 							{enemy?.locations?.map((location) => (
 								<TableRow key={location}>
 									<TableCell>
-										<Link href={`/locations/${location}`}>
+										<Link className="underline" href={`/locations/${location}`}>
 											{locations?.[location as keyof typeof locations]?.label}
 										</Link>
 									</TableCell>

@@ -79,7 +79,7 @@ export function LocationInfo() {
 							{location?.enemies?.map((enemy) => (
 								<TableRow key={enemy}>
 									<TableCell>
-										<Link href={`/enemies/${enemy}`}>
+										<Link className="underline" href={`/enemies/${enemy}`}>
 											{enemies?.[enemy as keyof typeof enemies]?.label}
 										</Link>
 									</TableCell>
@@ -101,7 +101,7 @@ export function LocationInfo() {
 								items?.[item]?.label ? (
 									<TableRow key={item}>
 										<TableCell>
-											<Link href={`/items/${item}`}>
+											<Link className="underline" href={`/items/${item}`}>
 												{items?.[item]?.label}
 											</Link>
 										</TableCell>
@@ -124,7 +124,7 @@ export function LocationInfo() {
 								items?.[item]?.label ? (
 									<TableRow key={item}>
 										<TableCell>
-											<Link href={`/items/${item}`}>
+											<Link className="underline" href={`/items/${item}`}>
 												{items?.[item]?.label}
 											</Link>
 										</TableCell>
@@ -146,7 +146,9 @@ export function LocationInfo() {
 							{location?.npcs?.map((npc) => (
 								<TableRow key={npc}>
 									<TableCell>
-										<Link href={`/npc/${npc}`}>{npc}</Link>
+										<Link className="underline" href={`/npc/${npc}`}>
+											{npc}
+										</Link>
 									</TableCell>
 								</TableRow>
 							))}

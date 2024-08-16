@@ -31,7 +31,7 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 						{Object.entries(craft).map(([itemName, amount]) => (
 							<TableRow key={itemName}>
 								<TableCell className="flex gap-2 items-center">
-									<Link href={`/items/${itemName}`}>
+									<Link className="underline" href={`/items/${itemName}`}>
 										{
 											(items as Record<string, { label: string }>)[itemName]
 												.label
@@ -57,7 +57,7 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 						{Object.entries(total_craft).map(([itemName, amount]) => (
 							<TableRow key={itemName}>
 								<TableCell className="flex gap-2 items-center">
-									<Link href={`/items/${itemName}`}>
+									<Link className="underline" href={`/items/${itemName}`}>
 										{
 											(items as Record<string, { label: string }>)[itemName]
 												.label

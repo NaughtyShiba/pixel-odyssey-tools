@@ -34,7 +34,7 @@ export function EnemyDropInfo({ enemy_drop }: EnemyDropInfoProps) {
 					{Object.entries(enemy_drop).map(([enemyName, chance]) => (
 						<TableRow key={enemyName}>
 							<TableCell>
-								<Link href={`/enemies/${enemyName}`}>
+								<Link className="underline" href={`/enemies/${enemyName}`}>
 									{enemies?.[enemyName as keyof typeof enemies]?.label}
 								</Link>
 							</TableCell>

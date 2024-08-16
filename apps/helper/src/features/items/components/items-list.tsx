@@ -14,15 +14,17 @@ export function ItemsList() {
 	});
 
 	const groupsItems = Object.entries(items ?? {}).filter(
-		([key, item]) => item.slot === category || item.type === category,
+		([, item]) => item.slot === category || item.type === category,
 	);
 
 	return (
 		<div>
-			<ul>
+			<ul className="list-disc">
 				{groupsItems?.map(([key, item]) => (
 					<li key={key}>
-						<Link href={`/items/${item.slot ?? item.type}/${key}`}>
+						<Link
+							className="underline"
+							href={`/items/${item.slot ?? item.type}/${key}`}>
 							{item.label}
 						</Link>
 					</li>

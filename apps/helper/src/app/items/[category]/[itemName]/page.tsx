@@ -7,11 +7,13 @@ import {
 	QueryClient,
 } from "@tanstack/react-query";
 
-export default async function Page({ params }: { params: { item: string } }) {
+export default async function Page({
+	params,
+}: { params: { itemName: string } }) {
 	const queryClient = new QueryClient();
 	await queryClient.prefetchQuery({
-		queryKey: getItemQueryKey(params.item),
-		queryFn: () => getItem(params.item),
+		queryKey: getItemQueryKey(params.itemName),
+		queryFn: () => getItem(params.itemName),
 	});
 
 	return (

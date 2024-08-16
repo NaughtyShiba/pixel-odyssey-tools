@@ -31,7 +31,7 @@ export function RecipeInfo({ recipe }: RecipeInfoProps) {
 						{Object.entries(recipe).map(([itemName, amount]) => (
 							<TableRow key={itemName}>
 								<TableCell className="flex gap-2 items-center">
-									<Link href={`/items/${itemName}`}>
+									<Link className="underline" href={`/items/${itemName}`}>
 										{
 											(items as Record<string, { label: string }>)[itemName]
 												.label
