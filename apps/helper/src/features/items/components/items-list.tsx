@@ -3,37 +3,31 @@
 import { useQuery } from "@tanstack/react-query";
 import { getItemsQueryKey } from "../utils";
 import { getItems } from "../models";
-import { groupBy } from "@/src/libs/fn/group-by";
-import { PageSubTitle } from "@/src/components/page";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export function ItemsList() {
+	const { category } = useParams<{ category: string }>();
 	const { data: items } = useQuery({
 		queryKey: getItemsQueryKey(),
 		queryFn: getItems,
 	});
-	const groupedItems = items
-		? groupBy(
-				Object.entries(items).map(([key, item]) => ({ ...item, id: key })),
-				"type",
-			)
-		: {};
+
+	const groupsItems = Object.entries(items ?? {}).filter(
+		([key, item]) => item.slot === category || item.type === category,
+	);
+
 	return (
-		<>
-			{Object.entries(groupedItems).map(([groupId, group]) => {
-				return (
-					<div key={groupId}>
-						<PageSubTitle>{groupId}</PageSubTitle>
-						<ul>
-							{group?.map((item) => (
-								<li key={item.id}>
-									<Link href={`/items/${item.id}`}>{item.label}</Link>
-								</li>
-							))}
-						</ul>
-					</div>
-				);
-			})}
-		</>
+		<div>
+			<ul>
+				{groupsItems?.map(([key, item]) => (
+					<li key={key}>
+						<Link href={`/items/${item.slot ?? item.type}/${key}`}>
+							{item.label}
+						</Link>
+					</li>
+				))}
+			</ul>
+		</div>
 	);
 }

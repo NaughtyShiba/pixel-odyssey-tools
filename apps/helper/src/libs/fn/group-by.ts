@@ -1,14 +1,14 @@
 export const groupBy = <
-	T extends Record<string, string>,
+	T extends Record<string, string | number | null>,
 	K extends keyof T,
 	G extends T[K],
 >(
 	list: T[],
-	key: K,
+	key: (item: T) => G,
 ) =>
 	list.reduce(
 		(previous, currentItem) => {
-			const group = currentItem[key] as G;
+			const group = key(currentItem) as G;
 			previous[group] ??= [];
 			previous[group].push(currentItem);
 			return previous;

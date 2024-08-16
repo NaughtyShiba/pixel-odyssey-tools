@@ -19,6 +19,7 @@ export interface Item
 export interface ItemMinimal {
 	label: string;
 	type: string;
+	slot: string | null;
 }
 
 export async function getItems(): Promise<Record<string, ItemMinimal>> {

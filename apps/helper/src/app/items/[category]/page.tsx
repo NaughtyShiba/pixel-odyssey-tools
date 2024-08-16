@@ -1,12 +1,12 @@
 import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
-import { GroupsList } from "@/src/features/items/components/groups-list";
+import { ItemsList } from "@/src/features/items/components/items-list";
 
 export default function Page() {
 	return (
 		<PageArticle>
 			<PageTitle>Items Info</PageTitle>
 			<PageContent>
-				<GroupsList />
+				<ItemsList />
 			</PageContent>
 		</PageArticle>
 	);

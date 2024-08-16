@@ -58,8 +58,11 @@ def generate_data_for_items(
   items = items_json.items()
   for [item_name, item] in items:
     data = {
-      "label": item["label"]
+      "label": item["label"],
+      "type": item["type"]
     }
+    if "slot" in item:
+      data["slot"] = item["slot"]
     if "stats" in item:
       data["perfect_refine"] = item_perfect_refine(item)
       data["imperfect_refine"] = item_imperfect_refine(item)
@@ -98,7 +101,7 @@ def generate_data_for_items(
 
 
     write_json(data, f"./apps/helper/data/items/{item_name}.json")
-  write_json({key: {"label": value["label"], "type": value["type"]} for key, value in items_json.items()}, "./apps/helper/data/items.json")
+  write_json({key: {"label": value["label"], "type": value["type"], "slot": value["slot"] if "slot" in value else None} for key, value in items_json.items()}, "./apps/helper/data/items.json")
 
 def generate_data_for_locations(
   locations_json: Any
@@ -134,7 +137,7 @@ def generate_search_map(
       "id": "items",
       "label": "Items",
       "items": [
-      {"id": key, "slug": f"/items/{key}", "label": value["label"], }
+        {"id": key, "slug": f"/items/{value["slot"] if "slot" in value else value["type"]}/{key}", "label": value["label"], }
         for key, value in items_json.items()
       ],
   },{
