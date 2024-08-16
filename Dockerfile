@@ -23,4 +23,4 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm turbo build
 
 EXPOSE 3002
-ENTRYPOINT [ "pnpm", "turbo", "start" ]
+ENTRYPOINT [ "pnpm", "dotenvx", "run", "--", "turbo", "start" ]

@@ -6,12 +6,20 @@
 			"outputs": [".next/**", "!.next/cache/**"]
 		},
 		"start": {
+			"passThroughEnv": [
+				"NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+				"CLERK_SECRET_KEY"
+			],
 			"dependsOn": ["^build"]
 		},
 		"check-types": {
 			"dependsOn": ["^check-types"]
 		},
 		"dev": {
+			"passThroughEnv": [
+				"NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+				"CLERK_SECRET_KEY"
+			],
 			"persistent": true,
 			"cache": false
 		},

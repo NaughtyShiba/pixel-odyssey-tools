@@ -1,11 +1,13 @@
 {
 	"name": "pixel-odyssey-tools",
 	"scripts": {
+		"dev": "dotenvx run -- turbo dev",
 		"lint": "biome check",
 		"format": "biome format"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
+		"@dotenvx/dotenvx": "1.7.0",
 		"@types/bun": "latest",
 		"turbo": "2.0.12"
 	},
