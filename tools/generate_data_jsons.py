@@ -138,7 +138,7 @@ def generate_search_map(
       "id": "items",
       "label": "Items",
       "items": [
-        {"id": key, "slug": f"/items/{value["slot"] if "slot" in value else value["type"]}/{key}", "label": value["label"], }
+        {"id": key, "slug": f"/items/{key}", "label": value["label"], }
         for key, value in items_json.items()
       ],
   },{
@@ -159,7 +159,7 @@ def generate_search_map(
       "id": "categories",
       "label": "Categories",
       "items": [
-      {"id": key,  "slug": f"/items/{key}", "label": value["label"], }
+      {"id": key,  "slug": f"/categories/{key}", "label": value["label"], }
         for key, value in catagories_json.items()
       ],
   }]

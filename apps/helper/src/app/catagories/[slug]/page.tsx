@@ -4,7 +4,7 @@ import { ItemsList } from "@/src/features/items/components/items-list";
 export default function Page() {
 	return (
 		<PageArticle>
-			<PageTitle>Items Info</PageTitle>
+			<PageTitle>Category</PageTitle>
 			<PageContent>
 				<ItemsList />
 			</PageContent>

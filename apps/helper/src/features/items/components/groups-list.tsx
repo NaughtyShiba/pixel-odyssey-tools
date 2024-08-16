@@ -8,9 +8,8 @@ import {
 } from "@repo/ui/components/card";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { getCategories, getItems } from "../models";
-import { getCategoriesQueryKey, getItemsQueryKey } from "../utils";
-import { groupBy } from "@/src/libs/fn/group-by";
+import { getCategories } from "../models";
+import { getCategoriesQueryKey } from "../utils";
 
 interface PlaceholderCardProps {
 	title: string;
@@ -44,7 +43,7 @@ export function GroupsList() {
 				<PlaceholderCard
 					key={groupId}
 					title={group.label}
-					href={`/items/${groupId}`}
+					href={`/catagories/${groupId}`}
 					image={groupId}
 				/>
 			))}

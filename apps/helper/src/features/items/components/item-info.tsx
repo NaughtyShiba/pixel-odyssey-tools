@@ -19,10 +19,10 @@ import { getItem } from "../models";
 import { RecipeInfo } from "./recipe-info";
 
 export function ItemInfo() {
-	const { itemName } = useParams<{ itemName: string }>();
+	const { slug } = useParams<{ slug: string }>();
 	const { data: item } = useQuery({
-		queryKey: getItemQueryKey(itemName),
-		queryFn: () => getItem(itemName),
+		queryKey: getItemQueryKey(slug),
+		queryFn: () => getItem(slug),
 	});
 
 	return (

@@ -7,14 +7,14 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export function ItemsList() {
-	const { category } = useParams<{ category: string }>();
+	const { slug } = useParams<{ slug: string }>();
 	const { data: items } = useQuery({
 		queryKey: getItemsQueryKey(),
 		queryFn: getItems,
 	});
 
 	const groupsItems = Object.entries(items ?? {}).filter(
-		([, item]) => item.slot === category || item.type === category,
+		([, item]) => item.slot === slug || item.type === slug,
 	);
 
 	return (
@@ -22,9 +22,7 @@ export function ItemsList() {
 			<ul className="list-disc">
 				{groupsItems?.map(([key, item]) => (
 					<li key={key}>
-						<Link
-							className="underline"
-							href={`/items/${item.slot ?? item.type}/${key}`}>
+						<Link className="underline" href={`/items/${key}`}>
 							{item.label}
 						</Link>
 					</li>
