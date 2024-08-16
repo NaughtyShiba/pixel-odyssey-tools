@@ -131,7 +131,8 @@ def generate_data_for_enemies(
 def generate_search_map(
   items_json: Any,
   enemies_json: Any,
-  locations_json: Any
+  locations_json: Any,
+  catagories_json: Any
 ):
   map = [{
       "id": "items",
@@ -154,15 +155,24 @@ def generate_search_map(
       {"id": key,  "slug": f"/locations/{key}", "label": value["label"], }
         for key, value in locations_json.items()
       ],
+  },{
+      "id": "categories",
+      "label": "Categories",
+      "items": [
+      {"id": key,  "slug": f"/items/{key}", "label": value["label"], }
+        for key, value in catagories_json.items()
+      ],
   }]
   write_json(map, "./apps/helper/data/search_map.json")
 
-
+def generate_categories(catagories_json: Any):
+  write_json(catagories_json, "./apps/helper/data/categories.json")
 
 def main():
   items_json = load_json("./data/items.json")
   enemies_json = load_json("./data/enemies.json")
   locations_json = load_json("./data/locations.json")
+  catagories_json = load_json("./data/categories.json")
   generate_data_for_items(
     items_json=items_json,
     enemies_json=enemies_json,
@@ -178,8 +188,10 @@ def main():
   generate_search_map(
     items_json=items_json,
     enemies_json=enemies_json,
-    locations_json=locations_json
+    locations_json=locations_json,
+    catagories_json=catagories_json
   )
+  generate_categories(catagories_json)
 
 
 

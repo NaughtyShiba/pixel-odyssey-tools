@@ -1,0 +1,21 @@
+{
+	"ore": { "label": "Ore" },
+	"ingot": { "label": "Ingot" },
+	"material": { "label": "Material" },
+	"monster_drop": { "label": "Monster Drop" },
+	"basic": { "label": "Basic" },
+	"mushroom": { "label": "Mushroom" },
+	"ring": { "label": "Ring" },
+	"charm": { "label": "Charm" },
+	"weapon": { "label": "Weapon" },
+	"shield": { "label": "Shield" },
+	"combat_equipment": { "label": "Combat Equipment" },
+	"helmet": { "label": "Helmet" },
+	"necklace": { "label": "Necklace" },
+	"chest": { "label": "Chest" },
+	"greaves": { "label": "Greaves" },
+	"amulet": { "label": "Amulet" },
+	"tool": { "label": "Tool" },
+	"boots": { "label": "Boots" },
+	"food": { "label": "Food" }
+}
