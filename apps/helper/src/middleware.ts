@@ -1,6 +1,17 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+const isProtectedRoute = createRouteMatcher(['/editor(.*)'])
+
+export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) {
+      auth().protect((has) => {
+        return (
+          has({ permission: 'org:wiki:edit' })
+        )
+      })
+    }
+});
+
 
 export const config = {
 	matcher: [
