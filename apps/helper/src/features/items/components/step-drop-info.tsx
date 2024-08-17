@@ -33,7 +33,7 @@ export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {
 					{stepping_drop.map((location) => (
 						<TableRow key={location}>
 							<TableCell>
-								<Link className="underline" href={`/locations/${location}`}>
+								<Link className="underline" href={`/destinations/${location}`}>
 									{locations?.[location]?.label}
 								</Link>
 							</TableCell>

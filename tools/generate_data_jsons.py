@@ -152,7 +152,7 @@ def generate_search_map(
       "id": "locations",
       "label": "Locations",
       "items": [
-      {"id": key,  "slug": f"/locations/{key}", "label": value["label"], }
+      {"id": key,  "slug": f"/destinations/{key}", "label": value["label"], }
         for key, value in locations_json.items()
       ],
   },{

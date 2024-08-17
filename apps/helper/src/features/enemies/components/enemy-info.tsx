@@ -78,7 +78,9 @@ export function EnemyInfo() {
 							{enemy?.locations?.map((location) => (
 								<TableRow key={location}>
 									<TableCell>
-										<Link className="underline" href={`/locations/${location}`}>
+										<Link
+											className="underline"
+											href={`/destinations/${location}`}>
 											{locations?.[location as keyof typeof locations]?.label}
 										</Link>
 									</TableCell>

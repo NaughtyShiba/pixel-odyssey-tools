@@ -7,7 +7,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@repo/ui/components/card";
-import { Checkbox } from "@repo/ui/components/checkbox";
 import { Input } from "@repo/ui/components/input";
 import { Textarea } from "@repo/ui/components/textarea";
 import Link from "next/link";
@@ -128,7 +127,7 @@ export function LocationFormCard({
 							<CardTitle>{title}</CardTitle>
 						</div>
 						<div className="flex flex-row gap-4">
-							<Link href="/editor/locations">
+							<Link href="/editor/destinations">
 								<Button variant="secondary">Cancel</Button>
 							</Link>
 							<Button type="submit">Save</Button>

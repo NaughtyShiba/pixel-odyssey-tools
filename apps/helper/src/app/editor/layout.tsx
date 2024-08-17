@@ -24,7 +24,7 @@ export default function Dashboard({ children }: DashboardProps) {
 						<Link href="/editor/users">Users</Link>
 						<Link href="/editor/items">Items</Link>
 						<Link href="/editor/enemies">Enemies</Link>
-						<Link href="/editor/locations">Locations</Link>
+						<Link href="/editor/destinations">Destinations</Link>
 						<Link href="/editor/posts">Posts</Link>
 					</nav>
 					<div className="grid gap-6">{children}</div>

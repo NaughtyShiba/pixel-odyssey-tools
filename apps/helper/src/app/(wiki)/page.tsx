@@ -38,7 +38,7 @@ export default function () {
 			<PageContent>
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 					<PlaceholderCard title="Items" href="/items" />
-					<PlaceholderCard title="Locations" href="/locations" />
+					<PlaceholderCard title="Destinations" href="/destinations" />
 					<PlaceholderCard title="Enemies" href="/enemies" />
 					<PlaceholderCard title="Guides" href="/guides" />
 				</div>

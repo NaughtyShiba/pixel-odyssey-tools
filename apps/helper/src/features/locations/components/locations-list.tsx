@@ -20,7 +20,7 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 					<div className="h-64 overflow-hidden relative">
 						<Image
 							alt={title}
-							src={`/assets/locations/${image}.png`}
+							src={`/assets/destinations/${image}.png`}
 							width="234"
 							height="234"
 							className="absolute top-0"
@@ -36,7 +36,7 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 }
 
 interface LocationsListProps {
-	locations: Array<{ value: string; label: string }>;
+	locations: Array<{ id: string; label: string }>;
 }
 
 export function LocationsList({ locations }: LocationsListProps) {
@@ -44,10 +44,10 @@ export function LocationsList({ locations }: LocationsListProps) {
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 			{locations.map((location) => (
 				<PlaceholderCard
-					key={location.value}
+					key={location.id}
 					title={location.label}
-					href={`/locations/${location.value}`}
-					image={location.value}
+					href={`/destinations/${location.id}`}
+					image={location.id}
 				/>
 			))}
 		</div>
