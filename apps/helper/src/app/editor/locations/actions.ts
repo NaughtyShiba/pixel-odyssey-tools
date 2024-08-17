@@ -13,15 +13,15 @@ export async function submitLocation(
 	});
 	console.log({ data });
 
-	for (const enemy of data.enemies) {
-		// sync drop locaton
-	}
+	// for (const enemy of data.enemies) {
+	// 	// sync drop locaton
+	// }
 
-	for (const item of data.items) {
-		// sync drop locaton
-	}
+	// for (const item of data.items) {
+	// 	// sync drop locaton
+	// }
 
-	for (const npc of data.npcs) {
-		// sync appear locaton
-	}
+	// for (const npc of data.npcs) {
+	// 	// sync appear locaton
+	// }
 }
