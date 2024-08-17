@@ -1,4 +1,4 @@
-import { MoreHorizontal } from "lucide-react";
+import { getItems } from "@/src/features/items/models";
 import { Button } from "@repo/ui/components/button";
 import {
 	Card,
@@ -23,7 +23,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import { getItems } from "@/src/features/items/models";
+import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 export default async function Component() {

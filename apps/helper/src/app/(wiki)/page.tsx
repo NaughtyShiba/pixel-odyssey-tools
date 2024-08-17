@@ -1,15 +1,15 @@
 import {
+	PageArticle,
+	PageContent,
+	PageTitle,
+} from "@repo/helper/components/page";
+import {
 	Card,
 	CardContent,
 	CardHeader,
 	CardTitle,
 } from "@repo/ui/components/card";
 import Link from "next/link";
-import {
-	PageArticle,
-	PageContent,
-	PageTitle,
-} from "@repo/helper/components/page";
 
 interface PlaceholderCardProps {
 	title: string;

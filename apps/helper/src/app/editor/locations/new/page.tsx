@@ -1,35 +1,11 @@
-import { Button } from "@repo/ui/components/button";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from "@repo/ui/components/card";
-import { Input } from "@repo/ui/components/input";
-import Link from "next/link";
+import { getEnemies } from "@/src/features/enemies/models";
+import { LocationForm, LocationFormCard } from "../form";
 
-export default function () {
+export default async function () {
+	const enemies = await getEnemies();
 	return (
-		<Card>
-			<CardHeader className="flex-row justify-between">
-				<div className="flex flex-col space-y-1.5">
-					<CardTitle>New location</CardTitle>
-				</div>
-				<div className="flex flex-row gap-4">
-					<Link href="/editor/locations">
-						<Button variant="secondary">Cancel</Button>
-					</Link>
-					<Button>Save</Button>
-				</div>
-			</CardHeader>
-			<CardContent>
-				<div className="grid gap-4">
-					<div className="space-y-2">
-						<label>Label</label>
-						<Input />
-					</div>
-				</div>
-			</CardContent>
-		</Card>
+		<LocationFormCard title="New location">
+			<LocationForm enemies={enemies} />
+		</LocationFormCard>
 	);
 }

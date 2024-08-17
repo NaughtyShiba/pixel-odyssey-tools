@@ -1,4 +1,3 @@
-export default function(){
-
-  return null
+export default function () {
+	return null;
 }

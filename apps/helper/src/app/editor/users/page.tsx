@@ -1,4 +1,3 @@
-import { MoreHorizontal } from "lucide-react";
 import { Button } from "@repo/ui/components/button";
 import {
 	Card,
@@ -23,6 +22,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
+import { MoreHorizontal } from "lucide-react";
 
 interface User {
 	id: string;

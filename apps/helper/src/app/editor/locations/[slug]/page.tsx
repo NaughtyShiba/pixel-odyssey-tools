@@ -1,37 +1,14 @@
+import { getEnemies } from "@/src/features/enemies/models";
 import { getLocation } from "@/src/features/locations/models";
-import { Button } from "@repo/ui/components/button";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from "@repo/ui/components/card";
-import { Input } from "@repo/ui/components/input";
-import Link from "next/link";
+import { LocationForm, LocationFormCard } from "../form";
 
 export default async function ({ params }: { params: { slug: string } }) {
 	const location = await getLocation(params.slug);
+	const enemies = await getEnemies();
+
 	return (
-		<Card>
-			<CardHeader className="flex-row justify-between">
-				<div className="flex flex-col space-y-1.5">
-					<CardTitle>{location.label}</CardTitle>
-				</div>
-				<div className="flex flex-row gap-4">
-					<Link href="/editor/locations">
-						<Button variant="secondary">Cancel</Button>
-					</Link>
-					<Button>Save</Button>
-				</div>
-			</CardHeader>
-			<CardContent>
-				<div className="grid gap-4">
-					<div className="space-y-2">
-						<label>Label</label>
-						<Input defaultValue={location.label} />
-					</div>
-				</div>
-			</CardContent>
-		</Card>
+		<LocationFormCard title={location.label} defaultFormData={location}>
+			<LocationForm enemies={enemies} />
+		</LocationFormCard>
 	);
 }
