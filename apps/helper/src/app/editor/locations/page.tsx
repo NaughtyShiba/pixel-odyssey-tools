@@ -1,4 +1,4 @@
-import { getLocations } from "@/src/features/locations/models";
+import { getAllDestinations } from "@/src/models/destinations/models";
 import { Button } from "@repo/ui/components/button";
 import {
 	Card,
@@ -27,7 +27,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 export default async function Component() {
-	const locations = await getLocations();
+	const destinations = await getAllDestinations();
 	return (
 		<Card>
 			<CardHeader className="flex-row justify-between">
@@ -50,10 +50,10 @@ export default async function Component() {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{Object.entries(locations).map(([id, location]) => (
+						{destinations.map(({ id, label }) => (
 							<TableRow key={id}>
 								<TableCell className="font-medium">
-									<Link href={`/editor/locations/${id}`}>{location.label}</Link>
+									<Link href={`/editor/locations/${id}`}>{label}</Link>
 								</TableCell>
 								<TableCell>
 									<DropdownMenu>

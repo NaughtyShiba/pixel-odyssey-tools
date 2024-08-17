@@ -1,0 +1,148 @@
+{
+	"sunny_field": {
+		"label": "Sunny Field",
+		"enemies": ["green_slime", "pink_slime", "spawn_camper"],
+		"items": [
+			"bluebell",
+			"branch",
+			"cherry",
+			"clover",
+			"meadow_mushroom",
+			"pink_berries",
+			"potato",
+			"strawberry"
+		],
+		"npcs": ["merchant", "elder_wanderer"]
+	},
+	"wandering_woods": {
+		"label": "Wandering Woods",
+		"enemies": ["colossal_bloom", "tree_trunker", "soil_serpent"],
+		"items": [
+			"apple",
+			"apple_with_worm",
+			"branch",
+			"clover",
+			"coal",
+			"glittercap",
+			"honeycomb",
+			"potato",
+			"spotted_berries",
+			"strawberry"
+		],
+		"npcs": ["merchant", "elder_wanderer", "fire_knight"]
+	},
+	"cortane_caves": {
+		"label": "Cortane Caves",
+		"enemies": ["snake", "baby_cyclops"],
+		"items": [
+			"apple",
+			"black_berries",
+			"cave_coral",
+			"coal",
+			"iron_ore",
+			"flora_fossil",
+			"fossil",
+			"fish_fossil"
+		],
+		"npcs": ["merchant", "elder_wanderer"]
+	},
+	"jungle_of_the_lost": {
+		"label": "Jungle of the Lost",
+		"enemies": ["goblin_mage", "jungle_spider", "goblin_warrior"],
+		"items": [
+			"coal",
+			"copper_ore",
+			"dreamspore",
+			"honeydew",
+			"spotted_berries",
+			"tomato"
+		],
+		"npcs": ["merchant", "elder_wanderer"]
+	},
+	"death_dessert": {
+		"label": "Death Dessert",
+		"enemies": ["undead_guard", "undead", "undead_hulk"],
+		"items": [
+			"nighshade_shroom",
+			"pumpkin",
+			"sandals",
+			"scarab",
+			"yellow_berries"
+		],
+		"npcs": ["merchant", "elder_wanderer", "scarabas_dealer"]
+	},
+	"rusty_rift": {
+		"label": "Rusty Rift",
+		"enemies": ["bat", "tummy"],
+		"items": [
+			"copper_ore",
+			"crazy_berries",
+			"gold_ore",
+			"gold_nugget",
+			"rift_mushroom",
+			"skull"
+		],
+		"npcs": ["merchant", "elder_wanderer"]
+	},
+	"sharp_peaks": {
+		"label": "Sharp Peaks",
+		"enemies": ["ice_dragon", "ice_fly", "peaks_dweller"],
+		"items": [
+			"ice_lotus",
+			"icy_truffle",
+			"silver_ore",
+			"warm_boots",
+			"white_berries"
+		],
+		"npcs": ["merchant", "elder_wanderer", "fairy"]
+	},
+	"the_well": {
+		"label": "The Well",
+		"enemies": ["well_guardian", "smiler", "jellyfish"],
+		"items": ["pearl", "pickle", "underwater_berries", "underwater_trumpet"],
+		"npcs": ["merchant", "elder_wanderer", "mermaid"]
+	},
+	"deep_tunnels": {
+		"label": "Deep Tunnels",
+		"enemies": ["half_dead"],
+		"items": [
+			"bloodrose",
+			"chain",
+			"gold_ore",
+			"rockplum",
+			"silver_ore",
+			"tunnel_mushroom"
+		],
+		"npcs": ["merchant", "elder_wanderer"]
+	},
+	"entrance_to_hell": {
+		"label": "Entrance to Hell",
+		"enemies": ["minotaur", "lava_eater", "guardling"],
+		"items": [
+			"emberfruit",
+			"inferno_fungus",
+			"platinum_ore",
+			"red_berries",
+			"roast_potato",
+			"wine"
+		],
+		"npcs": ["merchant", "elder_wanderer"]
+	},
+	"red_forest": {
+		"label": "Red Forest",
+		"enemies": ["dracula", "tiny_caster", "golem"],
+		"items": [],
+		"npcs": ["merchant", "elder_wanderer"]
+	},
+	"wasteland": {
+		"label": "Wasteland",
+		"enemies": [
+			"forest_horror",
+			"undead_shaman",
+			"angry_tree",
+			"winged_undead"
+		],
+		"items": [],
+		"npcs": ["merchant", "elder_wanderer", "fire_knight"]
+	}
+}

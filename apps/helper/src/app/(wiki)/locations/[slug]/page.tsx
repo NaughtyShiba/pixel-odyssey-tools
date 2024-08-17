@@ -1,8 +1,5 @@
-// import { getPostBySlug, getSlugsByCategory } from "@/src/features/mdx/utils";
-
 import { LocationInfo } from "@/src/features/locations/components/location-info";
-import { getLocation } from "@/src/features/locations/models";
-import { getLocationQueryKey } from "@/src/features/locations/utils";
+import { getDestinationQuery } from "@/src/models/destinations/queries";
 import {
 	HydrationBoundary,
 	QueryClient,
@@ -11,10 +8,7 @@ import {
 
 export default async function Page({ params }: { params: { slug: string } }) {
 	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery({
-		queryKey: getLocationQueryKey(params.slug),
-		queryFn: () => getLocation(params.slug),
-	});
+	await queryClient.prefetchQuery(getDestinationQuery(params.slug));
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

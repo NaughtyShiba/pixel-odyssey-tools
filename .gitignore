@@ -14,3 +14,4 @@ dist
 
 # Global stuff
 .env
+apps/helper/db/

@@ -1,38 +1,73 @@
-import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+import { text, sqliteTable, integer } from "drizzle-orm/sqlite-core";
 import { relations } from "drizzle-orm";
-import { integer } from "drizzle-orm/sqlite-core";
 import { primaryKey } from "drizzle-orm/sqlite-core";
+import type { StatType } from "@/src/models/items/types";
 
 export const destinations = sqliteTable("destinations", {
 	id: text("id").primaryKey(),
-	label: text("location").notNull(),
+	label: text("label").notNull(),
 	description: text("description"),
 });
-export type Location = typeof destinations.$inferSelect;
-export type InsertLocation = typeof destinations.$inferInsert;
 
 export const enemies = sqliteTable("enemies", {
 	id: text("id").primaryKey(),
-	label: text("location").notNull(),
+	label: text("label").notNull(),
 });
 
-export type Enemy = typeof enemies.$inferSelect;
-export type InsertEnemy = typeof enemies.$inferInsert;
+export const items = sqliteTable("items", {
+	id: text("id").primaryKey(),
+	label: text("label").notNull(),
+	type: text("type").notNull(),
+	slot: text("slot"),
+	stats: text("stats", { mode: "json" }).$type<
+		Partial<Record<StatType, number>>
+	>(),
+});
+
+export const craftRecipes = sqliteTable(
+	"craftRecipes",
+	{
+		materialId: text("material_id").references(() => items.id),
+		amount: integer("amount"),
+		craftedItem: text("crafted_item").references(() => items.id),
+	},
+	(t) => ({
+		pk: primaryKey({ columns: [t.materialId, t.craftedItem] }),
+	}),
+);
+
+export const recipesRelations = relations(craftRecipes, ({ one }) => ({
+	material: one(items, {
+		fields: [craftRecipes.materialId],
+		references: [items.id],
+	}),
+	craft: one(items, {
+		fields: [craftRecipes.craftedItem],
+		references: [items.id],
+	}),
+}));
 
 export const enemiesRelations = relations(enemies, ({ many }) => ({
 	enemiesToDestinations: many(enemiesToDestinations),
+	enemiesToItems: many(enemyDrops),
 }));
-export const destinationsRelations = relations(destinations, ({ many }) => ({
+export const destinationsRelations = relations(enemies, ({ many }) => ({
 	enemiesToDestinations: many(enemiesToDestinations),
+	itemsToDestinations: many(itemsToDestinations),
+}));
+export const itemsRelations = relations(items, ({ many }) => ({
+	enemiesToItems: many(enemyDrops),
+	itemsToDestinations: many(itemsToDestinations),
+	craftRecipes: many(craftRecipes),
 }));
 
 export const enemiesToDestinations = sqliteTable(
 	"enemiesToLocations",
 	{
-		destinationId: integer("destination_id")
+		destinationId: text("destination_id")
 			.notNull()
 			.references(() => destinations.id),
-		enemyId: integer("enemy_id")
+		enemyId: text("enemy_id")
 			.notNull()
 			.references(() => enemies.id),
 	},
@@ -41,6 +76,50 @@ export const enemiesToDestinations = sqliteTable(
 	}),
 );
 
+export const itemsToDestinations = sqliteTable(
+	"itemsToDestinations",
+	{
+		destinationId: text("destination_id")
+			.notNull()
+			.references(() => destinations.id),
+		itemId: text("item_id")
+			.notNull()
+			.references(() => items.id),
+	},
+	(t) => ({
+		pk: primaryKey({ columns: [t.destinationId, t.itemId] }),
+	}),
+);
+
+export const enemyDrops = sqliteTable(
+	"enemyDrops",
+	{
+		itemId: text("item_id")
+			.notNull()
+			.references(() => items.id),
+		enemyId: text("enemy_id")
+			.notNull()
+			.references(() => enemies.id),
+		chance: integer("drop_chance"),
+	},
+	(t) => ({
+		pk: primaryKey({ columns: [t.itemId, t.enemyId] }),
+	}),
+);
+
+export const itemsToDestinationsRelations = relations(
+	itemsToDestinations,
+	({ one }) => ({
+		destination: one(destinations, {
+			fields: [itemsToDestinations.destinationId],
+			references: [destinations.id],
+		}),
+		item: one(items, {
+			fields: [itemsToDestinations.itemId],
+			references: [items.id],
+		}),
+	}),
+);
 export const enemiesToDestinationsRelations = relations(
 	enemiesToDestinations,
 	({ one }) => ({
@@ -54,3 +133,20 @@ export const enemiesToDestinationsRelations = relations(
 		}),
 	}),
 );
+export const enemiesToItemsRelations = relations(enemyDrops, ({ one }) => ({
+	item: one(items, {
+		fields: [enemyDrops.itemId],
+		references: [items.id],
+	}),
+	enemy: one(enemies, {
+		fields: [enemyDrops.enemyId],
+		references: [enemies.id],
+	}),
+}));
+
+export type Location = typeof destinations.$inferSelect;
+export type InsertLocation = typeof destinations.$inferInsert;
+export type Enemy = typeof enemies.$inferSelect;
+export type InsertEnemy = typeof enemies.$inferInsert;
+export type Item = typeof items.$inferSelect;
+export type InsertItem = typeof items.$inferInsert;

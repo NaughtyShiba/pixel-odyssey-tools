@@ -21,8 +21,7 @@ import { getEnemies } from "../../enemies/models";
 import { getEnemiesQueryKey } from "../../enemies/utils";
 import { getItems } from "../../items/models";
 import { getItemsQueryKey } from "../../items/utils";
-import { getLocation } from "../models";
-import { getLocationQueryKey } from "../utils";
+import { getDestinationQuery } from "@/src/models/destinations/queries";
 
 const COMMON_DROPS = [
 	"acorn",
@@ -48,10 +47,7 @@ const COMMON_DROPS = [
 export function LocationInfo() {
 	const { slug } = useParams<{ slug: string }>();
 
-	const { data: location } = useQuery({
-		queryKey: getLocationQueryKey(slug),
-		queryFn: () => getLocation(slug),
-	});
+	const { data: location } = useQuery(getDestinationQuery(slug));
 
 	const { data: items } = useQuery({
 		queryKey: getItemsQueryKey(),
@@ -62,6 +58,8 @@ export function LocationInfo() {
 		queryKey: getEnemiesQueryKey(),
 		queryFn: getEnemies,
 	});
+
+	if (!location) return null;
 
 	return (
 		<PageArticle>
@@ -131,27 +129,6 @@ export function LocationInfo() {
 									</TableRow>
 								) : null,
 							)}
-						</TableBody>
-					</Table>
-				</div>
-				<div className="flex flex-col gap-8">
-					<PageSubTitle>NPCs</PageSubTitle>
-					<Table className="w-auto">
-						<TableHeader>
-							<TableRow>
-								<TableHead>Area</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{location?.npcs?.map((npc) => (
-								<TableRow key={npc}>
-									<TableCell>
-										<Link className="underline" href={`/npc/${npc}`}>
-											{npc}
-										</Link>
-									</TableCell>
-								</TableRow>
-							))}
 						</TableBody>
 					</Table>
 				</div>

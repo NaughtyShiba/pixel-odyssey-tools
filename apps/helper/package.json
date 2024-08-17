@@ -5,6 +5,7 @@
 	"exports": {
 		"./*": ["./src/*.tsx", "./src/*.ts"],
 		"./data/*": ["./data/*"],
+		"./seed/*": ["./seed/*"],
 		"./content/*": ["./content/*"]
 	},
 	"scripts": {
@@ -12,7 +13,8 @@
 		"build": "next build",
 		"start": "next start -p 3002",
 		"db:generate": "drizzle-kit generate",
-		"db:migrate": "tsx src/db/migrate.ts"
+		"db:migrate": "tsx src/db/migrate.ts",
+		"db:seed": "tsx src/db/seed.ts"
 	},
 	"devDependencies": {
 		"@repo/tailwind-config": "*",

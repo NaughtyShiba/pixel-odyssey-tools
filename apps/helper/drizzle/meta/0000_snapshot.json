@@ -1,9 +1,74 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "65ffe2c5-e1af-48c2-ad7a-6011fd6f6a91",
+  "id": "69f63e59-4e30-4deb-97b8-b4ebe4565ddb",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "craftRecipes": {
+      "name": "craftRecipes",
+      "columns": {
+        "material_id": {
+          "name": "material_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "crafted_item": {
+          "name": "crafted_item",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "craftRecipes_material_id_items_id_fk": {
+          "name": "craftRecipes_material_id_items_id_fk",
+          "tableFrom": "craftRecipes",
+          "tableTo": "items",
+          "columnsFrom": [
+            "material_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "craftRecipes_crafted_item_items_id_fk": {
+          "name": "craftRecipes_crafted_item_items_id_fk",
+          "tableFrom": "craftRecipes",
+          "tableTo": "items",
+          "columnsFrom": [
+            "crafted_item"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "craftRecipes_material_id_crafted_item_pk": {
+          "columns": [
+            "material_id",
+            "crafted_item"
+          ],
+          "name": "craftRecipes_material_id_crafted_item_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "destinations": {
       "name": "destinations",
       "columns": {
@@ -14,8 +79,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "location": {
-          "name": "location",
+        "label": {
+          "name": "label",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -44,8 +109,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "location": {
-          "name": "location",
+        "label": {
+          "name": "label",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -62,14 +127,14 @@
       "columns": {
         "destination_id": {
           "name": "destination_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
         "enemy_id": {
           "name": "enemy_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -111,6 +176,173 @@
             "enemy_id"
           ],
           "name": "enemiesToLocations_destination_id_enemy_id_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "enemyDrops": {
+      "name": "enemyDrops",
+      "columns": {
+        "item_id": {
+          "name": "item_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "enemy_id": {
+          "name": "enemy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "drop_chance": {
+          "name": "drop_chance",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "enemyDrops_item_id_items_id_fk": {
+          "name": "enemyDrops_item_id_items_id_fk",
+          "tableFrom": "enemyDrops",
+          "tableTo": "items",
+          "columnsFrom": [
+            "item_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "enemyDrops_enemy_id_enemies_id_fk": {
+          "name": "enemyDrops_enemy_id_enemies_id_fk",
+          "tableFrom": "enemyDrops",
+          "tableTo": "enemies",
+          "columnsFrom": [
+            "enemy_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "enemyDrops_item_id_enemy_id_pk": {
+          "columns": [
+            "item_id",
+            "enemy_id"
+          ],
+          "name": "enemyDrops_item_id_enemy_id_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "items": {
+      "name": "items",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "slot": {
+          "name": "slot",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "stats": {
+          "name": "stats",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "itemsToDestinations": {
+      "name": "itemsToDestinations",
+      "columns": {
+        "destination_id": {
+          "name": "destination_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "item_id": {
+          "name": "item_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "itemsToDestinations_destination_id_destinations_id_fk": {
+          "name": "itemsToDestinations_destination_id_destinations_id_fk",
+          "tableFrom": "itemsToDestinations",
+          "tableTo": "destinations",
+          "columnsFrom": [
+            "destination_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "itemsToDestinations_item_id_items_id_fk": {
+          "name": "itemsToDestinations_item_id_items_id_fk",
+          "tableFrom": "itemsToDestinations",
+          "tableTo": "items",
+          "columnsFrom": [
+            "item_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "itemsToDestinations_destination_id_item_id_pk": {
+          "columns": [
+            "destination_id",
+            "item_id"
+          ],
+          "name": "itemsToDestinations_destination_id_item_id_pk"
         }
       },
       "uniqueConstraints": {}
