@@ -31,7 +31,6 @@ function getTheme() {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
 	const theme = getTheme();
-	console.log(theme);
 	const queryClient = new QueryClient();
 	await Promise.all([
 		queryClient.prefetchQuery({

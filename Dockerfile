@@ -12,7 +12,7 @@ RUN corepack prepare pnpm@9.7.0 --activate
 
 FROM base AS install
 RUN pnpm add turbo@2.0.12 --global
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json run.sh ./
 RUN ls
 COPY packages ./packages
 COPY apps ./apps
@@ -20,7 +20,8 @@ COPY tools ./tools
 COPY data ./data
 RUN python tools/generate_data_jsons.py
 RUN pnpm install --frozen-lockfile
-RUN pnpm turbo build
+ENV DB_FILE=db/db.sqlite
+RUN chmod +x run.sh
 
 EXPOSE 3002
-ENTRYPOINT [ "pnpm", "dotenvx", "run", "--", "turbo", "start" ]
+ENTRYPOINT [ "sh", "run.sh" ]

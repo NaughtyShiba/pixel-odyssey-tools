@@ -2,24 +2,19 @@
 	"$schema": "https://turbo.build/schema.json",
 	"tasks": {
 		"build": {
+			"passThroughEnv": ["DB_FILE"],
 			"dependsOn": ["^build"],
 			"outputs": [".next/**", "!.next/cache/**"]
 		},
 		"start": {
-			"passThroughEnv": [
-				"NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
-				"CLERK_SECRET_KEY"
-			],
+			"passThroughEnv": ["DB_FILE"],
 			"dependsOn": ["^build"]
 		},
 		"check-types": {
 			"dependsOn": ["^check-types"]
 		},
 		"dev": {
-			"passThroughEnv": [
-				"NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
-				"CLERK_SECRET_KEY"
-			],
+			"passThroughEnv": ["DB_FILE"],
 			"persistent": true,
 			"cache": false
 		},
