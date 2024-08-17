@@ -61,6 +61,15 @@ export async function getPostBySlug({
 			h2: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
 				<h2 className="text-xl">{children}</h2>
 			),
+			h3: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
+				<h3 className="text-lg">{children}</h3>
+			),
+			ul: ({ children }: React.HTMLAttributes<HTMLUListElement>) => (
+				<ul className="list-disc pl-4">{children}</ul>
+			),
+			li: ({ children }: React.HTMLAttributes<HTMLLIElement>) => (
+				<li>{children}</li>
+			),
 			...components,
 		},
 	});
