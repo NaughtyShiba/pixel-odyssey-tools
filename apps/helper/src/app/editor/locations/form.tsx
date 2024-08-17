@@ -22,6 +22,7 @@ import {
 	FormItem,
 	FormLabel,
 } from "@repo/ui/components/form";
+import { MultiSelectCombobox } from "@/src/features/form/components/multiselect-combobox";
 
 interface LocationFormProps {
 	enemies: Record<string, EnemyMinimal>;
@@ -59,42 +60,26 @@ export function LocationForm(props: LocationFormProps) {
 			<FormField
 				control={control}
 				name="enemies"
-				render={() => (
+				render={({ field }) => (
 					<FormItem>
-						<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+						<div className="">
 							<div className="col-span-4">Enemies</div>
-							{Object.entries(props.enemies).map(([id, enemy]) => (
-								<FormField
-									key={id}
-									control={control}
-									name="enemies"
-									render={({ field }) => {
-										return (
-											<FormItem key={id}>
-												<div className="items-top flex space-x-2">
-													<FormControl>
-														<Checkbox
-															checked={field.value?.includes(id)}
-															onCheckedChange={(checked) => {
-																return checked
-																	? field.onChange([...field.value, id])
-																	: field.onChange(
-																			field.value?.filter(
-																				(value: string) => value !== id,
-																			),
-																		);
-															}}
-														/>
-													</FormControl>
-													<FormLabel className="cursor-pointer">
-														{enemy.label}
-													</FormLabel>
-												</div>
-											</FormItem>
-										);
-									}}
-								/>
-							))}
+							<MultiSelectCombobox
+								selectEntryText="Select enemy(-ies)"
+								searchEntryText="Search for enemy..."
+								noEntryFoundText="No enemy found."
+								items={Object.entries(props.enemies).map(
+									([value, { label }]) => ({ value, label }),
+								)}
+								value={field.value}
+								onSelect={(value) =>
+									field.value.includes(value)
+										? field.onChange(
+												field.value.filter((v: string) => v !== value),
+											)
+										: field.onChange([...field.value, value])
+								}
+							/>
 						</div>
 					</FormItem>
 				)}

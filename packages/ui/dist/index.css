@@ -930,12 +930,12 @@ video {
   border-color: hsl(var(--input));
 }
 
-.border-transparent {
-  border-color: transparent;
-}
-
 .border-primary {
   border-color: hsl(var(--primary));
+}
+
+.border-transparent {
+  border-color: transparent;
 }
 
 .bg-accent {
@@ -1122,6 +1122,14 @@ video {
   color: hsl(var(--card-foreground));
 }
 
+.text-current {
+  color: currentColor;
+}
+
+.text-destructive {
+  color: hsl(var(--destructive));
+}
+
 .text-destructive-foreground {
   color: hsl(var(--destructive-foreground));
 }
@@ -1148,14 +1156,6 @@ video {
 
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground));
-}
-
-.text-current {
-  color: currentColor;
-}
-
-.text-destructive {
-  color: hsl(var(--destructive));
 }
 
 .underline-offset-4 {
@@ -1478,12 +1478,12 @@ video {
   color: hsl(var(--accent-foreground));
 }
 
-.data-\[state\=open\]\:text-muted-foreground[data-state="open"] {
-  color: hsl(var(--muted-foreground));
-}
-
 .data-\[state\=checked\]\:text-primary-foreground[data-state="checked"] {
   color: hsl(var(--primary-foreground));
+}
+
+.data-\[state\=open\]\:text-muted-foreground[data-state="open"] {
+  color: hsl(var(--muted-foreground));
 }
 
 .data-\[disabled\=true\]\:opacity-50[data-disabled="true"] {
