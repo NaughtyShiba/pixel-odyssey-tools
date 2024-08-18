@@ -27,9 +27,9 @@ export function ItemInfo() {
 			<PageContent>
 				{isRefineable(item) && <RefineInfo {...item} />}
 				{isCraftable(item) && <CraftInfo {...item} />}{" "}
+				{isRecipeIngredient(item) && <RecipeInfo {...item} />}
 				{isDroppedByEnemies(item) && <EnemyDropInfo {...item} />}
 				{isDroppedByStepping(item) && <StepDropInfo {...item} />}
-				{isRecipeIngredient(item) && <RecipeInfo {...item} />}
 			</PageContent>
 		</PageArticle>
 	);
