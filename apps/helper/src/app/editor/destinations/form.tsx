@@ -1,5 +1,5 @@
 "use client";
-import type { EnemyMinimal } from "@repo/helper/features/enemies/models";
+
 import { Button } from "@repo/ui/components/button";
 import {
 	Card,
@@ -24,7 +24,7 @@ import {
 import { MultiSelectCombobox } from "@/src/features/form/components/multiselect-combobox";
 
 interface LocationFormProps {
-	enemies: Record<string, EnemyMinimal>;
+	enemies: Array<{ id: string; label: string }>;
 }
 
 export function LocationForm(props: LocationFormProps) {
@@ -67,9 +67,10 @@ export function LocationForm(props: LocationFormProps) {
 								selectEntryText="Select enemy(-ies)"
 								searchEntryText="Search for enemy..."
 								noEntryFoundText="No enemy found."
-								items={Object.entries(props.enemies).map(
-									([value, { label }]) => ({ value, label }),
-								)}
+								items={props.enemies.map(({ id, label }) => ({
+									value: id,
+									label,
+								}))}
 								value={field.value}
 								onSelect={(value) =>
 									field.value.includes(value)

@@ -1,6 +1,5 @@
 import { EnemyInfo } from "@/src/features/enemies/components/enemy-info";
-import { getEnemy } from "@/src/features/enemies/models";
-import { getEnemyQueryKey } from "@/src/features/enemies/utils";
+import { getEnemyQuery } from "@/src/models/enemies/queries";
 import {
 	HydrationBoundary,
 	QueryClient,
@@ -9,10 +8,7 @@ import {
 
 export default async function Page({ params }: { params: { slug: string } }) {
 	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery({
-		queryKey: getEnemyQueryKey(params.slug),
-		queryFn: () => getEnemy(params.slug),
-	});
+	await queryClient.prefetchQuery(getEnemyQuery(params.slug));
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>

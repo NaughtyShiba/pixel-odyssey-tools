@@ -10,11 +10,13 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import type { RecipeIngredient } from "../types";
-import { getItemsQueryKey } from "../utils";
+import { getAllItemsQuery } from "@/src/models/items/queries";
 
 interface RecipeInfoProps extends RecipeIngredient {}
-export function RecipeInfo({ recipe }: RecipeInfoProps) {
-	const { data: items } = useQuery({ queryKey: getItemsQueryKey() });
+export function RecipeInfo({ usedToCraft }: RecipeInfoProps) {
+	const { data: items } = useQuery(getAllItemsQuery());
+
+	if (usedToCraft.length === 0) return null;
 
 	return (
 		<>
@@ -28,14 +30,11 @@ export function RecipeInfo({ recipe }: RecipeInfoProps) {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{Object.entries(recipe).map(([itemName, amount]) => (
-							<TableRow key={itemName}>
+						{usedToCraft.map(({ itemId, amount }) => (
+							<TableRow key={itemId}>
 								<TableCell className="flex gap-2 items-center">
-									<Link className="underline" href={`/items/${itemName}`}>
-										{
-											(items as Record<string, { label: string }>)[itemName]
-												.label
-										}
+									<Link className="underline" href={`/items/${itemId}`}>
+										{items?.find((i) => i.id === itemId)?.label}
 									</Link>
 								</TableCell>
 								<TableCell>{amount}</TableCell>

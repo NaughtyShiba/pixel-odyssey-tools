@@ -11,7 +11,6 @@ export async function submitLocation(
 	await new Promise((resolve) => {
 		resolve(null);
 	});
-	console.log({ data });
 
 	// for (const enemy of data.enemies) {
 	// 	// sync drop locaton

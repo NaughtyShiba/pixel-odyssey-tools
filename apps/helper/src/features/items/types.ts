@@ -1,19 +1,19 @@
 export interface Craftable {
-	craft: Record<string, number>;
-	total_craft: Record<string, number>;
+	craftedWith: Array<{ itemId: string; amount: number }>;
+	// total_craft: Record<string, number>;
 }
 
 export interface RecipeIngredient {
-	recipe: Record<string, number>;
+	usedToCraft: Array<{ itemId: string; amount: number }>;
 }
 
 export interface Refineable {
-	perfect_refine: Record<
+	perfectRefine: Record<
 		string,
 		{
-			total_items: number;
+			itemsRequired: number;
 			stats: Record<string, number>;
-			refine_with?: {
+			cheapestItem?: {
 				perfect: boolean;
 				level: number;
 			};
@@ -28,9 +28,12 @@ export interface Refineable {
 }
 
 export interface DroppedByEnemies {
-	enemy_drop: Record<string, number>;
+	enemies: Array<{
+		enemyId: string;
+		chance: number;
+	}>;
 }
 
 export interface DroppedByStepping {
-	stepping_drop: string[];
+	destinations: string[];
 }

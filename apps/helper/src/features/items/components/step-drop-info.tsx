@@ -9,16 +9,14 @@ import {
 } from "@repo/ui/components/table";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { getLocations } from "../../locations/models";
-import { getLocationsQueryKey } from "../../locations/utils";
 import type { DroppedByStepping } from "../types";
+import { getAllDestinationsQuery } from "@/src/models/destinations/queries";
 
 interface StepDropInfoProps extends DroppedByStepping {}
-export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {
-	const { data: locations } = useQuery({
-		queryKey: getLocationsQueryKey(),
-		queryFn: getLocations,
-	});
+export function StepDropInfo({ destinations }: StepDropInfoProps) {
+	const { data: locations } = useQuery(getAllDestinationsQuery());
+
+	if (destinations.length === 0) return null;
 
 	return (
 		<section className="flex flex-col gap-8">
@@ -30,11 +28,13 @@ export function StepDropInfo({ stepping_drop }: StepDropInfoProps) {
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					{stepping_drop.map((location) => (
-						<TableRow key={location}>
+					{destinations.map((destination) => (
+						<TableRow key={destination}>
 							<TableCell>
-								<Link className="underline" href={`/destinations/${location}`}>
-									{locations?.[location]?.label}
+								<Link
+									className="underline"
+									href={`/destinations/${destination}`}>
+									{locations?.find((l) => l.id === destination)?.label}
 								</Link>
 							</TableCell>
 						</TableRow>

@@ -10,20 +10,16 @@ import {
 	isRecipeIngredient,
 	isRefineable,
 } from "../guards";
-import { getItem } from "../models";
-import { getItemQueryKey } from "../utils";
 import { CraftInfo } from "./craft-info";
 import { EnemyDropInfo } from "./enemy-drop-info";
 import { RecipeInfo } from "./recipe-info";
 import { RefineInfo } from "./refine-info";
 import { StepDropInfo } from "./step-drop-info";
+import { getItemQuery } from "@/src/models/items/queries";
 
 export function ItemInfo() {
 	const { slug } = useParams<{ slug: string }>();
-	const { data: item } = useQuery({
-		queryKey: getItemQueryKey(slug),
-		queryFn: () => getItem(slug),
-	});
+	const { data: item } = useQuery(getItemQuery(slug));
 
 	return (
 		<PageArticle>

@@ -49,14 +49,14 @@ export const recipesRelations = relations(craftRecipes, ({ one }) => ({
 
 export const enemiesRelations = relations(enemies, ({ many }) => ({
 	enemiesToDestinations: many(enemiesToDestinations),
-	enemiesToItems: many(enemyDrops),
+	enemiesToItems: many(enemiesToItems),
 }));
 export const destinationsRelations = relations(enemies, ({ many }) => ({
 	enemiesToDestinations: many(enemiesToDestinations),
 	itemsToDestinations: many(itemsToDestinations),
 }));
 export const itemsRelations = relations(items, ({ many }) => ({
-	enemiesToItems: many(enemyDrops),
+	enemiesToItems: many(enemiesToItems),
 	itemsToDestinations: many(itemsToDestinations),
 	craftRecipes: many(craftRecipes),
 }));
@@ -91,7 +91,7 @@ export const itemsToDestinations = sqliteTable(
 	}),
 );
 
-export const enemyDrops = sqliteTable(
+export const enemiesToItems = sqliteTable(
 	"enemyDrops",
 	{
 		itemId: text("item_id")
@@ -133,13 +133,13 @@ export const enemiesToDestinationsRelations = relations(
 		}),
 	}),
 );
-export const enemiesToItemsRelations = relations(enemyDrops, ({ one }) => ({
+export const enemiesToItemsRelations = relations(enemiesToItems, ({ one }) => ({
 	item: one(items, {
-		fields: [enemyDrops.itemId],
+		fields: [enemiesToItems.itemId],
 		references: [items.id],
 	}),
 	enemy: one(enemies, {
-		fields: [enemyDrops.enemyId],
+		fields: [enemiesToItems.enemyId],
 		references: [enemies.id],
 	}),
 }));

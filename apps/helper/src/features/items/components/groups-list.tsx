@@ -1,5 +1,6 @@
 "use client";
 
+import { getItemsCategoriesQuery } from "@/src/models/items/queries";
 import {
 	Card,
 	CardContent,
@@ -7,9 +8,8 @@ import {
 	CardTitle,
 } from "@repo/ui/components/card";
 import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { getCategories } from "../models";
-import { getCategoriesQueryKey } from "../utils";
 
 interface PlaceholderCardProps {
 	title: string;
@@ -32,19 +32,16 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 }
 
 export function GroupsList() {
-	const { data: groups } = useQuery({
-		queryKey: getCategoriesQueryKey(),
-		queryFn: getCategories,
-	});
-
+	const { data: groups } = useQuery(getItemsCategoriesQuery());
+	console.log({ groups });
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-			{Object.entries(groups ?? {}).map(([groupId, group]) => (
+			{groups?.map(({ category }) => (
 				<PlaceholderCard
-					key={groupId}
-					title={group.label}
-					href={`/catagories/${groupId}`}
-					image={groupId}
+					key={category}
+					title={category}
+					href={`/catagories/${category}`}
+					image={category}
 				/>
 			))}
 		</div>

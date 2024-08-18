@@ -10,11 +10,13 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import type { Craftable } from "../types";
-import { getItemsQueryKey } from "../utils";
+import { getAllItemsQuery } from "@/src/models/items/queries";
 
 interface CraftInfoProps extends Craftable {}
-export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
-	const { data: items } = useQuery({ queryKey: getItemsQueryKey() });
+export function CraftInfo({ craftedWith }: CraftInfoProps) {
+	const { data: items } = useQuery(getAllItemsQuery());
+
+	if (craftedWith.length === 0) return null;
 
 	return (
 		<>
@@ -28,14 +30,11 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{Object.entries(craft).map(([itemName, amount]) => (
-							<TableRow key={itemName}>
+						{craftedWith.map(({ itemId, amount }) => (
+							<TableRow key={itemId}>
 								<TableCell className="flex gap-2 items-center">
-									<Link className="underline" href={`/items/${itemName}`}>
-										{
-											(items as Record<string, { label: string }>)[itemName]
-												.label
-										}
+									<Link className="underline" href={`/items/${itemId}`}>
+										{items?.find((i) => i.id === itemId)?.label}
 									</Link>
 								</TableCell>
 								<TableCell>{amount}</TableCell>
@@ -44,7 +43,7 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 					</TableBody>
 				</Table>
 			</section>
-			<section className="flex flex-col gap-8">
+			{/*<section className="flex flex-col gap-8">
 				<PageSubTitle>Total Items required:</PageSubTitle>
 				<Table className="w-auto">
 					<TableHeader>
@@ -69,7 +68,7 @@ export function CraftInfo({ craft, total_craft }: CraftInfoProps) {
 						))}
 					</TableBody>
 				</Table>
-			</section>
+			</section>*/}
 		</>
 	);
 }

@@ -6,17 +6,11 @@ import {
 	dehydrate,
 } from "@tanstack/react-query";
 import { cookies } from "next/headers";
-import { getEnemies } from "../features/enemies/models";
-import { getEnemiesQueryKey } from "../features/enemies/utils";
-import { getCategories, getItems } from "../features/items/models";
-import {
-	getCategoriesQueryKey,
-	getItemsQueryKey,
-} from "../features/items/utils";
-import { getLocations } from "../features/locations/models";
-import { getLocationsQueryKey } from "../features/locations/utils";
 import { ReactQueryClientProvider } from "../features/providers/providers";
 import { ThemeProvider } from "../features/theme/context";
+import { getAllEnemiesQuery } from "../models/enemies/queries";
+import { getAllDestinationsQuery } from "../models/destinations/queries";
+import { getAllItemsQuery } from "../models/items/queries";
 
 interface RootLayoutProps {
 	children: ReactNode;
@@ -33,22 +27,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 	const theme = getTheme();
 	const queryClient = new QueryClient();
 	await Promise.all([
-		queryClient.prefetchQuery({
-			queryKey: getLocationsQueryKey(),
-			queryFn: getLocations,
-		}),
-		queryClient.prefetchQuery({
-			queryKey: getItemsQueryKey(),
-			queryFn: getItems,
-		}),
-		queryClient.prefetchQuery({
-			queryKey: getEnemiesQueryKey(),
-			queryFn: getEnemies,
-		}),
-		queryClient.prefetchQuery({
-			queryKey: getCategoriesQueryKey(),
-			queryFn: getCategories,
-		}),
+		queryClient.prefetchQuery(getAllDestinationsQuery()),
+		queryClient.prefetchQuery(getAllItemsQuery()),
+		queryClient.prefetchQuery(getAllEnemiesQuery()),
+		// queryClient.prefetchQuery({
+		// 	queryKey: getCategoriesQueryKey(),
+		// 	queryFn: getCategories,
+		// }),
 	]);
 	return (
 		<ReactQueryClientProvider>

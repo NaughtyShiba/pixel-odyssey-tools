@@ -1,12 +1,48 @@
+import { db } from "@/src/db/db";
+import { destinations, enemies, items } from "@/src/db/schemas";
 import type { SearchItems } from "@/src/features/command/types";
 import { getSlugsByCategory } from "@/src/features/mdx/utils";
+import { sql } from "drizzle-orm";
 
 export async function GET() {
 	try {
-		const data = await import("@repo/helper/data/search_map.json");
-
 		const map: SearchItems = [
-			...data.default,
+			{
+				id: "items",
+				label: "Items",
+				items: db
+					.select({
+						id: items.id,
+						label: items.label,
+						slug: sql<string>`'items/' || ${items.id}`.as("slug"),
+					})
+					.from(items)
+					.all(),
+			},
+			{
+				id: "enemies",
+				label: "Enemies",
+				items: db
+					.select({
+						id: enemies.id,
+						label: enemies.label,
+						slug: sql<string>`'enemies/' || ${enemies.id}`.as("slug"),
+					})
+					.from(enemies)
+					.all(),
+			},
+			{
+				id: "destinations",
+				label: "Destinations",
+				items: db
+					.select({
+						id: destinations.id,
+						label: destinations.label,
+						slug: sql<string>`'destination/' || ${destinations.id}`.as("slug"),
+					})
+					.from(destinations)
+					.all(),
+			},
 			{
 				id: "guides",
 				label: "Guides",

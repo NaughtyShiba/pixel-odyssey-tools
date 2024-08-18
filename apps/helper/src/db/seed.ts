@@ -3,7 +3,7 @@ import {
 	destinations,
 	enemies,
 	enemiesToDestinations,
-	enemyDrops,
+	enemiesToItems,
 	items,
 	itemsToDestinations,
 } from "./schemas";
@@ -23,7 +23,7 @@ async function seedEnemies() {
 			.onConflictDoNothing();
 		for (const { item, chance } of enemy.drops) {
 			await db
-				.insert(enemyDrops)
+				.insert(enemiesToItems)
 				.values({
 					itemId: item,
 					enemyId,

@@ -17,11 +17,9 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getEnemies } from "../../enemies/models";
-import { getEnemiesQueryKey } from "../../enemies/utils";
-import { getItems } from "../../items/models";
-import { getItemsQueryKey } from "../../items/utils";
 import { getDestinationQuery } from "@/src/models/destinations/queries";
+import { getAllEnemiesQuery } from "@/src/models/enemies/queries";
+import { getAllItemsQuery } from "@/src/models/items/queries";
 
 const COMMON_DROPS = [
 	"acorn",
@@ -48,16 +46,8 @@ export function LocationInfo() {
 	const { slug } = useParams<{ slug: string }>();
 
 	const { data: location } = useQuery(getDestinationQuery(slug));
-
-	const { data: items } = useQuery({
-		queryKey: getItemsQueryKey(),
-		queryFn: getItems,
-	});
-
-	const { data: enemies } = useQuery({
-		queryKey: getEnemiesQueryKey(),
-		queryFn: getEnemies,
-	});
+	const { data: items } = useQuery(getAllItemsQuery());
+	const { data: enemies } = useQuery(getAllEnemiesQuery());
 
 	if (!location) return null;
 
@@ -78,7 +68,7 @@ export function LocationInfo() {
 								<TableRow key={enemy}>
 									<TableCell>
 										<Link className="underline" href={`/enemies/${enemy}`}>
-											{enemies?.[enemy as keyof typeof enemies]?.label}
+											{enemies?.find((e) => e.id === enemy)?.label}
 										</Link>
 									</TableCell>
 								</TableRow>
@@ -96,11 +86,11 @@ export function LocationInfo() {
 						</TableHeader>
 						<TableBody>
 							{location?.items?.map((item) =>
-								items?.[item]?.label ? (
+								items?.find((i) => i.id === item) ? (
 									<TableRow key={item}>
 										<TableCell>
 											<Link className="underline" href={`/items/${item}`}>
-												{items?.[item]?.label}
+												{items?.find((i) => i.id === item)?.label}
 											</Link>
 										</TableCell>
 									</TableRow>
@@ -119,11 +109,11 @@ export function LocationInfo() {
 						</TableHeader>
 						<TableBody>
 							{COMMON_DROPS.map((item) =>
-								items?.[item]?.label ? (
+								items?.find((i) => i.id === item) ? (
 									<TableRow key={item}>
 										<TableCell>
 											<Link className="underline" href={`/items/${item}`}>
-												{items?.[item]?.label}
+												{items?.find((i) => i.id === item)?.label}
 											</Link>
 										</TableCell>
 									</TableRow>

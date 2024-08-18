@@ -27,17 +27,17 @@ export async function getDestination(id: string) {
 			description: destinations.description,
 			enemies: sql<string>`
       COALESCE(
-        json_group_array(DISTINCT
+        CASE WHEN ${enemies.id} IS NOT NULL THEN json_group_array(DISTINCT
           CASE WHEN ${enemies.id} IS NOT NULL THEN ${enemies.id} ELSE NULL END
-        ),
+        ) ELSE NULL END,
         '[]'
       )
     `.as("enemies"),
 			items: sql<string>`
       COALESCE(
-        json_group_array(DISTINCT
+        CASE WHEN ${items.id} IS NOT NULL THEN json_group_array(DISTINCT
           CASE WHEN ${items.id} IS NOT NULL THEN ${items.id} ELSE NULL END
-        ),
+        ) ELSE NULL END,
         '[]'
       )
     `.as("items"),

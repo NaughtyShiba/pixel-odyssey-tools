@@ -2,22 +2,18 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { getEnemies } from "../models";
-import { getEnemiesQueryKey } from "../utils";
+import { getAllEnemiesQuery } from "@/src/models/enemies/queries";
 
 export function EnemiesList() {
-	const { data: enemies } = useQuery({
-		queryKey: getEnemiesQueryKey(),
-		queryFn: getEnemies,
-	});
+	const { data: enemies } = useQuery(getAllEnemiesQuery());
 
 	return (
 		<ul className="list-disc">
 			{enemies
-				? Object.entries(enemies).map(([enemyName, enemy]) => (
-						<li key={enemyName}>
-							<Link className="underline" href={`/enemies/${enemyName}`}>
-								{enemy.label}
+				? enemies.map(({ id, label }) => (
+						<li key={id}>
+							<Link className="underline" href={`/enemies/${id}`}>
+								{label}
 							</Link>
 						</li>
 					))

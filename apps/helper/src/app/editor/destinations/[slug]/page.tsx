@@ -1,9 +1,9 @@
-import { getEnemies } from "@/src/features/enemies/models";
+import { getAllEnemies } from "@/src/models/enemies/models";
 import { LocationForm, LocationFormCard } from "../form";
 import { getDestination } from "@/src/models/destinations/models";
 
 export default async function ({ params }: { params: { slug: string } }) {
-	const enemies = await getEnemies();
+	const enemies = await getAllEnemies();
 
 	const destination = await getDestination(params.slug);
 	if (!destination) throw new Error("Destination not found");

@@ -1,4 +1,4 @@
-import { getItem } from "@/src/features/items/models";
+import { getItemEntry } from "@/src/models/items/models";
 import { Button } from "@repo/ui/components/button";
 import {
 	Card,
@@ -10,7 +10,10 @@ import { Input } from "@repo/ui/components/input";
 import Link from "next/link";
 
 export default async function ({ params }: { params: { slug: string } }) {
-	const item = await getItem(params.slug);
+	const item = await getItemEntry(params.slug);
+
+	if (!item) return;
+
 	return (
 		<Card>
 			<CardHeader className="flex-row justify-between">

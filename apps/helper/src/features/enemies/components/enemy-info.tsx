@@ -17,31 +17,19 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getItems } from "../../items/models";
-import { getItemsQueryKey } from "../../items/utils";
-import { getLocations } from "../../locations/models";
-import { getLocationsQueryKey } from "../../locations/utils";
-import { getEnemy } from "../models";
-import { getEnemyQueryKey } from "../utils";
+import { getEnemyQuery } from "@/src/models/enemies/queries";
+import { getAllDestinationsQuery } from "@/src/models/destinations/queries";
+import { getAllItemsQuery } from "@/src/models/items/queries";
 
 export function EnemyInfo() {
 	const { slug } = useParams<{ slug: string }>();
-	const { data: enemy } = useQuery({
-		queryKey: getEnemyQueryKey(slug),
-		queryFn: () => getEnemy(slug),
-	});
-	const { data: items } = useQuery({
-		queryKey: getItemsQueryKey(),
-		queryFn: getItems,
-	});
-	const { data: locations } = useQuery({
-		queryKey: getLocationsQueryKey(),
-		queryFn: getLocations,
-	});
+	const { data: enemy } = useQuery(getEnemyQuery(slug));
+	const { data: items } = useQuery(getAllItemsQuery());
+	const { data: locations } = useQuery(getAllDestinationsQuery());
 
 	return (
 		<PageArticle>
-			<PageTitle>{enemy?.name}</PageTitle>
+			<PageTitle>{enemy?.label}</PageTitle>
 			<PageContent>
 				<div className="flex flex-col gap-8">
 					<PageSubTitle>Drops</PageSubTitle>
@@ -53,11 +41,11 @@ export function EnemyInfo() {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{enemy?.drops?.map(({ item, chance }) => (
-								<TableRow key={item}>
+							{enemy?.items?.map(({ itemId, chance }) => (
+								<TableRow key={itemId}>
 									<TableCell>
-										<Link className="underline" href={`/items/${item}`}>
-											{(items as Record<string, { label: string }>)[item].label}
+										<Link className="underline" href={`/items/${itemId}`}>
+											{items?.find((i) => i.id === itemId)?.label}
 										</Link>
 									</TableCell>
 									<TableCell>{chance}%</TableCell>
@@ -75,13 +63,13 @@ export function EnemyInfo() {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{enemy?.locations?.map((location) => (
-								<TableRow key={location}>
+							{enemy?.destinations?.map((destination) => (
+								<TableRow key={destination}>
 									<TableCell>
 										<Link
 											className="underline"
-											href={`/destinations/${location}`}>
-											{locations?.[location as keyof typeof locations]?.label}
+											href={`/destinations/${destination}`}>
+											{locations?.find((l) => l.id === destination)?.label}
 										</Link>
 									</TableCell>
 								</TableRow>

@@ -1,6 +1,5 @@
 import { ItemInfo } from "@/src/features/items/components/item-info";
-import { getItem } from "@/src/features/items/models";
-import { getItemQueryKey } from "@/src/features/items/utils";
+import { getItemQuery } from "@/src/models/items/queries";
 import {
 	HydrationBoundary,
 	QueryClient,
@@ -9,10 +8,7 @@ import {
 
 export default async function Page({ params }: { params: { slug: string } }) {
 	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery({
-		queryKey: getItemQueryKey(params.slug),
-		queryFn: () => getItem(params.slug),
-	});
+	await queryClient.prefetchQuery(getItemQuery(params.slug));
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
