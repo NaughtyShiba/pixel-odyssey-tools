@@ -11,6 +11,7 @@ import { ThemeProvider } from "../features/theme/context";
 import { getAllEnemiesQuery } from "../models/enemies/queries";
 import { getAllDestinationsQuery } from "../models/destinations/queries";
 import { getAllItemsQuery } from "../models/items/queries";
+import { SessionProvider } from "next-auth/react";
 
 interface RootLayoutProps {
 	children: ReactNode;
@@ -26,6 +27,7 @@ function getTheme() {
 export default async function RootLayout({ children }: RootLayoutProps) {
 	const theme = getTheme();
 	const queryClient = new QueryClient();
+
 	await Promise.all([
 		queryClient.prefetchQuery(getAllDestinationsQuery()),
 		queryClient.prefetchQuery(getAllItemsQuery()),
@@ -36,15 +38,17 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 		// }),
 	]);
 	return (
-		<ReactQueryClientProvider>
-			<HydrationBoundary state={dehydrate(queryClient)}>
-				<html lang="en" data-theme={theme}>
-					<head />
-					<ThemeProvider defaultTheme={theme}>
-						<body>{children}</body>
-					</ThemeProvider>
-				</html>
-			</HydrationBoundary>
-		</ReactQueryClientProvider>
+		<SessionProvider>
+			<ReactQueryClientProvider>
+				<HydrationBoundary state={dehydrate(queryClient)}>
+					<html lang="en" data-theme={theme}>
+						<head />
+						<ThemeProvider defaultTheme={theme}>
+							<body>{children}</body>
+						</ThemeProvider>
+					</html>
+				</HydrationBoundary>
+			</ReactQueryClientProvider>
+		</SessionProvider>
 	);
 }

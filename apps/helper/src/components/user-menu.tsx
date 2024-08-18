@@ -37,10 +37,13 @@ import {
 } from "@repo/ui/components/dropdown-menu";
 // import Link from "next/link";
 import { useTheme } from "../features/theme/context";
+import { useSession } from "next-auth/react";
+import { Link } from "./link";
 
 export function UserDropdownMenu() {
 	const { setTheme } = useTheme();
-	// const user = useUser();
+	const session = useSession();
+	console.log({ session });
 	// const username = user.user?.username;
 
 	return (
@@ -62,8 +65,8 @@ export function UserDropdownMenu() {
 				) : null}
 				{user.isSignedIn ? (
 					<DropdownMenuItem className="cursor-pointer">Editor</DropdownMenuItem>
-					) : null}*/}
-				<DropdownMenuSeparator />
+					) : null}
+					<DropdownMenuSeparator />*/}
 				<DropdownMenuSub>
 					<DropdownMenuSubTrigger>
 						<span>Display mode</span>
@@ -92,19 +95,19 @@ export function UserDropdownMenu() {
 					</DropdownMenuPortal>
 				</DropdownMenuSub>
 				<DropdownMenuSeparator />
-				{/*{user.isSignedIn ? (
+				{session.status === "authenticated" ? (
 					<DropdownMenuItem className="cursor-pointer">
-						<SignOutButton redirectUrl="/">
-							<span className="block w-full">Logout</span>
-						</SignOutButton>
+						<Link href="/auth/logout" className="block w-full">
+							Logout
+						</Link>
 					</DropdownMenuItem>
 				) : (
 					<DropdownMenuItem className="cursor-pointer">
-						<Link href="/login" className="block w-full">
+						<Link href="/auth/login" className="block w-full">
 							Sign in
 						</Link>
 					</DropdownMenuItem>
-				)}*/}
+				)}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

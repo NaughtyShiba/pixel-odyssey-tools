@@ -2,19 +2,34 @@
 	"$schema": "https://turbo.build/schema.json",
 	"tasks": {
 		"build": {
-			"passThroughEnv": ["DB_FILE"],
+			"passThroughEnv": [
+				"DB_FILE",
+				"RESEND_API_KEY",
+				"RESEND_FROM",
+				"AUTH_WHITELISTED_EMAILS"
+			],
 			"dependsOn": ["^build"],
 			"outputs": [".next/**", "!.next/cache/**"]
 		},
 		"start": {
-			"passThroughEnv": ["DB_FILE"],
+			"passThroughEnv": [
+				"DB_FILE",
+				"RESEND_API_KEY",
+				"RESEND_FROM",
+				"AUTH_WHITELISTED_EMAILS"
+			],
 			"dependsOn": ["^build"]
 		},
 		"check-types": {
 			"dependsOn": ["^check-types"]
 		},
 		"dev": {
-			"passThroughEnv": ["DB_FILE"],
+			"passThroughEnv": [
+				"DB_FILE",
+				"RESEND_API_KEY",
+				"RESEND_FROM",
+				"AUTH_WHITELISTED_EMAILS"
+			],
 			"persistent": true,
 			"cache": false
 		},

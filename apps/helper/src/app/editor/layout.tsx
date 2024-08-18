@@ -1,11 +1,17 @@
+import { auth } from "@/auth";
 import { Link } from "@repo/helper/components/link";
+import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 
 interface DashboardProps {
 	children: ReactNode;
 }
 
-export default function Dashboard({ children }: DashboardProps) {
+export default async function Dashboard({ children }: DashboardProps) {
+	const session = await auth();
+	console.log({ session });
+	if (!session) redirect("/");
+
 	return (
 		<div className="flex min-h-screen w-full flex-col">
 			<header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-30">

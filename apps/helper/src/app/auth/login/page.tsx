@@ -1,4 +1,4 @@
-import { signIn } from "@/auth";
+import { auth, signIn } from "@/auth";
 import { Button } from "@repo/ui/components/button";
 
 import {
@@ -9,15 +9,19 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@repo/ui/components/card";
-import { FormItem, FormLabel, FormMessage } from "@repo/ui/components/form";
 import { Input } from "@repo/ui/components/input";
+import { Label } from "@repo/ui/components/label";
+import { redirect } from "next/navigation";
 
-export function SignIn() {
+export default async function SignIn() {
+	const session = await auth();
+	if (session) redirect("/");
+
 	return (
 		<form
 			action={async (formData) => {
 				"use server";
-				await signIn("credentials", formData);
+				await signIn("resend", formData);
 			}}>
 			<Card className="w-full max-w-sm">
 				<CardHeader>
@@ -27,20 +31,11 @@ export function SignIn() {
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="grid gap-4">
-					<FormItem id="email">
-						<FormLabel>
-							<label htmlFor="email">Email address</label>
-						</FormLabel>
+					<div className="space-y-2">
+						<Label htmlFor="email">Email address</Label>
 						<Input type="email" name="email" />
-						<FormMessage className="block text-sm text-destructive" />
-					</FormItem>
-					<FormItem id="password">
-						<FormLabel>
-							<label htmlFor="password">Email address or Username</label>
-						</FormLabel>
-						<Input type="password" name="password" />
-						<FormMessage className="block text-sm text-destructive" />
-					</FormItem>
+						<div className="text-sm font-medium text-destructive" />
+					</div>
 				</CardContent>
 				<CardFooter>
 					<div className="grid w-full gap-y-4">

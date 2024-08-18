@@ -1,12 +1,23 @@
 {
 	"name": "@repo/helper",
 	"private": true,
-	"sideEffects": ["src/app/globals.css"],
+	"sideEffects": [
+		"src/app/globals.css"
+	],
 	"exports": {
-		"./*": ["./src/*.tsx", "./src/*.ts"],
-		"./data/*": ["./data/*"],
-		"./seed/*": ["./seed/*"],
-		"./content/*": ["./content/*"]
+		"./*": [
+			"./src/*.tsx",
+			"./src/*.ts"
+		],
+		"./data/*": [
+			"./data/*"
+		],
+		"./seed/*": [
+			"./seed/*"
+		],
+		"./content/*": [
+			"./content/*"
+		]
 	},
 	"scripts": {
 		"dev": "next dev",
@@ -31,6 +42,7 @@
 		"typescript": "5.5.4"
 	},
 	"dependencies": {
+		"@auth/drizzle-adapter": "^1.4.2",
 		"@clerk/elements": "^0.13.0",
 		"@clerk/nextjs": "^5.3.1",
 		"@mdx-js/loader": "^3.0.1",
@@ -41,6 +53,7 @@
 		"@repo/ui": "*",
 		"@tanstack/react-query": "^5.51.23",
 		"@types/mdx": "^2.0.13",
+		"bcrypt": "^5.1.1",
 		"better-sqlite3": "^11.1.2",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
@@ -50,7 +63,9 @@
 		"install": "^0.13.0",
 		"lucide-react": "^0.427.0",
 		"next": "14.2.5",
+		"next-auth": "5.0.0-beta.20",
 		"next-mdx-remote": "^5.0.0",
+		"nodemailer": "^6.9.14",
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
 		"react-hook-form": "^7.52.2",
