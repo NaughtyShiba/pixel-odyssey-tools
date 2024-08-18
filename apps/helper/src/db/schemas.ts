@@ -52,7 +52,7 @@ export const enemiesRelations = relations(enemies, ({ many }) => ({
 	enemiesToDestinations: many(enemiesToDestinations),
 	enemiesToItems: many(enemiesToItems),
 }));
-export const destinationsRelations = relations(enemies, ({ many }) => ({
+export const destinationsRelations = relations(destinations, ({ many }) => ({
 	enemiesToDestinations: many(enemiesToDestinations),
 	itemsToDestinations: many(itemsToDestinations),
 }));

@@ -93,14 +93,16 @@ interface LocationFormCardProps {
 	children: ReactNode;
 	defaultFormData?: {
 		label: string;
+		description: string | null;
 		enemies: string[];
 		npcs?: string[];
-		items?: string[];
+		items: string[];
 	};
 }
 
 const DEFAULT_FORM_DATA = {
 	label: "",
+	description: "",
 	enemies: [],
 	npcs: [],
 	items: [],

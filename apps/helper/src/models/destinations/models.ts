@@ -8,7 +8,7 @@ import {
 	itemsToDestinations,
 } from "@/db/schemas";
 import { db } from "@/db/db";
-import { eq, sql } from "drizzle-orm";
+import { and, eq, inArray, sql } from "drizzle-orm";
 
 export async function getAllDestinations() {
 	return await db
@@ -17,6 +17,86 @@ export async function getAllDestinations() {
 			label: destinations.label,
 		})
 		.from(destinations);
+}
+
+const slugify = (str: string) => {
+	return str
+		.toLowerCase()
+		.trim()
+		.replace(/[^a-z0-9 ]/g, "") // remove all chars not letters, numbers and spaces (to be replaced)
+		.replace(/\s+/g, "-"); // separator
+};
+
+export async function updateDestination(
+	data: {
+		id: string;
+		label: string;
+		description: string;
+		enemies: string[];
+		// npcs: string[];
+		// items: string[];
+	},
+	id?: string,
+) {
+	return await db.transaction(async (tx) => {
+		// Upsert destination
+		let destinationId = id;
+		if (destinationId) {
+			await tx
+				.update(destinations)
+				.set({
+					id: destinationId,
+					label: data.label,
+					description: data.description,
+				})
+				.where(eq(destinations.id, destinationId));
+		} else {
+			destinationId = slugify(data.label);
+			await tx.insert(destinations).values({
+				id: slugify(data.label),
+				label: data.label,
+				description: data.description,
+			});
+		}
+
+		// Get current item relations
+		const currentRelations = await tx
+			.select({ enemyId: enemiesToDestinations.enemyId })
+			.from(enemiesToDestinations)
+			.where(eq(enemiesToDestinations.destinationId, destinationId));
+
+		const currentEnemiesIds = currentRelations.map(
+			(relation) => relation.enemyId,
+		);
+
+		// Remove old relations
+		const enemiesToRemove = currentEnemiesIds.filter(
+			(id) => !data.enemies.includes(id),
+		);
+		if (enemiesToRemove.length > 0) {
+			await tx
+				.delete(enemiesToDestinations)
+				.where(
+					and(
+						eq(enemiesToDestinations.destinationId, destinationId),
+						inArray(enemiesToDestinations.enemyId, enemiesToRemove),
+					),
+				);
+		}
+
+		// Add new relations
+		const enemiesToAdd = data.enemies.filter(
+			(id) => !currentEnemiesIds.includes(id),
+		);
+		if (enemiesToAdd.length > 0) {
+			await tx.insert(enemiesToDestinations).values(
+				enemiesToAdd.map((enemyId) => ({
+					destinationId: destinationId,
+					enemyId: enemyId,
+				})),
+			);
+		}
+	});
 }
 
 export async function getDestination(id: string) {

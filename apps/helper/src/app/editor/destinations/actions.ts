@@ -1,16 +1,19 @@
 "use server";
 
-export async function submitLocation(
-	data: Partial<{
-		label: string;
-		enemies: string[];
-		npcs: string[];
-		items: string[];
-	}>,
-) {
+import { updateDestination } from "@/models/destinations/models";
+
+export async function submitLocation(data: {
+	id: string;
+	label: string;
+	description: string;
+	enemies: string[];
+	// npcs: string[];
+	// items: string[];
+}) {
 	await new Promise((resolve) => {
 		resolve(null);
 	});
+	await updateDestination(data, data.id);
 
 	// for (const enemy of data.enemies) {
 	// 	// sync drop locaton
