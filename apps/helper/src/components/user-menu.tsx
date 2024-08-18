@@ -19,7 +19,6 @@ import {
 } from "lucide-react";
 import { Moon, Settings, Sun } from "lucide-react";
 
-// import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "@repo/ui/components/button";
 import {
 	DropdownMenu,

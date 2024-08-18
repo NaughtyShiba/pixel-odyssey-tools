@@ -1,23 +1,12 @@
 {
 	"name": "@repo/helper",
 	"private": true,
-	"sideEffects": [
-		"src/app/globals.css"
-	],
+	"sideEffects": ["src/app/globals.css"],
 	"exports": {
-		"./*": [
-			"./src/*.tsx",
-			"./src/*.ts"
-		],
-		"./data/*": [
-			"./data/*"
-		],
-		"./seed/*": [
-			"./seed/*"
-		],
-		"./content/*": [
-			"./content/*"
-		]
+		"./*": ["./src/*.tsx", "./src/*.ts"],
+		"./data/*": ["./data/*"],
+		"./seed/*": ["./seed/*"],
+		"./content/*": ["./content/*"]
 	},
 	"scripts": {
 		"dev": "next dev",
@@ -43,8 +32,6 @@
 	},
 	"dependencies": {
 		"@auth/drizzle-adapter": "^1.4.2",
-		"@clerk/elements": "^0.13.0",
-		"@clerk/nextjs": "^5.3.1",
 		"@mdx-js/loader": "^3.0.1",
 		"@mdx-js/react": "^3.0.1",
 		"@next/mdx": "^14.2.5",
