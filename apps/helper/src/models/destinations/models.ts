@@ -96,6 +96,18 @@ export async function updateDestination(data: {
 	});
 }
 
+export async function deleteDestination(id: string) {
+	return await db.transaction(async (tx) => {
+		await tx
+			.delete(itemsToDestinations)
+			.where(eq(itemsToDestinations.destinationId, id));
+		await tx
+			.delete(enemiesToDestinations)
+			.where(eq(enemiesToDestinations.destinationId, id));
+		await tx.delete(destinations).where(eq(destinations.id, id));
+	});
+}
+
 export async function getDestination(id: string) {
 	const data = await db
 		.select({
