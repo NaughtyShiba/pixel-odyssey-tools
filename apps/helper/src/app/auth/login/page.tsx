@@ -22,9 +22,21 @@ export default async function SignIn() {
 			action={async (formData) => {
 				"use server";
 				try {
-					await signIn("resend", formData);
+					await signIn(
+						process.env.NODE_ENV === "production" ? "resend" : "nodemailer",
+						formData,
+					);
 				} catch (ex) {
-					redirect("/auth/error");
+					if (
+						ex instanceof Error &&
+						"type" in ex &&
+						ex.type === "AccessDenied"
+					) {
+						console.log(ex);
+						redirect("/auth/error");
+					}
+
+					throw ex;
 				}
 			}}>
 			<Card className="w-full max-w-sm">
