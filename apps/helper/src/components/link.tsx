@@ -17,6 +17,7 @@ export function Link(props: LinkProps) {
 				pathname.startsWith(props.href.toString())
 					? "text-primary"
 					: "text-foreground",
+				props.className,
 			)}
 		/>
 	);

@@ -97,13 +97,13 @@ export function UserDropdownMenu() {
 				{session.status === "authenticated" ? (
 					<DropdownMenuItem className="cursor-pointer">
 						<Link href="/auth/logout" className="block w-full">
-							Logout
+							<span className="block w-full">Sign out</span>
 						</Link>
 					</DropdownMenuItem>
 				) : (
 					<DropdownMenuItem className="cursor-pointer">
 						<Link href="/auth/login" className="block w-full">
-							Sign in
+							<span className="block w-full">Sign in</span>
 						</Link>
 					</DropdownMenuItem>
 				)}

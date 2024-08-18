@@ -21,7 +21,11 @@ export default async function SignIn() {
 		<form
 			action={async (formData) => {
 				"use server";
-				await signIn("resend", formData);
+				try {
+					await signIn("resend", formData);
+				} catch (ex) {
+					redirect("/auth/error");
+				}
 			}}>
 			<Card className="w-full max-w-sm">
 				<CardHeader>
