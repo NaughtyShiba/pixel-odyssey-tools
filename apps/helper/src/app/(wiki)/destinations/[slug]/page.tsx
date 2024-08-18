@@ -1,5 +1,5 @@
-import { LocationInfo } from "@/src/features/locations/components/location-info";
-import { getDestinationQuery } from "@/src/models/destinations/queries";
+import { LocationInfo } from "@/features/locations/components/location-info";
+import { getDestinationQuery } from "@/models/destinations/queries";
 import {
 	HydrationBoundary,
 	QueryClient,

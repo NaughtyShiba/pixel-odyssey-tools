@@ -1,5 +1,5 @@
-import { ItemInfo } from "@/src/features/items/components/item-info";
-import { getItemQuery } from "@/src/models/items/queries";
+import { ItemInfo } from "@/features/items/components/item-info";
+import { getItemQuery } from "@/models/items/queries";
 import {
 	HydrationBoundary,
 	QueryClient,

@@ -5,7 +5,7 @@ import {
 	PageContent,
 	PageSubTitle,
 	PageTitle,
-} from "@/src/components/page";
+} from "@/components/page";
 import {
 	Table,
 	TableBody,
@@ -17,9 +17,9 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getEnemyQuery } from "@/src/models/enemies/queries";
-import { getAllDestinationsQuery } from "@/src/models/destinations/queries";
-import { getAllItemsQuery } from "@/src/models/items/queries";
+import { getEnemyQuery } from "@/models/enemies/queries";
+import { getAllDestinationsQuery } from "@/models/destinations/queries";
+import { getAllItemsQuery } from "@/models/items/queries";
 
 export function EnemyInfo() {
 	const { slug } = useParams<{ slug: string }>();

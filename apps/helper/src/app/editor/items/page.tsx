@@ -1,4 +1,4 @@
-import { getAllItems } from "@/src/models/items/models";
+import { getAllItems } from "@/models/items/models";
 import { Button } from "@repo/ui/components/button";
 import {
 	Card,

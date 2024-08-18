@@ -21,7 +21,7 @@ import {
 	FormItem,
 	FormLabel,
 } from "@repo/ui/components/form";
-import { MultiSelectCombobox } from "@/src/features/form/components/multiselect-combobox";
+import { MultiSelectCombobox } from "@/features/form/components/multiselect-combobox";
 
 interface LocationFormProps {
 	enemies: Array<{ id: string; label: string }>;

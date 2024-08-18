@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import {
 	destinations,
 	enemies,
@@ -11,7 +11,7 @@ import {
 	// enemiesToItems,
 	items,
 	itemsToDestinations,
-} from "@/src/db/schemas";
+} from "@/db/schemas";
 import { eq, or, sql } from "drizzle-orm";
 import { calculatePerfectRefine } from "./utils";
 

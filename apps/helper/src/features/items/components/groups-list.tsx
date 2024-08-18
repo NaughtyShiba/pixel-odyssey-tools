@@ -1,6 +1,6 @@
 "use client";
 
-import { getItemsCategoriesQuery } from "@/src/models/items/queries";
+import { getItemsCategoriesQuery } from "@/models/items/queries";
 import {
 	Card,
 	CardContent,

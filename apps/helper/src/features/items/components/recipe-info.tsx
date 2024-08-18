@@ -1,4 +1,4 @@
-import { PageSubTitle } from "@/src/components/page";
+import { PageSubTitle } from "@/components/page";
 import {
 	Table,
 	TableBody,
@@ -10,7 +10,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import type { RecipeIngredient } from "../types";
-import { getAllItemsQuery } from "@/src/models/items/queries";
+import { getAllItemsQuery } from "@/models/items/queries";
 
 interface RecipeInfoProps extends RecipeIngredient {}
 export function RecipeInfo({ usedToCraft }: RecipeInfoProps) {

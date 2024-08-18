@@ -1,6 +1,6 @@
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
-import { getPostBySlug } from "@/src/features/mdx/utils";
-import { getAllDestinationsQuery } from "@/src/models/destinations/queries";
+import { PageArticle, PageContent, PageTitle } from "@/components/page";
+import { getPostBySlug } from "@/features/mdx/utils";
+import { getAllDestinationsQuery } from "@/models/destinations/queries";
 import { LocationsList } from "@repo/helper/features/locations/components/locations-list";
 import { QueryClient } from "@tanstack/react-query";
 

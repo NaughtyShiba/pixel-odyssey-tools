@@ -1,7 +1,7 @@
-import { db } from "@/src/db/db";
-import { destinations, enemies, items } from "@/src/db/schemas";
-import type { SearchItems } from "@/src/features/command/types";
-import { getSlugsByCategory } from "@/src/features/mdx/utils";
+import { db } from "@/db/db";
+import { destinations, enemies, items } from "@/db/schemas";
+import type { SearchItems } from "@/features/command/types";
+import { getSlugsByCategory } from "@/features/mdx/utils";
 import { sql } from "drizzle-orm";
 
 export async function GET() {

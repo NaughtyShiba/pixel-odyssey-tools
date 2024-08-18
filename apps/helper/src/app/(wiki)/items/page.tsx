@@ -1,6 +1,6 @@
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
-import { GroupsList } from "@/src/features/items/components/groups-list";
-import { getItemsCategoriesQuery } from "@/src/models/items/queries";
+import { PageArticle, PageContent, PageTitle } from "@/components/page";
+import { GroupsList } from "@/features/items/components/groups-list";
+import { getItemsCategoriesQuery } from "@/models/items/queries";
 import {
 	dehydrate,
 	HydrationBoundary,

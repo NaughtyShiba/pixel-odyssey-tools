@@ -1,4 +1,4 @@
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
+import { PageArticle, PageContent, PageTitle } from "@/components/page";
 import Link from "next/link";
 
 export default function Page() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllEnemiesQuery } from "@/src/models/enemies/queries";
+import { getAllEnemiesQuery } from "@/models/enemies/queries";
 import { Button } from "@repo/ui/components/button";
 import {
 	DropdownMenu,

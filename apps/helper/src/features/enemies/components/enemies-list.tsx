@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { getAllEnemiesQuery } from "@/src/models/enemies/queries";
+import { getAllEnemiesQuery } from "@/models/enemies/queries";
 
 export function EnemiesList() {
 	const { data: enemies } = useQuery(getAllEnemiesQuery());

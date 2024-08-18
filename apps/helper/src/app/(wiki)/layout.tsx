@@ -1,4 +1,4 @@
-import { Header } from "@/src/components/header";
+import { Header } from "@/components/header";
 import type { ReactNode } from "react";
 
 export default function ({ children }: { children: ReactNode }) {

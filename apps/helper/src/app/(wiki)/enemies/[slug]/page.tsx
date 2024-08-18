@@ -1,5 +1,5 @@
-import { EnemyInfo } from "@/src/features/enemies/components/enemy-info";
-import { getEnemyQuery } from "@/src/models/enemies/queries";
+import { EnemyInfo } from "@/features/enemies/components/enemy-info";
+import { getEnemyQuery } from "@/models/enemies/queries";
 import {
 	HydrationBoundary,
 	QueryClient,

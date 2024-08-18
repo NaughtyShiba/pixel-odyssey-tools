@@ -1,4 +1,4 @@
-import { getAllDestinationsQuery } from "@/src/models/destinations/queries";
+import { getAllDestinationsQuery } from "@/models/destinations/queries";
 import { Button } from "@repo/ui/components/button";
 import {
 	Card,

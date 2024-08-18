@@ -1,4 +1,4 @@
-import { PageSubTitle } from "@/src/components/page";
+import { PageSubTitle } from "@/components/page";
 import {
 	Table,
 	TableBody,

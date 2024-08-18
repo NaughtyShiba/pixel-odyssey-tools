@@ -1,13 +1,13 @@
 "use server";
 
-import { db } from "@/src/db/db";
+import { db } from "@/db/db";
 import {
 	destinations,
 	enemies,
 	enemiesToDestinations,
 	enemiesToItems,
 	items,
-} from "@/src/db/schemas";
+} from "@/db/schemas";
 import { eq, sql } from "drizzle-orm";
 
 export async function getAllEnemies() {

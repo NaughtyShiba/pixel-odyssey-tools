@@ -1,4 +1,4 @@
-import { getAllEnemies } from "@/src/models/enemies/models";
+import { getAllEnemies } from "@/models/enemies/models";
 import { LocationForm, LocationFormCard } from "../form";
 
 export default async function () {

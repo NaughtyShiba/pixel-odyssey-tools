@@ -1,6 +1,6 @@
-import { getAllEnemies } from "@/src/models/enemies/models";
+import { getAllEnemies } from "@/models/enemies/models";
 import { LocationForm, LocationFormCard } from "../form";
-import { getDestination } from "@/src/models/destinations/models";
+import { getDestination } from "@/models/destinations/models";
 
 export default async function ({ params }: { params: { slug: string } }) {
 	const enemies = await getAllEnemies();

@@ -1,4 +1,4 @@
-import { PageSubTitle } from "@/src/components/page";
+import { PageSubTitle } from "@/components/page";
 import {
 	Table,
 	TableBody,
@@ -10,7 +10,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import type { DroppedByEnemies } from "../types";
-import { getAllEnemiesQuery } from "@/src/models/enemies/queries";
+import { getAllEnemiesQuery } from "@/models/enemies/queries";
 
 interface EnemyDropInfoProps extends DroppedByEnemies {}
 export function EnemyDropInfo({

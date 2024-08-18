@@ -1,6 +1,6 @@
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
-import { ItemsList } from "@/src/features/items/components/items-list";
-import { getItemsByCategoryQuery } from "@/src/models/items/queries";
+import { PageArticle, PageContent, PageTitle } from "@/components/page";
+import { ItemsList } from "@/features/items/components/items-list";
+import { getItemsByCategoryQuery } from "@/models/items/queries";
 import {
 	dehydrate,
 	HydrationBoundary,

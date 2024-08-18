@@ -1,5 +1,5 @@
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
-import { EnemiesList } from "@/src/features/enemies/components/enemies-list";
+import { PageArticle, PageContent, PageTitle } from "@/components/page";
+import { EnemiesList } from "@/features/enemies/components/enemies-list";
 
 export default function Page() {
 	return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
+import { PageArticle, PageContent, PageTitle } from "@/components/page";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import {
@@ -15,7 +15,7 @@ import { EnemyDropInfo } from "./enemy-drop-info";
 import { RecipeInfo } from "./recipe-info";
 import { RefineInfo } from "./refine-info";
 import { StepDropInfo } from "./step-drop-info";
-import { getItemQuery } from "@/src/models/items/queries";
+import { getItemQuery } from "@/models/items/queries";
 
 export function ItemInfo() {
 	const { slug } = useParams<{ slug: string }>();

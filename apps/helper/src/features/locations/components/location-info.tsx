@@ -5,7 +5,7 @@ import {
 	PageContent,
 	PageSubTitle,
 	PageTitle,
-} from "@/src/components/page";
+} from "@/components/page";
 import {
 	Table,
 	TableBody,
@@ -17,9 +17,9 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getDestinationQuery } from "@/src/models/destinations/queries";
-import { getAllEnemiesQuery } from "@/src/models/enemies/queries";
-import { getAllItemsQuery } from "@/src/models/items/queries";
+import { getDestinationQuery } from "@/models/destinations/queries";
+import { getAllEnemiesQuery } from "@/models/enemies/queries";
+import { getAllItemsQuery } from "@/models/items/queries";
 
 const COMMON_DROPS = [
 	"acorn",

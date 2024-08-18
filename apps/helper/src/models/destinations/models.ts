@@ -6,8 +6,8 @@ import {
 	enemiesToDestinations,
 	items,
 	itemsToDestinations,
-} from "@/src/db/schemas";
-import { db } from "@/src/db/db";
+} from "@/db/schemas";
+import { db } from "@/db/db";
 import { eq, sql } from "drizzle-orm";
 
 export async function getAllDestinations() {

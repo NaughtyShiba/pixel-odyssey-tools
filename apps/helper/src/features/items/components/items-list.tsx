@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getItemsByCategoryQuery } from "@/src/models/items/queries";
+import { getItemsByCategoryQuery } from "@/models/items/queries";
 
 export function ItemsList() {
 	const { slug } = useParams<{ slug: string }>();

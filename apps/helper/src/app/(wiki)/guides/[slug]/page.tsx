@@ -1,5 +1,5 @@
-import { PageArticle, PageContent, PageTitle } from "@/src/components/page";
-import { getPostBySlug, getSlugsByCategory } from "@/src/features/mdx/utils";
+import { PageArticle, PageContent, PageTitle } from "@/components/page";
+import { getPostBySlug, getSlugsByCategory } from "@/features/mdx/utils";
 
 export async function generateStaticParams() {
 	return await getSlugsByCategory("guides");
