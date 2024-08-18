@@ -27,20 +27,17 @@ const slugify = (str: string) => {
 		.replace(/\s+/g, "-"); // separator
 };
 
-export async function updateDestination(
-	data: {
-		id: string;
-		label: string;
-		description: string;
-		enemies: string[];
-		// npcs: string[];
-		// items: string[];
-	},
-	id?: string,
-) {
+export async function updateDestination(data: {
+	id: string | null;
+	label: string;
+	description: string;
+	enemies: string[];
+	// npcs: string[];
+	// items: string[];
+}) {
 	return await db.transaction(async (tx) => {
 		// Upsert destination
-		let destinationId = id;
+		let destinationId = data.id;
 		if (destinationId) {
 			await tx
 				.update(destinations)
