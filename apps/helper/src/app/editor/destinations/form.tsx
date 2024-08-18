@@ -94,7 +94,7 @@ interface LocationFormCardProps {
 	defaultFormData?: {
 		id: string | null;
 		label: string;
-		description: string;
+		description: string | null;
 		enemies: string[];
 		// npcs?: string[];
 		// items: string[];
