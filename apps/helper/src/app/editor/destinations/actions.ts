@@ -10,5 +10,5 @@ export async function submitLocation(data: {
 	// npcs: string[];
 	items: string[];
 }) {
-	await updateDestination(data);
+	return await updateDestination(data);
 }

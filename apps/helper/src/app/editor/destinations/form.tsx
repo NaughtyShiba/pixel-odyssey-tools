@@ -22,9 +22,11 @@ import {
 	FormLabel,
 } from "@repo/ui/components/form";
 import { MultiSelectCombobox } from "@/features/form/components/multiselect-combobox";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllEnemiesQuery } from "@/models/enemies/queries";
 import { getAllItemsQuery } from "@/models/items/queries";
+import { redirect, useParams } from "next/navigation";
+import { getDestinationQuery } from "@/models/destinations/queries";
 
 export function LocationForm() {
 	const { data: enemies = [] } = useQuery(getAllEnemiesQuery());
@@ -113,20 +115,14 @@ export function LocationForm() {
 	);
 }
 
-interface LocationFormCardProps {
-	title: string;
-	children: ReactNode;
-	defaultFormData?: {
-		id: string | null;
-		label: string;
-		description: string | null;
-		enemies: string[];
-		// npcs?: string[];
-		items: string[];
-	};
-}
-
-const DEFAULT_FORM_DATA = {
+const DEFAULT_FORM_DATA: {
+	id: string | null;
+	label: string;
+	description: string | null;
+	enemies: string[];
+	// npcs?: string[];
+	items: string[];
+} = {
 	id: null,
 	label: "",
 	description: "",
@@ -134,18 +130,23 @@ const DEFAULT_FORM_DATA = {
 	// npcs: [],
 	items: [],
 };
-
-export function LocationFormCard({
-	title,
-	children,
-	defaultFormData = DEFAULT_FORM_DATA,
-}: LocationFormCardProps) {
+interface LocationFormCardProps {
+	children: ReactNode;
+}
+export function LocationFormCard({ children }: LocationFormCardProps) {
+	const { slug } = useParams<{ slug: string }>();
+	const { data: destination } = useQuery(getDestinationQuery(slug));
 	const form = useForm({
-		defaultValues: defaultFormData,
+		defaultValues: destination ?? DEFAULT_FORM_DATA,
 	});
+	const queryClient = useQueryClient();
 
 	const action: () => void = form.handleSubmit(async (data) => {
-		await submitLocation(data);
+		const res = await submitLocation(data);
+		if (data.id === null) redirect(`/editor/destinations/${res.id}`);
+		if (data.id)
+			queryClient.invalidateQueries({ queryKey: ["destinations", data.id] });
+		console.log("abc");
 	});
 
 	return (
@@ -154,7 +155,9 @@ export function LocationFormCard({
 				<Card>
 					<CardHeader className="flex-row justify-between">
 						<div className="flex flex-col space-y-1.5">
-							<CardTitle>{title}</CardTitle>
+							<CardTitle>
+								{slug ? destination?.label : "New Destination"}
+							</CardTitle>
 						</div>
 						<div className="flex flex-row gap-4">
 							<Link href="/editor/destinations">

@@ -14,7 +14,7 @@ export default async function () {
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
-			<LocationFormCard title="New location">
+			<LocationFormCard>
 				<LocationForm />
 			</LocationFormCard>
 		</HydrationBoundary>

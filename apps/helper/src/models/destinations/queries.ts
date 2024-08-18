@@ -9,11 +9,12 @@ export function getAllDestinationsQuery() {
 	};
 }
 
-export function getDestinationQuery(slug: string) {
+export function getDestinationQuery(slug?: string) {
 	return {
 		queryKey: ["destinations", slug],
 		async queryFn() {
-			return await getDestination(slug);
+			return await getDestination(slug as string);
 		},
+		enabled: Boolean(slug),
 	};
 }

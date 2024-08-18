@@ -39,7 +39,7 @@ export async function updateDestination(data: {
 		// Upsert destination
 		let destinationId = data.id;
 		if (destinationId) {
-			await tx
+			const res = await tx
 				.update(destinations)
 				.set({
 					id: destinationId,
@@ -124,6 +124,8 @@ export async function updateDestination(data: {
 				})),
 			);
 		}
+
+		return { id: destinationId };
 	});
 }
 
