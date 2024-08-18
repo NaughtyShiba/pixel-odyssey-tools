@@ -33,7 +33,7 @@ export async function updateDestination(data: {
 	description: string | null;
 	enemies: string[];
 	// npcs: string[];
-	// items: string[];
+	items: string[];
 }) {
 	return await db.transaction(async (tx) => {
 		// Upsert destination
@@ -56,15 +56,13 @@ export async function updateDestination(data: {
 			});
 		}
 
-		// Get current item relations
-		const currentRelations = await tx
-			.select({ enemyId: enemiesToDestinations.enemyId })
-			.from(enemiesToDestinations)
-			.where(eq(enemiesToDestinations.destinationId, destinationId));
-
-		const currentEnemiesIds = currentRelations.map(
-			(relation) => relation.enemyId,
-		);
+		// Get current enemies ids
+		const currentEnemiesIds = (
+			await tx
+				.select({ enemyId: enemiesToDestinations.enemyId })
+				.from(enemiesToDestinations)
+				.where(eq(enemiesToDestinations.destinationId, destinationId))
+		).map((relation) => relation.enemyId);
 
 		// Remove old relations
 		const enemiesToRemove = currentEnemiesIds.filter(
@@ -90,6 +88,39 @@ export async function updateDestination(data: {
 				enemiesToAdd.map((enemyId) => ({
 					destinationId: destinationId,
 					enemyId: enemyId,
+				})),
+			);
+		}
+
+		// Get current items relations
+		const currentItemsIds = (
+			await tx
+				.select({ itemId: itemsToDestinations.itemId })
+				.from(itemsToDestinations)
+				.where(eq(itemsToDestinations.destinationId, destinationId))
+		).map((relation) => relation.itemId);
+
+		const itemsToRemove = currentItemsIds.filter(
+			(id) => !data.items.includes(id),
+		);
+		const itemsToAdd = data.items.filter((id) => !currentItemsIds.includes(id));
+		// Remove old relations
+		if (itemsToRemove.length > 0) {
+			await tx
+				.delete(itemsToDestinations)
+				.where(
+					and(
+						eq(itemsToDestinations.destinationId, destinationId),
+						inArray(itemsToDestinations.itemId, itemsToRemove),
+					),
+				);
+		}
+		// Add new relations
+		if (itemsToAdd.length > 0) {
+			await tx.insert(itemsToDestinations).values(
+				itemsToAdd.map((itemId) => ({
+					destinationId: destinationId,
+					itemId: itemId,
 				})),
 			);
 		}

@@ -42,8 +42,6 @@ import { Link } from "./link";
 export function UserDropdownMenu() {
 	const { setTheme } = useTheme();
 	const session = useSession();
-	console.log({ session });
-	// const username = user.user?.username;
 
 	return (
 		<DropdownMenu>

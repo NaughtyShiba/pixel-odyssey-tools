@@ -8,10 +8,7 @@ export async function submitLocation(data: {
 	description: string | null;
 	enemies: string[];
 	// npcs: string[];
-	// items: string[];
+	items: string[];
 }) {
-	await new Promise((resolve) => {
-		resolve(null);
-	});
 	await updateDestination(data);
 }

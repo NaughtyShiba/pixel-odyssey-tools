@@ -1276,25 +1276,25 @@
 	},
 	"honeycomb": {
 		"type": "food",
-		"label": "Honeycom"
+		"label": "Honeycomb"
 	},
-	"spotted_berries": { "type": "food", "label": "Honeycom" },
-	"black_berries": { "type": "food", "label": "Honeycom" },
+	"spotted_berries": { "type": "food", "label": "Spoted Berries" },
+	"black_berries": { "type": "food", "label": "Black Berries" },
 	"cave_coral": {
 		"type": "food",
-		"label": "Honeycom"
+		"label": "Cave Coral"
 	},
 	"flora_fossil": {
 		"type": "food",
-		"label": "Honeycom"
+		"label": "Flora Fossil"
 	},
 	"fossil": {
 		"type": "food",
-		"label": "Honeycom"
+		"label": "Fossil"
 	},
 	"fish_fossil": {
 		"type": "food",
-		"label": "Honeycom"
+		"label": "Fish Fossil"
 	},
 	"honeydew": {
 		"type": "food",
@@ -1302,7 +1302,7 @@
 	},
 	"tomato": {
 		"type": "food",
-		"label": "Tomati"
+		"label": "Tomato"
 	},
 	"nighshade_shroom": {
 		"type": "mushroom",

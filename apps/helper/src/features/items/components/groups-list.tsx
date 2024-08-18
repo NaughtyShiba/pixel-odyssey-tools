@@ -33,7 +33,6 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 
 export function GroupsList() {
 	const { data: groups } = useQuery(getItemsCategoriesQuery());
-	console.log({ groups });
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 			{groups?.map(({ category }) => (

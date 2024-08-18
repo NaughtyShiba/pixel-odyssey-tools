@@ -45,8 +45,8 @@ export function MultiSelectCombobox({
 					variant="outline"
 					role="combobox"
 					aria-expanded={open}
-					className="w-[320px] justify-between flex">
-					<span className="flex-1 min-w-0 truncate">
+					className="w-full justify-between flex">
+					<span className="flex-1 min-w-0 text-left truncate">
 						{value
 							? items
 									.filter((item) => value.includes(item.value))
@@ -57,7 +57,7 @@ export function MultiSelectCombobox({
 					<ChevronsUpDown className="ml-2 h-4 w-4 flex-shrink-0 opacity-50" />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="w-[200px] p-0">
+			<PopoverContent className="w-[200px] p-0 l-0" align="start">
 				<Command>
 					<CommandInput placeholder={searchEntryText} />
 					<CommandList>

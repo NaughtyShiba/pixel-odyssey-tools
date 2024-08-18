@@ -32,7 +32,6 @@ export default async function SignIn() {
 						"type" in ex &&
 						ex.type === "AccessDenied"
 					) {
-						console.log(ex);
 						redirect("/auth/error");
 					}
 

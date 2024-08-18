@@ -1,11 +1,22 @@
-import { getAllEnemies } from "@/models/enemies/models";
 import { LocationForm, LocationFormCard } from "../form";
+import {
+	dehydrate,
+	HydrationBoundary,
+	QueryClient,
+} from "@tanstack/react-query";
+import { getAllEnemiesQuery } from "@/models/enemies/queries";
+import { getAllItemsQuery } from "@/models/items/queries";
 
 export default async function () {
-	const enemies = await getAllEnemies();
+	const queryClient = new QueryClient();
+	await queryClient.prefetchQuery(getAllEnemiesQuery());
+	await queryClient.prefetchQuery(getAllItemsQuery());
+
 	return (
-		<LocationFormCard title="New location">
-			<LocationForm enemies={enemies} />
-		</LocationFormCard>
+		<HydrationBoundary state={dehydrate(queryClient)}>
+			<LocationFormCard title="New location">
+				<LocationForm />
+			</LocationFormCard>
+		</HydrationBoundary>
 	);
 }

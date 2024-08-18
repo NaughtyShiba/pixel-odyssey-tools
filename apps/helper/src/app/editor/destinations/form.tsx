@@ -22,21 +22,22 @@ import {
 	FormLabel,
 } from "@repo/ui/components/form";
 import { MultiSelectCombobox } from "@/features/form/components/multiselect-combobox";
+import { useQuery } from "@tanstack/react-query";
+import { getAllEnemiesQuery } from "@/models/enemies/queries";
+import { getAllItemsQuery } from "@/models/items/queries";
 
-interface LocationFormProps {
-	enemies: Array<{ id: string; label: string }>;
-}
-
-export function LocationForm(props: LocationFormProps) {
+export function LocationForm() {
+	const { data: enemies = [] } = useQuery(getAllEnemiesQuery());
+	const { data: items = [] } = useQuery(getAllItemsQuery());
 	const { control } = useFormContext();
 
 	return (
-		<div className="grid gap-4">
+		<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 			<FormField
 				control={control}
 				name="label"
 				render={({ field }) => (
-					<FormItem>
+					<FormItem className="md:col-span-2">
 						<FormLabel>Name</FormLabel>
 						<FormControl>
 							<Input {...field} />
@@ -48,7 +49,7 @@ export function LocationForm(props: LocationFormProps) {
 				control={control}
 				name="description"
 				render={({ field }) => (
-					<FormItem>
+					<FormItem className="md:col-span-2">
 						<FormLabel>Description</FormLabel>
 						<FormControl>
 							<Textarea {...field} rows={5} />
@@ -61,26 +62,50 @@ export function LocationForm(props: LocationFormProps) {
 				name="enemies"
 				render={({ field }) => (
 					<FormItem>
-						<div className="">
-							<div className="col-span-4">Enemies</div>
-							<MultiSelectCombobox
-								selectEntryText="Select enemy(-ies)"
-								searchEntryText="Search for enemy..."
-								noEntryFoundText="No enemy found."
-								items={props.enemies.map(({ id, label }) => ({
-									value: id,
-									label,
-								}))}
-								value={field.value}
-								onSelect={(value) =>
-									field.value.includes(value)
-										? field.onChange(
-												field.value.filter((v: string) => v !== value),
-											)
-										: field.onChange([...field.value, value])
-								}
-							/>
-						</div>
+						<FormLabel>Enemies</FormLabel>
+						<MultiSelectCombobox
+							selectEntryText="Select enemy(-ies)"
+							searchEntryText="Search for enemy..."
+							noEntryFoundText="No enemy found."
+							items={enemies.map(({ id, label }) => ({
+								value: id,
+								label,
+							}))}
+							value={field.value}
+							onSelect={(value) =>
+								field.value.includes(value)
+									? field.onChange(
+											field.value.filter((v: string) => v !== value),
+										)
+									: field.onChange([...field.value, value])
+							}
+						/>
+					</FormItem>
+				)}
+			/>
+			<FormField
+				control={control}
+				name="items"
+				render={({ field }) => (
+					<FormItem className="md:col-span-2">
+						<FormLabel>Items</FormLabel>
+						<MultiSelectCombobox
+							selectEntryText="Select items"
+							searchEntryText="Search for item..."
+							noEntryFoundText="No item found."
+							items={items.map(({ id, label }) => ({
+								value: id,
+								label,
+							}))}
+							value={field.value}
+							onSelect={(value) =>
+								field.value.includes(value)
+									? field.onChange(
+											field.value.filter((v: string) => v !== value),
+										)
+									: field.onChange([...field.value, value])
+							}
+						/>
 					</FormItem>
 				)}
 			/>
@@ -97,7 +122,7 @@ interface LocationFormCardProps {
 		description: string | null;
 		enemies: string[];
 		// npcs?: string[];
-		// items: string[];
+		items: string[];
 	};
 }
 
@@ -107,7 +132,7 @@ const DEFAULT_FORM_DATA = {
 	description: "",
 	enemies: [],
 	// npcs: [],
-	// items: [],
+	items: [],
 };
 
 export function LocationFormCard({
