@@ -6,7 +6,9 @@
 				"DB_FILE",
 				"RESEND_API_KEY",
 				"RESEND_FROM",
-				"AUTH_WHITELISTED_EMAILS"
+				"AUTH_WHITELISTED_EMAILS",
+				"AUTH_TRUST_HOST",
+				"AUTH_SECRET"
 			],
 			"dependsOn": ["^build"],
 			"outputs": [".next/**", "!.next/cache/**"]
@@ -16,7 +18,9 @@
 				"DB_FILE",
 				"RESEND_API_KEY",
 				"RESEND_FROM",
-				"AUTH_WHITELISTED_EMAILS"
+				"AUTH_WHITELISTED_EMAILS",
+				"AUTH_TRUST_HOST",
+				"AUTH_SECRET"
 			],
 			"dependsOn": ["^build"]
 		},
@@ -28,7 +32,9 @@
 				"DB_FILE",
 				"RESEND_API_KEY",
 				"RESEND_FROM",
-				"AUTH_WHITELISTED_EMAILS"
+				"AUTH_WHITELISTED_EMAILS",
+				"AUTH_TRUST_HOST",
+				"AUTH_SECRET"
 			],
 			"persistent": true,
 			"cache": false
