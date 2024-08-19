@@ -13,6 +13,6 @@ export const isDroppedByEnemies = (item?: object): item is DroppedByEnemies =>
 export const isRefineable = (item?: object): item is Refineable =>
 	typeof item === "object" && "perfectRefine" in item;
 export const isCraftable = (item?: object): item is Craftable =>
-	typeof item === "object" && "craftedWith" in item;
+	typeof item === "object" && "craftedFromRecipes" in item;
 export const isRecipeIngredient = (item?: object): item is RecipeIngredient =>
-	typeof item === "object" && "usedToCraft" in item;
+	typeof item === "object" && "materialForRecipes" in item;

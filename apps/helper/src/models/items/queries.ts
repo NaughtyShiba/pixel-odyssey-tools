@@ -29,6 +29,7 @@ export function getItemsByCategoryQuery(category: string) {
 		async queryFn() {
 			return await getItemsByCategory(category);
 		},
+		enabled: Boolean(category),
 	};
 }
 export function getItemQuery(name: string) {
@@ -37,5 +38,6 @@ export function getItemQuery(name: string) {
 		async queryFn() {
 			return await getItem(name);
 		},
+		enabled: Boolean(name),
 	};
 }

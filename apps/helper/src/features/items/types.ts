@@ -1,10 +1,10 @@
 export interface Craftable {
-	craftedWith: Array<{ itemId: string; amount: number }>;
+	craftedFromRecipes: Array<{ itemId: string; amount: number }>;
 	// total_craft: Record<string, number>;
 }
 
 export interface RecipeIngredient {
-	usedToCraft: Array<{ itemId: string; amount: number }>;
+	materialForRecipes: Array<{ itemId: string; amount: number }>;
 }
 
 export interface Refineable {

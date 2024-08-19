@@ -13,10 +13,10 @@ import type { Craftable } from "../types";
 import { getAllItemsQuery } from "@/models/items/queries";
 
 interface CraftInfoProps extends Craftable {}
-export function CraftInfo({ craftedWith }: CraftInfoProps) {
+export function CraftInfo({ craftedFromRecipes }: CraftInfoProps) {
 	const { data: items } = useQuery(getAllItemsQuery());
 
-	if (craftedWith.length === 0) return null;
+	if (craftedFromRecipes.length === 0) return null;
 
 	return (
 		<>
@@ -30,7 +30,7 @@ export function CraftInfo({ craftedWith }: CraftInfoProps) {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{craftedWith.map(({ itemId, amount }) => (
+						{craftedFromRecipes.map(({ itemId, amount }) => (
 							<TableRow key={itemId}>
 								<TableCell className="flex gap-2 items-center">
 									<Link className="underline" href={`/items/${itemId}`}>

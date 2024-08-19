@@ -15,5 +15,6 @@ export function getEnemyQuery(id: string) {
 		async queryFn() {
 			return await getEnemy(id);
 		},
+		enabled: Boolean(id),
 	};
 }

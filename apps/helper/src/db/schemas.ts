@@ -41,25 +41,32 @@ export const recipesRelations = relations(craftRecipes, ({ one }) => ({
 	material: one(items, {
 		fields: [craftRecipes.materialId],
 		references: [items.id],
+		relationName: "materialForRecipes",
 	}),
 	craft: one(items, {
 		fields: [craftRecipes.craftedItem],
 		references: [items.id],
+		relationName: "craftedFromRecipes",
 	}),
 }));
 
 export const enemiesRelations = relations(enemies, ({ many }) => ({
-	enemiesToDestinations: many(enemiesToDestinations),
-	enemiesToItems: many(enemiesToItems),
+	destinations: many(enemiesToDestinations),
+	items: many(enemiesToItems),
 }));
 export const destinationsRelations = relations(destinations, ({ many }) => ({
-	enemiesToDestinations: many(enemiesToDestinations),
-	itemsToDestinations: many(itemsToDestinations),
+	enemies: many(enemiesToDestinations),
+	items: many(itemsToDestinations),
 }));
 export const itemsRelations = relations(items, ({ many }) => ({
-	enemiesToItems: many(enemiesToItems),
-	itemsToDestinations: many(itemsToDestinations),
-	craftRecipes: many(craftRecipes),
+	enemies: many(enemiesToItems),
+	destinations: many(itemsToDestinations),
+	materialForRecipes: many(craftRecipes, {
+		relationName: "materialForRecipes",
+	}),
+	craftedFromRecipes: many(craftRecipes, {
+		relationName: "craftedFromRecipes",
+	}),
 }));
 
 export const enemiesToDestinations = sqliteTable(
