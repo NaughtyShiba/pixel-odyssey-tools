@@ -18,7 +18,7 @@ export default async function ({ params }: { params: { slug: string } }) {
 		<Card>
 			<CardHeader className="flex-row justify-between">
 				<div className="flex flex-col space-y-1.5">
-					<CardTitle>{item.label}</CardTitle>
+					<CardTitle>{item?.label}</CardTitle>
 				</div>
 				<div className="flex flex-row gap-4">
 					<Link href="/editor/items">
@@ -31,7 +31,7 @@ export default async function ({ params }: { params: { slug: string } }) {
 				<div className="grid gap-4">
 					<div className="space-y-2">
 						<label>Label</label>
-						<Input defaultValue={item.label} />
+						<Input defaultValue={item?.label} />
 					</div>
 				</div>
 			</CardContent>

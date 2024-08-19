@@ -30,9 +30,14 @@ export async function getItemsByCategory(category: string) {
 }
 
 export async function getItemEntry(id: string) {
-	return await db.query.items.findMany({
+	return await db.query.items.findFirst({
 		columns: { id: true, label: true, slot: true, type: true },
-		with: { enemies: true, destinations: true, recipes: true },
+		with: {
+			enemies: true,
+			destinations: true,
+			materialForRecipes: true,
+			craftedFromRecipes: true,
+		},
 		where: or(eq(items.id, id)),
 	});
 }
