@@ -14,6 +14,9 @@ import {
 	TableRow,
 } from "@repo/ui/components/table";
 import type { MDXComponents } from "mdx/types";
+import Image from "next/image";
+import Link from "next/link";
+import { getItem } from "@/models/items/models";
 
 type Category = "guides" | "pages";
 
@@ -70,6 +73,32 @@ export async function getPostBySlug({
 			li: ({ children }: React.HTMLAttributes<HTMLLIElement>) => (
 				<li>{children}</li>
 			),
+			Item: async ({
+				itemName,
+				amount,
+			}: { itemName: string; amount?: number }) => {
+				const item = await getItem(itemName);
+				if (!item) return <span>{itemName}</span>;
+				return (
+					<span className="inline-block">
+						<Link
+							className="flex flex-row items-center gap-2"
+							href={`/items/${itemName}`}
+							target="_blank">
+							<Image
+								src={`/assets/items/${itemName}.png`}
+								width={24}
+								height={24}
+								alt={item.label}
+							/>
+							<span>
+								{item.label}
+								{amount ? ` (${amount})` : null}
+							</span>
+						</Link>
+					</span>
+				);
+			},
 			...components,
 		},
 	});

@@ -4,18 +4,18 @@ title: Refine
 
 ## Chance and Charm Requirements
 
-To increase the chance of refining, we have 4 charm items in the game. They are Rabbit's Foot (2x), Wishbone (3x), Easter Egg (3x, but this was an Easter Event item, you cannot find it in the game now), Clover (4x) and finally Horseshoe (5x). Each has a different value to increase this chance, and you can use any of them more than once. For a successful refining you need %100. Going beyond that will not refine the item to a higher level than what is supposed to be. If you do not wish to use any charms, this option is also available. If your refining fails, you will lose the item on the right, regardless of its level. Be careful with this.
+To increase the chance of refining, we have 4 charm items in the game. They are <Item itemName="rabbits_foot" /> (2x), <Item itemName="wishbone" /> (3x), Easter Egg (3x, but this was an Easter Event item, you cannot find it in the game now), <Item itemName="clover" />" (4x) and finally <Item itemName="horseshoe" /> (5x). Each has a different value to increase this chance, and you can use any of them more than once. For a successful refining you need %100. Going beyond that will not refine the item to a higher level than what is supposed to be. If you do not wish to use any charms, this option is also available. If your refining fails, you will lose the item on the right, regardless of its level. Be careful with this.
 
 Below are the percentages of your refining chance and the charms you can use to make it successful. However, you can create your own strategy based on the amount of charms you have.
 
-| Level    | Chance | Charms (With horseshoe) | Charms (Without horseshoe) |
+| Level    | Chance | Charms (With <Item itemName="horseshoe" />) | Charms (Without <Item itemName="horseshoe" />) |
 |----------|--------|-------------------------|----------------------------|
 | Level 2  | 100%   | No Charms | No Charms |
-| Level 3  | 50%    | Rabbit's Foot | Rabbit's Foot |
-| Level 4  | 30%    | Clover | Clover |
-| Level 5  | 20%    | Horseshoe | Rabbit's Foot + Wishbone |
-| Level 6  | 10%    | Rabbit's Foot + Horseshoe | Clover + Wishbone |
-| Level 7  | 5%     | Clover + Horseshoe | Rabbit's Foot + Clover + Wishbone |
-| Level 8  | 3%     | Horseshoe + Clover + Rabbit's foot | 2x Wishbone + Clover |
-| Level 9  | 1%     | 2x Horseshoe + Clover | 2x Wishbone + 2x Clover |
-| Level 10 | 0.5%   | Rabbit's Foot + 2x Horseshoe + Clover | Rabbit's Foot + 2x Wishbone + 2x Clover |
+| Level 3  | 50%    | <Item itemName="rabbits_foot" amount={1} /> | <Item itemName="rabbits_foot" amount={1} /> |
+| Level 4  | 30%    | <Item itemName="clover" amount={1} /> | <Item itemName="clover" amount={1} /> |
+| Level 5  | 20%    | <Item itemName="horseshoe" amount={1} /> | <Item itemName="rabbits_foot" amount={1} /> + <Item itemName="wishbone" amount={1} /> |
+| Level 6  | 10%    | <Item itemName="rabbits_foot" amount={1} /> + <Item itemName="horseshoe" amount={1} /> | <Item itemName="clover" amount={1} /> + <Item itemName="wishbone" amount={1} /> |
+| Level 7  | 5%     | <Item itemName="clover" amount={1} /> + <Item itemName="horseshoe" amount={1} /> | <Item itemName="rabbits_foot" amount={1} /> + <Item itemName="clover" amount={1} /> + <Item itemName="wishbone" amount={1} /> |
+| Level 8  | 3%     | <Item itemName="horseshoe" amount={1} /> + <Item itemName="clover" amount={1} /> + <Item itemName="rabbits_foot" amount={1} /> | <Item itemName="wishbone" amount={2} /> + <Item itemName="clover" amount={1} /> |
+| Level 9  | 1%     | <Item itemName="horseshoe" amount={2} /> + <Item itemName="clover" amount={1} /> | <Item itemName="wishbone" amount={2} /> + <Item itemName="clover" amount={2} /> |
+| Level 10 | 0.5%   | <Item itemName="rabbits_foot" amount={1} /> + <Item itemName="horseshoe" amount={2} /> + <Item itemName="clover" /> | <Item itemName="rabbits_foot" amount={1} /> + <Item itemName="wishbone" amount={2} /> + <Item itemName="clover" amount={2} /> |
