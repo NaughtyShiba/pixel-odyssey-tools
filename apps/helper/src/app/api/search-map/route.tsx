@@ -14,7 +14,7 @@ export async function GET() {
 					.select({
 						id: items.id,
 						label: items.label,
-						slug: sql<string>`'items/' || ${items.id}`.as("slug"),
+						slug: sql<string>`'/items/' || ${items.id}`.as("slug"),
 					})
 					.from(items)
 					.all(),
@@ -26,7 +26,7 @@ export async function GET() {
 					.select({
 						id: enemies.id,
 						label: enemies.label,
-						slug: sql<string>`'enemies/' || ${enemies.id}`.as("slug"),
+						slug: sql<string>`'/enemies/' || ${enemies.id}`.as("slug"),
 					})
 					.from(enemies)
 					.all(),
@@ -38,7 +38,7 @@ export async function GET() {
 					.select({
 						id: destinations.id,
 						label: destinations.label,
-						slug: sql<string>`'destination/' || ${destinations.id}`.as("slug"),
+						slug: sql<string>`'/destination/' || ${destinations.id}`.as("slug"),
 					})
 					.from(destinations)
 					.all(),
