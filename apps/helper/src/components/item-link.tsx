@@ -11,8 +11,7 @@ export function ItemLink(props: ItemLinkProps) {
 		<span className="inline-block">
 			<Link
 				className="flex flex-row items-center gap-2 underline"
-				href={`/items/${props.id}`}
-				target="_blank">
+				href={`/items/${props.id}`}>
 				<Image
 					src={`/assets/items/${props.id}.png`}
 					width={24}

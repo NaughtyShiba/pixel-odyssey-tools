@@ -10,8 +10,7 @@ export function EnemyLink(props: EnemyLinkProps) {
 		<span className="inline-block">
 			<Link
 				className="flex flex-row items-center gap-2 underline"
-				href={`/enemies/${props.id}`}
-				target="_blank">
+				href={`/enemies/${props.id}`}>
 				<Image
 					src={`/assets/enemies/${props.id}.png`}
 					width={24}
