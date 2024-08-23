@@ -8,5 +8,6 @@ export default function Page({ params }: { params: { slug: string } }) {
 	const items = getAllItems();
 	const destinations = getAllDestinations();
 
-	return <EnemyInfo enemy={enemy} items={items} destinations={destinations} />;
+	// return <EnemyInfo enemy={enemy} items={items} destinations={destinations} />;
+	return null;
 }
