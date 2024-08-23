@@ -18,5 +18,5 @@ COPY tools ./tools
 RUN pnpm install --frozen-lockfile
 RUN chmod +x run.sh
 
-EXPOSE 3002
+EXPOSE 4000
 ENTRYPOINT [ "sh", "run.sh" ]
