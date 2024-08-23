@@ -29,9 +29,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 	const queryClient = new QueryClient();
 
 	await Promise.all([
-		queryClient.prefetchQuery(getAllDestinationsQuery()),
-		queryClient.prefetchQuery(getAllItemsQuery()),
-		queryClient.prefetchQuery(getAllEnemiesQuery()),
+		// queryClient.prefetchQuery(getAllDestinationsQuery()),
+		// queryClient.prefetchQuery(getAllItemsQuery()),
+		// queryClient.prefetchQuery(getAllEnemiesQuery()),
 		// queryClient.prefetchQuery({
 		// 	queryKey: getCategoriesQueryKey(),
 		// 	queryFn: getCategories,

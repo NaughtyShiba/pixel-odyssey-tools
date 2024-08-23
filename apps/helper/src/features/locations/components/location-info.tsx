@@ -14,12 +14,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { getDestinationQuery } from "@/models/destinations/queries";
-import { getAllEnemiesQuery } from "@/models/enemies/queries";
-import { getAllItemsQuery } from "@/models/items/queries";
+import { use } from "react";
 
 const COMMON_DROPS = [
 	"acorn",
@@ -42,18 +38,43 @@ const COMMON_DROPS = [
 	"wishbone",
 ];
 
-export function LocationInfo() {
-	const { slug } = useParams<{ slug: string }>();
+interface LocationInfoProps {
+	destination: Promise<
+		| {
+				enemies: string[];
+				items: string[];
+				id: string;
+				label: string;
+				description: string | null;
+		  }
+		| undefined
+	>;
+	items: Promise<
+		{
+			id: string;
+			label: string;
+			type: string;
+			slot: string | null;
+		}[]
+	>;
+	enemies: Promise<
+		{
+			id: string;
+			label: string;
+		}[]
+	>;
+}
 
-	const { data: location } = useQuery(getDestinationQuery(slug));
-	const { data: items } = useQuery(getAllItemsQuery());
-	const { data: enemies } = useQuery(getAllEnemiesQuery());
+export function LocationInfo(props: LocationInfoProps) {
+	const destination = use(props.destination);
+	const enemies = use(props.enemies);
+	const items = use(props.items);
 
-	if (!location) return null;
+	if (!destination || !enemies || !items) return <div>Loading...</div>;
 
 	return (
 		<PageArticle>
-			<PageTitle>{location?.label}</PageTitle>
+			<PageTitle>{destination?.label}</PageTitle>
 			<PageContent>
 				<div className="flex flex-col gap-8">
 					<PageSubTitle>Enemies</PageSubTitle>
@@ -64,7 +85,7 @@ export function LocationInfo() {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{location?.enemies?.map((enemy) => (
+							{destination?.enemies?.map((enemy) => (
 								<TableRow key={enemy}>
 									<TableCell>
 										<Link className="underline" href={`/enemies/${enemy}`}>
@@ -85,7 +106,7 @@ export function LocationInfo() {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{location?.items?.map((item) =>
+							{destination?.items?.map((item) =>
 								items?.find((i) => i.id === item) ? (
 									<TableRow key={item}>
 										<TableCell>

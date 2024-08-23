@@ -7,15 +7,14 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import type { RecipeIngredient } from "../types";
-import { getAllItemsQuery } from "@/models/items/queries";
+import type { Item } from "@/models/items/models";
 
-interface RecipeInfoProps extends RecipeIngredient {}
+interface RecipeInfoProps {
+	materialForRecipes: NonNullable<Item>["materialForRecipes"];
+}
+
 export function RecipeInfo({ materialForRecipes }: RecipeInfoProps) {
-	const { data: items } = useQuery(getAllItemsQuery());
-
 	if (materialForRecipes.length === 0) return null;
 
 	return (
@@ -30,11 +29,11 @@ export function RecipeInfo({ materialForRecipes }: RecipeInfoProps) {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{materialForRecipes.map(({ itemId, amount }) => (
-							<TableRow key={itemId}>
+						{materialForRecipes.map(({ craft, amount }) => (
+							<TableRow key={craft?.id}>
 								<TableCell className="flex gap-2 items-center">
-									<Link className="underline" href={`/items/${itemId}`}>
-										{items?.find((i) => i.id === itemId)?.label}
+									<Link className="underline" href={`/items/${craft?.id}`}>
+										{craft?.label}
 									</Link>
 								</TableCell>
 								<TableCell>{amount}</TableCell>

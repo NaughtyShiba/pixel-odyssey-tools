@@ -1,26 +1,16 @@
 import { PageArticle, PageContent, PageTitle } from "@/components/page";
 import { getPostBySlug } from "@/features/mdx/utils";
-import { getAllDestinationsQuery } from "@/models/destinations/queries";
+import { getAllDestinations } from "@/models/destinations/models";
 import { LocationsList } from "@repo/helper/features/locations/components/locations-list";
-import { QueryClient } from "@tanstack/react-query";
 
 export default async function Page() {
-	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery(getAllDestinationsQuery());
-
-	const destinations = queryClient.getQueryData(
-		getAllDestinationsQuery().queryKey,
-	);
+	const destinations = getAllDestinations();
 
 	const post = await getPostBySlug({
 		slug: "locations",
 		category: "pages",
 		components: {
-			LocationsList: () => (
-				<LocationsList
-					locations={destinations as Array<{ id: string; label: string }>}
-				/>
-			),
+			LocationsList: () => <LocationsList destinations={destinations} />,
 		},
 	});
 

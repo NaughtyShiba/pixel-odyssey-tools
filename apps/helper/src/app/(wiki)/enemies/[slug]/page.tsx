@@ -1,18 +1,12 @@
 import { EnemyInfo } from "@/features/enemies/components/enemy-info";
-import { getEnemyQuery } from "@/models/enemies/queries";
-import {
-	HydrationBoundary,
-	QueryClient,
-	dehydrate,
-} from "@tanstack/react-query";
+import { getAllDestinations } from "@/models/destinations/models";
+import { getEnemy } from "@/models/enemies/models";
+import { getAllItems } from "@/models/items/models";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery(getEnemyQuery(params.slug));
+export default function Page({ params }: { params: { slug: string } }) {
+	const enemy = getEnemy(params.slug);
+	const items = getAllItems();
+	const destinations = getAllDestinations();
 
-	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<EnemyInfo />
-		</HydrationBoundary>
-	);
+	return <EnemyInfo enemy={enemy} items={items} destinations={destinations} />;
 }

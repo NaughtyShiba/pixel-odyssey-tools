@@ -14,18 +14,42 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { getEnemyQuery } from "@/models/enemies/queries";
-import { getAllDestinationsQuery } from "@/models/destinations/queries";
-import { getAllItemsQuery } from "@/models/items/queries";
+import { use } from "react";
 
-export function EnemyInfo() {
-	const { slug } = useParams<{ slug: string }>();
-	const { data: enemy } = useQuery(getEnemyQuery(slug));
-	const { data: items } = useQuery(getAllItemsQuery());
-	const { data: locations } = useQuery(getAllDestinationsQuery());
+interface EnemyInfoProps {
+	destinations: Promise<
+		{
+			id: string;
+			label: string;
+		}[]
+	>;
+	items: Promise<
+		{
+			id: string;
+			label: string;
+			type: string;
+			slot: string | null;
+		}[]
+	>;
+	enemy: Promise<
+		| {
+				destinations: string[];
+				items: {
+					itemId: string;
+					chance: number | null;
+				}[];
+				id: string;
+				label: string;
+		  }
+		| undefined
+	>;
+}
+
+export function EnemyInfo(props: EnemyInfoProps) {
+	const destinations = use(props.destinations);
+	const items = use(props.items);
+	const enemy = use(props.enemy);
 
 	return (
 		<PageArticle>
@@ -69,7 +93,7 @@ export function EnemyInfo() {
 										<Link
 											className="underline"
 											href={`/destinations/${destination}`}>
-											{locations?.find((l) => l.id === destination)?.label}
+											{destinations?.find((l) => l.id === destination)?.label}
 										</Link>
 									</TableCell>
 								</TableRow>

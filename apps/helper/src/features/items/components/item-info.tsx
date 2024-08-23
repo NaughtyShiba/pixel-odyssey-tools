@@ -1,8 +1,6 @@
 "use client";
 
 import { PageArticle, PageContent, PageTitle } from "@/components/page";
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
 import {
 	isCraftable,
 	isDroppedByEnemies,
@@ -13,20 +11,24 @@ import {
 import { CraftInfo } from "./craft-info";
 import { EnemyDropInfo } from "./enemy-drop-info";
 import { RecipeInfo } from "./recipe-info";
-import { RefineInfo } from "./refine-info";
+// import { RefineInfo } from "./refine-info";
 import { StepDropInfo } from "./step-drop-info";
-import { getItemQuery } from "@/models/items/queries";
+import { use } from "react";
+import type { Item } from "@/models/items/models";
 
-export function ItemInfo() {
-	const { slug } = useParams<{ slug: string }>();
-	const { data: item } = useQuery(getItemQuery(slug));
+interface ItemInfoProps {
+	item: Promise<Item>;
+}
+
+export function ItemInfo(props: ItemInfoProps) {
+	const item = use(props.item);
 
 	return (
 		<PageArticle>
 			<PageTitle>{item?.label}</PageTitle>
 			<PageContent>
-				{isRefineable(item) && <RefineInfo {...item} />}
-				{isCraftable(item) && <CraftInfo {...item} />}{" "}
+				// {isRefineable(item) && <RefineInfo {...item} />}
+				{isCraftable(item) && <CraftInfo {...item} />}
 				{isRecipeIngredient(item) && <RecipeInfo {...item} />}
 				{isDroppedByEnemies(item) && <EnemyDropInfo {...item} />}
 				{isDroppedByStepping(item) && <StepDropInfo {...item} />}

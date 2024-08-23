@@ -1,15 +1,14 @@
 "use client";
 
-import { getItemsCategoriesQuery } from "@/models/items/queries";
+import { ItemsCategories } from "@/models/items/models";
 import {
 	Card,
 	CardContent,
 	CardHeader,
 	CardTitle,
 } from "@repo/ui/components/card";
-import { useQuery } from "@tanstack/react-query";
-// import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { use } from "react";
 
 interface PlaceholderCardProps {
 	title: string;
@@ -31,11 +30,16 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 	);
 }
 
-export function GroupsList() {
-	const { data: groups } = useQuery(getItemsCategoriesQuery());
+interface GroupsListProp {
+	categories: Promise<ItemsCategories>;
+}
+
+export function GroupsList(props: GroupsListProp) {
+	console.log({ categories: props.categories });
+	const categories = use(props.categories);
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-			{groups?.map(({ category }) => (
+			{categories?.map(({ category }) => (
 				<PlaceholderCard
 					key={category}
 					title={category}

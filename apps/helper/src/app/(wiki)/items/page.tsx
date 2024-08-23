@@ -1,24 +1,16 @@
 import { PageArticle, PageContent, PageTitle } from "@/components/page";
 import { GroupsList } from "@/features/items/components/groups-list";
-import { getItemsCategoriesQuery } from "@/models/items/queries";
-import {
-	dehydrate,
-	HydrationBoundary,
-	QueryClient,
-} from "@tanstack/react-query";
+import { getItemsCategories } from "@/models/items/models";
 
-export default async function Page() {
-	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery(getItemsCategoriesQuery());
+export default function Page() {
+	const categories = getItemsCategories();
 
 	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<PageArticle>
-				<PageTitle>Items Info</PageTitle>
-				<PageContent>
-					<GroupsList />
-				</PageContent>
-			</PageArticle>
-		</HydrationBoundary>
+		<PageArticle>
+			<PageTitle>Items Info</PageTitle>
+			<PageContent>
+				<GroupsList categories={categories} />
+			</PageContent>
+		</PageArticle>
 	);
 }

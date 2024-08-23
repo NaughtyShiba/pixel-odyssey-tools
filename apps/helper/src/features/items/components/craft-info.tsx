@@ -7,15 +7,13 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import type { Craftable } from "../types";
-import { getAllItemsQuery } from "@/models/items/queries";
+import type { Item } from "@/models/items/models";
 
-interface CraftInfoProps extends Craftable {}
+interface CraftInfoProps {
+	craftedFromRecipes: NonNullable<Item>["craftedFromRecipes"];
+}
 export function CraftInfo({ craftedFromRecipes }: CraftInfoProps) {
-	const { data: items } = useQuery(getAllItemsQuery());
-
 	if (craftedFromRecipes.length === 0) return null;
 
 	return (
@@ -30,11 +28,11 @@ export function CraftInfo({ craftedFromRecipes }: CraftInfoProps) {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{craftedFromRecipes.map(({ itemId, amount }) => (
-							<TableRow key={itemId}>
+						{craftedFromRecipes.map(({ material, amount }) => (
+							<TableRow key={material?.id}>
 								<TableCell className="flex gap-2 items-center">
-									<Link className="underline" href={`/items/${itemId}`}>
-										{items?.find((i) => i.id === itemId)?.label}
+									<Link className="underline" href={`/items/${material?.id}`}>
+										{material?.label}
 									</Link>
 								</TableCell>
 								<TableCell>{amount}</TableCell>
@@ -43,32 +41,6 @@ export function CraftInfo({ craftedFromRecipes }: CraftInfoProps) {
 					</TableBody>
 				</Table>
 			</section>
-			{/*<section className="flex flex-col gap-8">
-				<PageSubTitle>Total Items required:</PageSubTitle>
-				<Table className="w-auto">
-					<TableHeader>
-						<TableRow>
-							<TableHead>Item</TableHead>
-							<TableHead>Amount</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{Object.entries(total_craft).map(([itemName, amount]) => (
-							<TableRow key={itemName}>
-								<TableCell className="flex gap-2 items-center">
-									<Link className="underline" href={`/items/${itemName}`}>
-										{
-											(items as Record<string, { label: string }>)[itemName]
-												.label
-										}
-									</Link>
-								</TableCell>
-								<TableCell>{amount}</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</section>*/}
 		</>
 	);
 }

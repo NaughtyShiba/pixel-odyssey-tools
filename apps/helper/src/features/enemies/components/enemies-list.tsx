@@ -1,11 +1,19 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { getAllEnemiesQuery } from "@/models/enemies/queries";
+import { use } from "react";
 
-export function EnemiesList() {
-	const { data: enemies } = useQuery(getAllEnemiesQuery());
+interface EnemiesListProp {
+	enemies: Promise<
+		{
+			id: string;
+			label: string;
+		}[]
+	>;
+}
+
+export function EnemiesList(props: EnemiesListProp) {
+	const enemies = use(props.enemies);
 
 	return (
 		<ul className="list-disc">

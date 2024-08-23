@@ -6,6 +6,7 @@ import {
 } from "@repo/ui/components/card";
 import Image from "next/image";
 import Link from "next/link";
+import { use } from "react";
 
 interface PlaceholderCardProps {
 	title: string;
@@ -36,18 +37,20 @@ function PlaceholderCard({ title, href, image }: PlaceholderCardProps) {
 }
 
 interface LocationsListProps {
-	locations: Array<{ id: string; label: string }>;
+	destinations: Promise<Array<{ id: string; label: string }>>;
 }
 
-export function LocationsList({ locations }: LocationsListProps) {
+export function LocationsList(props: LocationsListProps) {
+	const destinations = use(props.destinations);
+
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-			{locations.map((location) => (
+			{destinations.map((destination) => (
 				<PlaceholderCard
-					key={location.id}
-					title={location.label}
-					href={`/destinations/${location.id}`}
-					image={location.id}
+					key={destination.id}
+					title={destination.label}
+					href={`/destinations/${destination.id}`}
+					image={destination.id}
 				/>
 			))}
 		</div>

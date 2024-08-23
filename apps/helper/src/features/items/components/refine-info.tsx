@@ -9,7 +9,7 @@ import {
 } from "@repo/ui/components/table";
 import type { Refineable } from "../types";
 
-interface RefineInfoProps extends Refineable {}
+interface RefineInfoProps extends Item[""] {}
 export function RefineInfo({ perfectRefine }: RefineInfoProps) {
 	return (
 		<section className="flex flex-col gap-8">

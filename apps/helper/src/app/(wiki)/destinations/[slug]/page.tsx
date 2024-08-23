@@ -1,18 +1,13 @@
 import { LocationInfo } from "@/features/locations/components/location-info";
-import { getDestinationQuery } from "@/models/destinations/queries";
-import {
-	HydrationBoundary,
-	QueryClient,
-	dehydrate,
-} from "@tanstack/react-query";
+import { getDestination } from "@/models/destinations/models";
+import { getAllEnemies } from "@/models/enemies/models";
+import { getAllItems } from "@/models/items/models";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery(getDestinationQuery(params.slug));
-
+export default function Page({ params }: { params: { slug: string } }) {
+	const destination = getDestination(params.slug);
+	const items = getAllItems();
+	const enemies = getAllEnemies();
 	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<LocationInfo />
-		</HydrationBoundary>
+		<LocationInfo destination={destination} items={items} enemies={enemies} />
 	);
 }

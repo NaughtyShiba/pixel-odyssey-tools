@@ -1,18 +1,8 @@
 import { ItemInfo } from "@/features/items/components/item-info";
-import { getItemQuery } from "@/models/items/queries";
-import {
-	HydrationBoundary,
-	QueryClient,
-	dehydrate,
-} from "@tanstack/react-query";
+import { getAllItems, getItem } from "@/models/items/models";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery(getItemQuery(params.slug));
+export default function Page({ params }: { params: { slug: string } }) {
+	const item = getItem(params.slug);
 
-	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<ItemInfo />
-		</HydrationBoundary>
-	);
+	return <ItemInfo item={item} />;
 }
