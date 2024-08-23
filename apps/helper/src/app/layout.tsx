@@ -1,17 +1,7 @@
 import type { ReactNode } from "react";
 import "./globals.css";
-import {
-	HydrationBoundary,
-	QueryClient,
-	dehydrate,
-} from "@tanstack/react-query";
 import { cookies } from "next/headers";
-import { ReactQueryClientProvider } from "../features/providers/providers";
 import { ThemeProvider } from "../features/theme/context";
-import { getAllEnemiesQuery } from "../models/enemies/queries";
-import { getAllDestinationsQuery } from "../models/destinations/queries";
-import { getAllItemsQuery } from "../models/items/queries";
-import { SessionProvider } from "next-auth/react";
 
 interface RootLayoutProps {
 	children: ReactNode;
@@ -24,31 +14,14 @@ function getTheme() {
 	return "system";
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
 	const theme = getTheme();
-	const queryClient = new QueryClient();
-
-	await Promise.all([
-		// queryClient.prefetchQuery(getAllDestinationsQuery()),
-		// queryClient.prefetchQuery(getAllItemsQuery()),
-		// queryClient.prefetchQuery(getAllEnemiesQuery()),
-		// queryClient.prefetchQuery({
-		// 	queryKey: getCategoriesQueryKey(),
-		// 	queryFn: getCategories,
-		// }),
-	]);
 	return (
-		<SessionProvider>
-			<ReactQueryClientProvider>
-				<HydrationBoundary state={dehydrate(queryClient)}>
-					<html lang="en" data-theme={theme}>
-						<head />
-						<ThemeProvider defaultTheme={theme}>
-							<body>{children}</body>
-						</ThemeProvider>
-					</html>
-				</HydrationBoundary>
-			</ReactQueryClientProvider>
-		</SessionProvider>
+		<html lang="en" data-theme={theme}>
+			<head />
+			<ThemeProvider defaultTheme={theme}>
+				<body>{children}</body>
+			</ThemeProvider>
+		</html>
 	);
 }

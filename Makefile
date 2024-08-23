@@ -14,3 +14,6 @@ rebuild_and_restart:
 
 logs_local:
 	docker logs po_tools_local
+
+run_postgres:
+	docker compose -f postgres/docker-compose.yaml up --force-recreate

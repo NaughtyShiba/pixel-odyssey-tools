@@ -1,235 +1,30 @@
 {
-  "version": "6",
-  "dialect": "sqlite",
-  "id": "863ddec8-51cb-41ea-bb71-59fbf6b79f31",
+  "id": "a1b8c2d4-c272-4b43-ac2e-37ea6f8d841b",
   "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
   "tables": {
-    "account": {
-      "name": "account",
-      "columns": {
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "type": {
-          "name": "type",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "provider": {
-          "name": "provider",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "providerAccountId": {
-          "name": "providerAccountId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "refresh_token": {
-          "name": "refresh_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "access_token": {
-          "name": "access_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "token_type": {
-          "name": "token_type",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "scope": {
-          "name": "scope",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "id_token": {
-          "name": "id_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "session_state": {
-          "name": "session_state",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "account_userId_user_id_fk": {
-          "name": "account_userId_user_id_fk",
-          "tableFrom": "account",
-          "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "account_provider_providerAccountId_pk": {
-          "columns": [
-            "provider",
-            "providerAccountId"
-          ],
-          "name": "account_provider_providerAccountId_pk"
-        }
-      },
-      "uniqueConstraints": {}
-    },
-    "authenticator": {
-      "name": "authenticator",
-      "columns": {
-        "credentialID": {
-          "name": "credentialID",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "providerAccountId": {
-          "name": "providerAccountId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "credentialPublicKey": {
-          "name": "credentialPublicKey",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "counter": {
-          "name": "counter",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "credentialDeviceType": {
-          "name": "credentialDeviceType",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "credentialBackedUp": {
-          "name": "credentialBackedUp",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "transports": {
-          "name": "transports",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "authenticator_credentialID_unique": {
-          "name": "authenticator_credentialID_unique",
-          "columns": [
-            "credentialID"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {
-        "authenticator_userId_user_id_fk": {
-          "name": "authenticator_userId_user_id_fk",
-          "tableFrom": "authenticator",
-          "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "authenticator_userId_credentialID_pk": {
-          "columns": [
-            "userId",
-            "credentialID"
-          ],
-          "name": "authenticator_userId_credentialID_pk"
-        }
-      },
-      "uniqueConstraints": {}
-    },
-    "craftRecipes": {
+    "public.craftRecipes": {
       "name": "craftRecipes",
+      "schema": "",
       "columns": {
         "material_id": {
           "name": "material_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "amount": {
           "name": "amount",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "crafted_item": {
           "name": "crafted_item",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
       "indexes": {},
@@ -262,39 +57,37 @@
         }
       },
       "compositePrimaryKeys": {
-        "craftRecipes_material_id_crafted_item_pk": {
+        "craftRecipes_composite_key": {
+          "name": "craftRecipes_composite_key",
           "columns": [
             "material_id",
             "crafted_item"
-          ],
-          "name": "craftRecipes_material_id_crafted_item_pk"
+          ]
         }
       },
       "uniqueConstraints": {}
     },
-    "destinations": {
+    "public.destinations": {
       "name": "destinations",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
           "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "label": {
           "name": "label",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "description": {
           "name": "description",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
       "indexes": {},
@@ -302,22 +95,21 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "enemies": {
+    "public.enemies": {
       "name": "enemies",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
           "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "label": {
           "name": "label",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -325,22 +117,21 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "enemiesToLocations": {
+    "public.enemiesToLocations": {
       "name": "enemiesToLocations",
+      "schema": "",
       "columns": {
         "destination_id": {
           "name": "destination_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "enemy_id": {
           "name": "enemy_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -373,39 +164,37 @@
         }
       },
       "compositePrimaryKeys": {
-        "enemiesToLocations_destination_id_enemy_id_pk": {
+        "enemiesToLocations_composite_key": {
+          "name": "enemiesToLocations_composite_key",
           "columns": [
             "destination_id",
             "enemy_id"
-          ],
-          "name": "enemiesToLocations_destination_id_enemy_id_pk"
+          ]
         }
       },
       "uniqueConstraints": {}
     },
-    "enemyDrops": {
+    "public.enemyDrops": {
       "name": "enemyDrops",
+      "schema": "",
       "columns": {
         "item_id": {
           "name": "item_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "enemy_id": {
           "name": "enemy_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "drop_chance": {
           "name": "drop_chance",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
       "indexes": {},
@@ -438,53 +227,49 @@
         }
       },
       "compositePrimaryKeys": {
-        "enemyDrops_item_id_enemy_id_pk": {
+        "enemyDrops_composite_key": {
+          "name": "enemyDrops_composite_key",
           "columns": [
             "item_id",
             "enemy_id"
-          ],
-          "name": "enemyDrops_item_id_enemy_id_pk"
+          ]
         }
       },
       "uniqueConstraints": {}
     },
-    "items": {
+    "public.items": {
       "name": "items",
+      "schema": "",
       "columns": {
         "id": {
           "name": "id",
           "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "label": {
           "name": "label",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "type": {
           "name": "type",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "slot": {
           "name": "slot",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         },
         "stats": {
           "name": "stats",
-          "type": "text",
+          "type": "json",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": false
         }
       },
       "indexes": {},
@@ -492,22 +277,21 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "itemsToDestinations": {
+    "public.itemsToDestinations": {
       "name": "itemsToDestinations",
+      "schema": "",
       "columns": {
         "destination_id": {
           "name": "destination_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         },
         "item_id": {
           "name": "item_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -540,165 +324,23 @@
         }
       },
       "compositePrimaryKeys": {
-        "itemsToDestinations_destination_id_item_id_pk": {
+        "itemsToDestinations_composite_key": {
+          "name": "itemsToDestinations_composite_key",
           "columns": [
             "destination_id",
             "item_id"
-          ],
-          "name": "itemsToDestinations_destination_id_item_id_pk"
-        }
-      },
-      "uniqueConstraints": {}
-    },
-    "session": {
-      "name": "session",
-      "columns": {
-        "sessionToken": {
-          "name": "sessionToken",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "expires": {
-          "name": "expires",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "session_userId_user_id_fk": {
-          "name": "session_userId_user_id_fk",
-          "tableFrom": "session",
-          "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "user": {
-      "name": "user",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "password": {
-          "name": "password",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "emailVerified": {
-          "name": "emailVerified",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "image": {
-          "name": "image",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "user_email_unique": {
-          "name": "user_email_unique",
-          "columns": [
-            "email"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "verificationToken": {
-      "name": "verificationToken",
-      "columns": {
-        "identifier": {
-          "name": "identifier",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "token": {
-          "name": "token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "expires": {
-          "name": "expires",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "verificationToken_identifier_token_pk": {
-          "columns": [
-            "identifier",
-            "token"
-          ],
-          "name": "verificationToken_identifier_token_pk"
+          ]
         }
       },
       "uniqueConstraints": {}
     }
   },
   "enums": {},
+  "schemas": {},
+  "sequences": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "internal": {
-    "indexes": {}
+    "tables": {}
   }
 }

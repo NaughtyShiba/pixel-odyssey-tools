@@ -12,7 +12,7 @@ export async function getAllEnemies() {
 }
 
 export async function getEnemy(id: string) {
-	return await db.query.enemies.findFirst({
+	const a = await db.query.enemies.findFirst({
 		where: eq(enemies.id, id),
 		with: {
 			...createRelationQuery("destinations", "destination", [
@@ -24,5 +24,7 @@ export async function getEnemy(id: string) {
 			}),
 		},
 	});
+	console.log({ id, a });
+	return a;
 }
 export type Enemy = Awaited<ReturnType<typeof getEnemy>>;

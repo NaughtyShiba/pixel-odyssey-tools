@@ -7,7 +7,7 @@ import {
 	items,
 	itemsToDestinations,
 } from "./schemas";
-import { db } from "./db";
+import { db, queryClient } from "./db";
 
 // Seeds enemies and enemy-item relations
 async function seedEnemies() {
@@ -110,6 +110,7 @@ const main = async () => {
 	await seedItems();
 	await seedEnemies();
 	await seedLocations();
+	queryClient.end();
 };
 
 main();

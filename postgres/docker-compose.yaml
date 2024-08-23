@@ -1,0 +1,35 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16.2-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - po-wiki-psql-volume:/var/lib/postgresql/data
+    networks:
+      - po-wiki-network
+    restart: unless-stopped
+  pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin4_container
+      restart: always
+      ports:
+        - "8888:80"
+      environment:
+        PGADMIN_DEFAULT_EMAIL: root@localhost.dev
+        PGADMIN_DEFAULT_PASSWORD: bananai
+      networks:
+        - po-wiki-network
+      volumes:
+        - po-wiki-pgadmin-volume:/var/lib/pgadmin
+
+volumes:
+  po-wiki-psql-volume:
+  po-wiki-pgadmin-volume:
+
+networks:
+  po-wiki-network:

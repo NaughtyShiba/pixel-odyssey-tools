@@ -3,7 +3,7 @@
 import { db } from "@/db/db";
 import { items } from "@/db/schemas";
 import { eq, or, SQL, sql } from "drizzle-orm";
-import { calculatePerfectRefine } from "./utils";
+// import { calculatePerfectRefine } from "./utils";
 import { createRelationQuery } from "@/libs/drizzle/utils";
 
 export async function getAllItems() {
@@ -19,8 +19,7 @@ export async function getItemsCategories() {
 			category: sql<string>`COALESCE(${items.slot}, ${items.type})`,
 		})
 		.from(items)
-		.groupBy(sql`COALESCE(${items.slot}, ${items.type})`)
-		.all();
+		.groupBy(sql`COALESCE(${items.slot}, ${items.type})`);
 }
 export type ItemsCategories = Awaited<ReturnType<typeof getItemsCategories>>;
 

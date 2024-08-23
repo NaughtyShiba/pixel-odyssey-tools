@@ -1,6 +1,12 @@
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import Database from "better-sqlite3";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import * as schema from "./schemas";
 
-export const connection = new Database(process.env.DB_FILE);
-export const db = drizzle(connection, { schema });
+export const migrationClient = postgres(
+	`postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:${process.env.DB_PORT}/${process.env.DB_DATABASE}`,
+	{ max: 1 },
+);
+export const queryClient = postgres(
+	`postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:${process.env.DB_PORT}/${process.env.DB_DATABASE}`,
+);
+export const db = drizzle(queryClient, { schema });

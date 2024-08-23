@@ -3,7 +3,10 @@
 	"tasks": {
 		"build": {
 			"passThroughEnv": [
-				"DB_FILE",
+				"DB_USERNAME",
+				"DB_PASSWORD",
+				"DB_PORT",
+				"DB_DATABASE",
 				"RESEND_API_KEY",
 				"RESEND_FROM",
 				"AUTH_WHITELISTED_EMAILS",
@@ -15,7 +18,10 @@
 		},
 		"start": {
 			"passThroughEnv": [
-				"DB_FILE",
+				"DB_USERNAME",
+				"DB_PASSWORD",
+				"DB_PORT",
+				"DB_DATABASE",
 				"RESEND_API_KEY",
 				"RESEND_FROM",
 				"AUTH_WHITELISTED_EMAILS",
@@ -29,7 +35,10 @@
 		},
 		"dev": {
 			"passThroughEnv": [
-				"DB_FILE",
+				"DB_USERNAME",
+				"DB_PASSWORD",
+				"DB_PORT",
+				"DB_DATABASE",
 				"RESEND_API_KEY",
 				"RESEND_FROM",
 				"AUTH_WHITELISTED_EMAILS",

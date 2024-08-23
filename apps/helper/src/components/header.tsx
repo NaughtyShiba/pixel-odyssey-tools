@@ -9,9 +9,9 @@ import {
 } from "@repo/ui/components/sheet";
 import { Menu } from "lucide-react";
 // import { NextBreadcrumb } from "./breadcrumbs";
-import { CommandMenu } from "../features/command/components/cmdk";
+// import { CommandMenu } from "../features/command/components/cmdk";
 import { Link } from "./link";
-import { UserDropdownMenu } from "./user-menu";
+// import { UserDropdownMenu } from "./user-menu";
 
 export function Header() {
 	return (
@@ -34,8 +34,6 @@ export function Header() {
 					</nav>
 				</SheetContent>
 			</Sheet>
-			<CommandMenu />
-			<UserDropdownMenu />
 		</header>
 	);
 }
