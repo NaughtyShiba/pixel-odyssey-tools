@@ -1,3 +1,4 @@
+import { EnemyLink } from "@/components/enemy-link";
 import { ItemLink } from "@/components/item-link";
 import {
 	PageArticle,
@@ -63,9 +64,7 @@ export function LocationInfo(props: LocationInfoProps) {
 							{destination?.enemies?.map(({ enemy }) => (
 								<TableRow key={enemy?.id}>
 									<TableCell>
-										<Link className="underline" href={`/enemies/${enemy?.id}`}>
-											{enemy?.label}
-										</Link>
+										<EnemyLink id={enemy?.id} label={enemy.label} />
 									</TableCell>
 								</TableRow>
 							))}

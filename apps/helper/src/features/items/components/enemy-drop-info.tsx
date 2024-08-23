@@ -9,6 +9,7 @@ import {
 } from "@repo/ui/components/table";
 import Link from "next/link";
 import type { Item } from "@/models/items/models";
+import { EnemyLink } from "@/components/enemy-link";
 
 interface EnemyDropInfoProps {
 	enemies: NonNullable<Item>["enemies"];
@@ -30,9 +31,7 @@ export function EnemyDropInfo({ enemies }: EnemyDropInfoProps) {
 					{enemies.map(({ enemy, chance }) => (
 						<TableRow key={enemy?.id}>
 							<TableCell>
-								<Link className="underline" href={`/enemies/${enemy?.id}`}>
-									{enemy?.label}
-								</Link>
+								<EnemyLink id={enemy?.id} label={enemy.label} />
 							</TableCell>
 							<TableCell>{chance}%</TableCell>
 						</TableRow>
