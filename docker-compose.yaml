@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+      - data:/usr/src/app/apps/helper/db
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PNPM_HOME=/pnpm
+      - PATH=/pnpm:$PATH
+    command: >
+      sh -c "
+      pnpm install --frozen-lockfile &&
+      echo 'Running the migrations...' &&
+      pnpm dotenvx run -- pnpm --filter='@repo/helper' db:migrate &&
+      echo 'Seed the DB...' &&
+      pnpm dotenvx run -- pnpm --filter='@repo/helper' db:seed &&
+      echo 'Building for the production...' &&
+      pnpm dotenvx run -- turbo build
+      "
+
+volumes:
+  node_modules:
+  data:
