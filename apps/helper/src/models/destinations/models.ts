@@ -7,10 +7,7 @@ import {
 } from "@/db/schemas";
 import { db } from "@/db/db";
 import { and, eq, inArray } from "drizzle-orm";
-import {
-	SQLiteTableWithColumns,
-	SQLiteTransaction,
-} from "drizzle-orm/sqlite-core";
+import { createRelationQuery } from "@/libs/drizzle/utils";
 
 const slugify = (str: string) => {
 	return str
@@ -141,16 +138,12 @@ export async function deleteDestination(id: string) {
 }
 
 export async function getDestination(id: string) {
-	const data = await db.query.destinations.findFirst({
-		with: { items: true, enemies: true },
+	return await db.query.destinations.findFirst({
 		where: eq(destinations.id, id),
+		with: {
+			...createRelationQuery("enemies", "enemy", ["id", "label"] as const),
+			...createRelationQuery("items", "item", ["id", "label"] as const),
+		},
 	});
-
-	return data
-		? {
-				...data,
-				enemies: data.enemies.map((e) => e.enemyId),
-				items: data.items.map((e) => e.itemId),
-			}
-		: undefined;
 }
+export type Destination = Awaited<ReturnType<typeof getDestination>>;

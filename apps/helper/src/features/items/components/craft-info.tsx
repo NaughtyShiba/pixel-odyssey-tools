@@ -9,6 +9,7 @@ import {
 } from "@repo/ui/components/table";
 import Link from "next/link";
 import type { Item } from "@/models/items/models";
+import { ItemLink } from "@/components/item-link";
 
 interface CraftInfoProps {
 	craftedFromRecipes: NonNullable<Item>["craftedFromRecipes"];
@@ -31,9 +32,10 @@ export function CraftInfo({ craftedFromRecipes }: CraftInfoProps) {
 						{craftedFromRecipes.map(({ material, amount }) => (
 							<TableRow key={material?.id}>
 								<TableCell className="flex gap-2 items-center">
-									<Link className="underline" href={`/items/${material?.id}`}>
-										{material?.label}
-									</Link>
+									<ItemLink
+										id={material?.id ?? ""}
+										label={material?.label ?? ""}
+									/>
 								</TableCell>
 								<TableCell>{amount}</TableCell>
 							</TableRow>

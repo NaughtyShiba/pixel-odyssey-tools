@@ -1,11 +1,11 @@
-"use client";
-
+import { ItemLink } from "@/components/item-link";
 import {
 	PageArticle,
 	PageContent,
 	PageSubTitle,
 	PageTitle,
 } from "@/components/page";
+import type { Destination } from "@/models/destinations/models";
 import {
 	Table,
 	TableBody,
@@ -39,39 +39,14 @@ const COMMON_DROPS = [
 ];
 
 interface LocationInfoProps {
-	destination: Promise<
-		| {
-				enemies: string[];
-				items: string[];
-				id: string;
-				label: string;
-				description: string | null;
-		  }
-		| undefined
-	>;
-	items: Promise<
-		{
-			id: string;
-			label: string;
-			type: string;
-			slot: string | null;
-		}[]
-	>;
-	enemies: Promise<
-		{
-			id: string;
-			label: string;
-		}[]
-	>;
+	destination: Promise<Destination>;
 }
 
 export function LocationInfo(props: LocationInfoProps) {
 	const destination = use(props.destination);
-	const enemies = use(props.enemies);
-	const items = use(props.items);
 
-	if (!destination || !enemies || !items) return <div>Loading...</div>;
-
+	// if (!destination) return <div>Loading...</div>;
+	console.log("abc", { destination });
 	return (
 		<PageArticle>
 			<PageTitle>{destination?.label}</PageTitle>
@@ -85,11 +60,11 @@ export function LocationInfo(props: LocationInfoProps) {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{destination?.enemies?.map((enemy) => (
-								<TableRow key={enemy}>
+							{destination?.enemies?.map(({ enemy }) => (
+								<TableRow key={enemy?.id}>
 									<TableCell>
-										<Link className="underline" href={`/enemies/${enemy}`}>
-											{enemies?.find((e) => e.id === enemy)?.label}
+										<Link className="underline" href={`/enemies/${enemy?.id}`}>
+											{enemy?.label}
 										</Link>
 									</TableCell>
 								</TableRow>
@@ -106,21 +81,17 @@ export function LocationInfo(props: LocationInfoProps) {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{destination?.items?.map((item) =>
-								items?.find((i) => i.id === item) ? (
-									<TableRow key={item}>
-										<TableCell>
-											<Link className="underline" href={`/items/${item}`}>
-												{items?.find((i) => i.id === item)?.label}
-											</Link>
-										</TableCell>
-									</TableRow>
-								) : null,
-							)}
+							{destination?.items?.map(({ item }) => (
+								<TableRow key={item?.id}>
+									<TableCell>
+										<ItemLink id={item.id} label={item.label} />
+									</TableCell>
+								</TableRow>
+							))}
 						</TableBody>
 					</Table>
 				</div>
-				<div className="flex flex-col gap-8">
+				{/*<div className="flex flex-col gap-8">
 					<PageSubTitle>Common Drops</PageSubTitle>
 					<Table className="w-auto">
 						<TableHeader>
@@ -142,7 +113,7 @@ export function LocationInfo(props: LocationInfoProps) {
 							)}
 						</TableBody>
 					</Table>
-				</div>
+				</div>*/}
 			</PageContent>
 		</PageArticle>
 	);

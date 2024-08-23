@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import {
 	PageArticle,
@@ -6,6 +6,8 @@ import {
 	PageSubTitle,
 	PageTitle,
 } from "@/components/page";
+import { ItemLink } from "@/features/mdx/components/item-link";
+import type { Enemy } from "@/models/enemies/models";
 import {
 	Table,
 	TableBody,
@@ -18,37 +20,10 @@ import Link from "next/link";
 import { use } from "react";
 
 interface EnemyInfoProps {
-	destinations: Promise<
-		{
-			id: string;
-			label: string;
-		}[]
-	>;
-	items: Promise<
-		{
-			id: string;
-			label: string;
-			type: string;
-			slot: string | null;
-		}[]
-	>;
-	enemy: Promise<
-		| {
-				destinations: string[];
-				items: {
-					itemId: string;
-					chance: number | null;
-				}[];
-				id: string;
-				label: string;
-		  }
-		| undefined
-	>;
+	enemy: Promise<Enemy>;
 }
 
 export function EnemyInfo(props: EnemyInfoProps) {
-	const destinations = use(props.destinations);
-	const items = use(props.items);
 	const enemy = use(props.enemy);
 
 	return (
@@ -65,12 +40,10 @@ export function EnemyInfo(props: EnemyInfoProps) {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{enemy?.items?.map(({ itemId, chance }) => (
-								<TableRow key={itemId}>
+							{enemy?.items?.map(({ item, chance }) => (
+								<TableRow key={item?.id}>
 									<TableCell>
-										<Link className="underline" href={`/items/${itemId}`}>
-											{items?.find((i) => i.id === itemId)?.label}
-										</Link>
+										<ItemLink itemName={item?.id ?? ""} />
 									</TableCell>
 									<TableCell>{chance}%</TableCell>
 								</TableRow>
@@ -87,13 +60,13 @@ export function EnemyInfo(props: EnemyInfoProps) {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{enemy?.destinations?.map((destination) => (
-								<TableRow key={destination}>
+							{enemy?.destinations?.map(({ destination }) => (
+								<TableRow key={destination.id}>
 									<TableCell>
 										<Link
 											className="underline"
-											href={`/destinations/${destination}`}>
-											{destinations?.find((l) => l.id === destination)?.label}
+											href={`/destinations/${destination.id}`}>
+											{destination?.label}
 										</Link>
 									</TableCell>
 								</TableRow>

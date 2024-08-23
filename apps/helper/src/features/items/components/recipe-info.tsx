@@ -7,8 +7,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import Link from "next/link";
 import type { Item } from "@/models/items/models";
+import { ItemLink } from "@/components/item-link";
 
 interface RecipeInfoProps {
 	materialForRecipes: NonNullable<Item>["materialForRecipes"];
@@ -32,9 +32,7 @@ export function RecipeInfo({ materialForRecipes }: RecipeInfoProps) {
 						{materialForRecipes.map(({ craft, amount }) => (
 							<TableRow key={craft?.id}>
 								<TableCell className="flex gap-2 items-center">
-									<Link className="underline" href={`/items/${craft?.id}`}>
-										{craft?.label}
-									</Link>
+									<ItemLink id={craft?.id ?? ""} label={craft?.label ?? ""} />
 								</TableCell>
 								<TableCell>{amount}</TableCell>
 							</TableRow>

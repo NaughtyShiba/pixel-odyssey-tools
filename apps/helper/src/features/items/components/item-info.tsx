@@ -11,7 +11,6 @@ import {
 import { CraftInfo } from "./craft-info";
 import { EnemyDropInfo } from "./enemy-drop-info";
 import { RecipeInfo } from "./recipe-info";
-// import { RefineInfo } from "./refine-info";
 import { StepDropInfo } from "./step-drop-info";
 import { use } from "react";
 import type { Item } from "@/models/items/models";
@@ -27,11 +26,12 @@ export function ItemInfo(props: ItemInfoProps) {
 		<PageArticle>
 			<PageTitle>{item?.label}</PageTitle>
 			<PageContent>
-				// {isRefineable(item) && <RefineInfo {...item} />}
 				{isCraftable(item) && <CraftInfo {...item} />}
-				{isRecipeIngredient(item) && <RecipeInfo {...item} />}
+				{isRecipeIngredient(item) && <RecipeInfo {...item} />}{" "}
 				{isDroppedByEnemies(item) && <EnemyDropInfo {...item} />}
-				{isDroppedByStepping(item) && <StepDropInfo {...item} />}
+				{isDroppedByStepping(item) && (
+					<StepDropInfo destinations={item.destinations} />
+				)}
 			</PageContent>
 		</PageArticle>
 	);
