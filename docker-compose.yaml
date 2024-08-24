@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: install
     ports:
       - "4002:4002"
     environment:
@@ -12,8 +13,15 @@ services:
       - PNPM_HOME=/pnpm
     volumes:
       - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - po-wiki-network
     working_dir: /usr/src/app
-    command: sh run.sh
+    entrypoint: ["sh", "run.sh"]
 
 volumes:
   app-data:
+
+networks:
+  po-wiki-network:
+    external: true

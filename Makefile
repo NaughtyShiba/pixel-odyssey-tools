@@ -17,3 +17,6 @@ logs_local:
 
 run_postgres:
 	docker compose -f postgres/docker-compose.yaml up --force-recreate
+
+run_compose:
+	docker compose -f ./docker-compose.yaml up --force-recreate

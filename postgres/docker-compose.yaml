@@ -34,6 +34,3 @@ volumes:
 networks:
   po-wiki-network:
     external: true
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.host_binding_ipv4: "0.0.0.0"
