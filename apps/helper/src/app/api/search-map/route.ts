@@ -1,17 +1,21 @@
-"use server";
 import { db } from "@/db/db";
 import { destinations, enemies, items } from "@/db/schemas";
 import type { SearchItems } from "@/features/command/types";
 import { getSlugsByCategory } from "@/features/mdx/utils";
 import { sql } from "drizzle-orm";
-import { cookies } from "next/headers";
 
-export async function setThemeCookie(mode: "light" | "dark" | "system") {
-	await cookies().set("theme", mode);
-}
-
-export async function getSearchMap() {
+export async function GET() {
 	try {
+		const i = await db.query.items
+			.findMany({
+				columns: {
+					id: true,
+					label: true,
+					slug: sql<string>`'/items/' || ${items.id}`.as("slug"),
+				},
+			})
+			.execute();
+
 		const map: SearchItems = [
 			{
 				id: "items",
@@ -71,8 +75,24 @@ export async function getSearchMap() {
 			},
 		];
 
-		return map;
+		return new Response(JSON.stringify(map), {
+			status: 200,
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 	} catch (err) {
-		return [];
+		if (
+			err instanceof Error &&
+			"code" in err &&
+			err.code === "MODULE_NOT_FOUND"
+		) {
+			return new Response(JSON.stringify({ error: "Not Found" }), {
+				status: 404,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+		}
 	}
 }

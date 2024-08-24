@@ -18,22 +18,18 @@ import {
 } from "@repo/ui/components/command";
 import { inputVariants } from "@repo/ui/components/input";
 import { cn } from "@repo/ui/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, use, useEffect, useState } from "react";
 import type { SearchItems } from "../types";
 
-export const CommandMenu = () => {
+interface CommandMenuProps {
+	searchMap: SearchItems;
+}
+export const CommandMenu = ({ searchMap }: CommandMenuProps) => {
 	const router = useRouter();
-	const { data } = useQuery({
-		queryKey: ["search_map"],
-		async queryFn() {
-			const res = await fetch("/api/search-map");
-			return (await res.json()) as SearchItems;
-		},
-	});
 	const [open, setOpen] = useState(false);
+	console.log({ searchMap });
 
 	// Toggle the menu when ⌘K is pressed
 	useEffect(() => {
@@ -69,7 +65,7 @@ export const CommandMenu = () => {
 					<CommandInput placeholder="Search for something" />
 					<CommandList>
 						<CommandEmpty>No results found.</CommandEmpty>
-						{data?.map((group, i) => {
+						{searchMap?.map((group, i) => {
 							return (
 								<Fragment key={group.id}>
 									<CommandGroup heading={group.label}>

@@ -36,12 +36,12 @@ import {
 } from "@repo/ui/components/dropdown-menu";
 // import Link from "next/link";
 import { useTheme } from "../features/theme/context";
-import { useSession } from "next-auth/react";
-import { Link } from "./link";
+// import { useSession } from "next-auth/react";
+// import { Link } from "./link";
 
 export function UserDropdownMenu() {
 	const { setTheme } = useTheme();
-	const session = useSession();
+	// const session = useSession();
 
 	return (
 		<DropdownMenu>
@@ -92,7 +92,7 @@ export function UserDropdownMenu() {
 					</DropdownMenuPortal>
 				</DropdownMenuSub>
 				<DropdownMenuSeparator />
-				{session.status === "authenticated" ? (
+				{/*session.status === "authenticated" ? (
 					<DropdownMenuItem className="cursor-pointer">
 						<Link href="/auth/logout" className="block w-full">
 							<span className="block w-full">Sign out</span>
@@ -104,7 +104,7 @@ export function UserDropdownMenu() {
 							<span className="block w-full">Sign in</span>
 						</Link>
 					</DropdownMenuItem>
-				)}
+					)*/}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
