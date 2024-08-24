@@ -9,7 +9,7 @@ import { Menu } from "lucide-react";
 import { CommandMenu } from "../features/command/components/cmdk";
 import { Link } from "./link";
 import { UserDropdownMenu } from "./user-menu";
-import { getSearchMap } from "@/app/actions";
+import { getSearchMap } from "@/features/command/get";
 
 export async function Header() {
 	const searchMap = await getSearchMap();
