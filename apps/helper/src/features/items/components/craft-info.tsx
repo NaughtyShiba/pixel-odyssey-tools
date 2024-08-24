@@ -7,7 +7,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@repo/ui/components/table";
-import Link from "next/link";
 import type { Item } from "@/models/items/models";
 import { ItemLink } from "@/components/item-link";
 

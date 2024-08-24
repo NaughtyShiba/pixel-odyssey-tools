@@ -43,7 +43,7 @@ function betterForRefine(newStats: Stats, potentialNewStats: Stats): boolean {
 	);
 }
 
-function calculateImperfectRefine(stats: Stats): NumbersPerLevel {
+export function calculateImperfectRefine(stats: Stats): NumbersPerLevel {
 	const numbersPerLevel: NumbersPerLevel = {
 		1: {
 			level: 1,
