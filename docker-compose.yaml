@@ -17,6 +17,7 @@ services:
       - /usr/src/app/packages/ui/node_modules
       - /usr/src/app/packages/config-tailwind/node_modules
       - /usr/src/app/apps/helper/node_modules
+      - /usr/src/app/apps/helper/public/assets
     working_dir: /usr/src/app
     entrypoint: ["sh", "run.sh"]
 
