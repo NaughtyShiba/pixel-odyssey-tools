@@ -21,4 +21,3 @@ RUN pnpm install --frozen-lockfile
 # RUN pnpm dotenvx run -- turbo build
 
 EXPOSE 4002
-ENTRYPOINT [ "sh", "run.sh" ]

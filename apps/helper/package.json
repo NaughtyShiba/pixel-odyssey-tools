@@ -9,8 +9,8 @@
 		"./content/*": ["./content/*"]
 	},
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
+		"dev": "next dev --turbo",
+		"build": "next build --debug",
 		"start": "next start -p 4002",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "tsx src/db/migrate.ts",

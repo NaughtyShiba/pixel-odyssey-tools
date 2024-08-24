@@ -11,7 +11,7 @@ services:
     volumes:
       - po-wiki-psql-volume:/var/lib/postgresql/data
     networks:
-      - po-wiki-network
+      - po-wiki
     restart: unless-stopped
   pgadmin:
       image: dpage/pgadmin4
@@ -23,7 +23,7 @@ services:
         PGADMIN_DEFAULT_EMAIL: root@localhost.dev
         PGADMIN_DEFAULT_PASSWORD: bananai
       networks:
-        - po-wiki-network
+        - po-wiki
       volumes:
         - po-wiki-pgadmin-volume:/var/lib/pgadmin
 
@@ -32,5 +32,5 @@ volumes:
   po-wiki-pgadmin-volume:
 
 networks:
-  po-wiki-network:
+  po-wiki:
     external: true
