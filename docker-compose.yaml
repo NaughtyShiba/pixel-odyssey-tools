@@ -14,14 +14,8 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    networks:
-      - po-wiki-network
     working_dir: /usr/src/app
     entrypoint: ["sh", "run.sh"]
 
 volumes:
   app-data:
-
-networks:
-  po-wiki-network:
-    external: true
