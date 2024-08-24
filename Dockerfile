@@ -20,5 +20,5 @@ RUN pnpm install --frozen-lockfile
 # RUN pnpm dotenvx run -- pnpm --filter="@repo/helper" db:seed
 # RUN pnpm dotenvx run -- turbo build
 
-EXPOSE 3002
+EXPOSE 4002
 ENTRYPOINT [ "sh", "run.sh" ]
