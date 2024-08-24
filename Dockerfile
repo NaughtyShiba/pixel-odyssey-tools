@@ -16,7 +16,9 @@ COPY packages ./packages
 COPY apps ./apps
 COPY tools ./tools
 RUN pnpm install --frozen-lockfile
-RUN chmod +x run.sh
+# RUN pnpm dotenvx run -- pnpm --filter="@repo/helper" db:migrate
+# RUN pnpm dotenvx run -- pnpm --filter="@repo/helper" db:seed
+# RUN pnpm dotenvx run -- turbo build
 
 EXPOSE 3002
 ENTRYPOINT [ "sh", "run.sh" ]
